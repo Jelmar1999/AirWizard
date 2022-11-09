@@ -1,0 +1,105 @@
+<div class="row">
+  <div class="col-sm-6 col-md-8 col-lg-10">
+    <h1 id="aboutTitle">Over deze applicatie</h1>
+    <p>
+      Deze applicatie is gemaakt in het kader van het vak 'Clientside web frameworks' van Avans Hogeschool
+      Breda.
+    </p>
+    <h3>AirWizard</h3>
+    <p>
+      Deze website zal als functionaliteit hebben dat piloten kunnen bekijken waar zij willen en/of kunnen landen op verschillende vliegvelden.
+      Er is informatie op te halen over verschillende vliegvelden, de gates die deze vliegvelden hebben en de vliegtuigen die hier al eventueel staan.
+      Het is mogelijk de details van een gate te wijzigen stel dat deze in onderhoud is of iets dergelijks. Ook kan een vliegveld nieuwe gates aanleggen.
+    </p>
+  </div>
+  <div class="col-sm-6 col-md-4 col-lg-2">
+    <div class="card">
+      <div class="d-flex justify-content-center align-items-center">
+        <img
+          src="assets/images/person.png"
+          class="card-img-top rounded-circle border profile-pic"
+          alt="..."
+        />
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Jelmar Dekker</h5>
+        <p class="card-text">Studentnummer: 2177170</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>Entiteiten</h3>
+<p>
+  De Entiteiten die deze applicatie bevatten zijn als volgt: Een vliegveld, een gate/landingsbaan en een vliegtuid. De specifieke attributen van deze entiteiten
+  zijn hieronder te zien. Een vliegveld heeft een aantal gates, het aantal gates is afhankelijk van de vliegbewegingen van het vliegveld. Een gate kan maximaal een vliegtuig
+  tegelijk ontvangen. Een gate kan ook geen vliegtuig hebben. De user entiteit zal een birthdate van het type DATE hebben en een gender die uit een ENUM gender kan
+  worden geselecteerd.
+</p>
+<div class="row">
+  <div class="col-sm-12 col-md-4">
+    <p>Airport</p>
+    <ul>
+      <li>airportname: string</li>
+      <li>airportId: number</li>
+      <li>address: string</li>
+      <li>gates: gate[]</li>
+    </ul>
+  </div>
+  <div class="col-sm-12 col-md-4">
+    <p>Gate</p>
+    <ul>
+      <li>gatename: string</li>
+      <li>gateId: number</li>
+      <li>waitingroomcapacity: number</li>
+      <li>currentairplane: Airplane</li>
+    </ul>
+  </div>
+  <div class="col-sm-12 col-md-4">
+    <p>Airplane</p>
+    <ul>
+      <li>planeId: number</li>
+      <li>airplanename: string</li>
+      <li>model: string</li>
+      <li>buildyear: Date</li>
+      <li>fuelcapacity: number</li>
+      <li>length: number</li>
+      <li>wingspan: number</li>
+      <li>heigth: number</li>
+      <li>engine: string</li>
+      <li>weight: weight (ENUM)</li>
+    </ul>
+  </div>
+  <div class="col-sm-12 col-md-4">
+    <p>User</p>
+    <ul>
+      <li>userId: number</li>
+      <li>firstname: string</li>
+      <li>lastname: string</li>
+      <li>email: string</li>
+      <li>phonenumber: string</li>
+      <li>birthdate: date</li>
+      <li>gender: gender (ENUM)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <p>ERD</p>
+    <img src="assets/images/erdairportcasus.drawio.png " alt="..." />
+    <p>Documentmodel</p>
+    <img src="assets/images/documentmodel.drawio.png" alt="..." />
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <h3>Use Cases</h3>
+    <p>De applicatie biedt de volgende functionaliteit.</p>
+    <div *ngFor="let UC of useCases">
+      <app-usecase [useCase]="UC"></app-usecase>
+    </div>
+    <p>Vul hier zelf meer functionaliteit toe.</p>
+  </div>
+</div>
