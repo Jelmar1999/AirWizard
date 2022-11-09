@@ -16,7 +16,7 @@
     "ng": "ng",
     "start": "node src/server.js",
     "postinstall": "ng build",
-    "build:prod": "ng build --configuration production --base-href https://jelmar1999.github.io/AirWizard/",
+    "build:prod": "ng build --prod --base-href https://jelmar1999.github.io/AirWizard/",
     "pretty": "prettier --write \"./src/**/*.{ts,js,css,scss,json}\"",
     "sonar": "sonar-scanner",
     "lint": "ng lint",
