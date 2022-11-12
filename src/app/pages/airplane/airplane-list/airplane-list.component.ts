@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { AirplaneService } from 'src/app/services/airplane.service';
 import { Airplane } from '../airplane';
-import { AIRPLANES } from '../mock-airplanes';
+// import { AIRPLANES } from '../mock-airplanes';
 
 @Component({
   selector: 'app-airplane-list',
@@ -28,15 +28,15 @@ export class AirplaneListComponent implements OnInit {
   }
 
   refreshAirplanes() {
-    // this.airplaneService
-    //   .getAirplanes()
-    //   .pipe(
-    //     map((airplanes: Airplane[]) =>
-    //       airplanes.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)
-    //     )
-    //   )
-    //   .subscribe((airplanes) => airplanes.map((airplane) => (airplane.buildyear = new Date(airplane.buildyear)), this.airplanes = airplanes))
-    this.airplanes = AIRPLANES;
+    this.airplaneService
+      .getAirplanes()
+      .pipe(
+        map((airplanes: Airplane[]) =>
+          airplanes.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)
+        )
+      )
+      .subscribe((airplanes) => airplanes.map((airplane) => (airplane.buildYear = new Date(airplane.buildYear)), this.airplanes = airplanes))
+    // this.airplanes = AIRPLANES;
     
     console.log(this.airplanes)
   }

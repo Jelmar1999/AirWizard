@@ -17,12 +17,12 @@
   </thead>
   <tbody>
     <tr *ngFor="let airplane of airplanes">
-      <th scope="row">{{ airplane._id }}</th>
-      <a [routerLink]="['/airplanes', airplane._id]">{{ airplane.airplanename }} </a>
+      <th scope="row">{{ airplane.id }}</th>
+      <a [routerLink]="['/airplanes', airplane.id]">{{ airplane.airplaneName }} </a>
       <td>{{ airplane.model }}</td>
       <td>{{ airplane.weight }}</td>
       <td>{{ airplane.engine }}</td>
-      <td>{{ airplane.buildyear.toDateString() }}</td>
+      <td>{{ airplane.buildYear.toDateString() }}</td>
     </tr>
   </tbody>
 </table>

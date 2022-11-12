@@ -17,7 +17,7 @@ export class AirplaneEditComponent implements OnInit {
   constructor(private airplaneService: AirplaneService, private router: Router, private route: ActivatedRoute) { }
 
   dateToObject(){
-    this.airplane.buildyear = new Date(this.airplane.buildyear)
+    this.airplane.buildYear = new Date(this.airplane.buildYear)
   }
 
   weightToObject(){
@@ -27,7 +27,7 @@ export class AirplaneEditComponent implements OnInit {
   saveAirplane(airplane: Airplane) {
     console.log('airplane add aangeroepen')
     this.airplane.weight = Weight[this.airplane.weight]
-    this.airplane.buildyear = new Date(this.airplane.buildyear)
+    this.airplane.buildYear = new Date(this.airplane.buildYear)
     if (this.airplaneId) {
       //Update
       console.log(this.airplane)

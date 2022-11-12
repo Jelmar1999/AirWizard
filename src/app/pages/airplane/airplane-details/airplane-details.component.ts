@@ -23,13 +23,13 @@ export class AirplaneDetailsComponent implements OnInit {
       // Get airplane id from the route
       this.airplaneId = params.get('id');
       // Find airplane by id
-      // this.airplaneService.getAirplaneById(String(this.airplaneId)).subscribe((airplane) => {
-      //   airplane.buildyear = new Date(airplane.buildyear);
-      //   this.airplane = airplane;
-      let foundPlane = AIRPLANES.filter( x => {
-        return x._id === this.airplaneId;
+      this.airplaneService.getAirplaneById(String(this.airplaneId)).subscribe((airplane) => {
+        airplane.buildYear = new Date(airplane.buildYear);
+        this.airplane = airplane;
+      // let foundPlane = AIRPLANES.filter( x => {
+      //   return x._id === this.airplaneId;
       })
-      this.airplane = foundPlane[0];
+      // this.airplane = foundPlane[0];
     })
   }
   gotoAiplanes() {

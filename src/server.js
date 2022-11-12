@@ -23,7 +23,7 @@ const options = {
   setHeaders: (res, path, stat) => {
     res.set(
       'Content-Security-Policy',
-      "default-src 'self' http://angular-gitlab-heroku.herokuapp.com/; script-src 'self' http://angular-gitlab-heroku.herokuapp.com/; connect-src http://angular-gitlab-heroku.herokuapp.com/ 'self'; img-src 'self' www.google.com; style-src 'self' 'unsafe-inline';"
+      "default-src 'self' https://jelmar1999.github.io/AirWizard/; script-src 'self' https://jelmar1999.github.io/AirWizard/; connect-src https://jelmar1999.github.io/AirWizard/ 'self'; img-src 'self' www.google.com; style-src 'self' 'unsafe-inline';"
     )
   }
 }

@@ -18,7 +18,7 @@
             <div class="row mt-2">
               <div class="col-md-6 form-group">
                 <label class="labels">Airplane Name</label>
-                  <input required type="text" id="airplaneName" class="form-control my-2" [(ngModel)]="airplane.airplanename" name="airplanename" #airplanename="ngModel"
+                  <input required type="text" id="airplaneName" class="form-control my-2" [(ngModel)]="airplane.airplaneName" name="airplanename" #airplanename="ngModel"
                   [ngClass]="{'is-invalid': airplanename.invalid}" minlength="3" />
               </div>
             </div>
@@ -32,7 +32,7 @@
             <div class="row mt-3">
               <div class="col-md-12 form-group">
                 <label class="labels">Fuelcapacity</label>
-                  <input required type="text" id="airplaneFuelcapacity" class="form-control my-2" [(ngModel)]="airplane.fuelcapacity" name="fuelcapacity" #fuelcapacity="ngModel"
+                  <input required type="text" id="airplaneFuelcapacity" class="form-control my-2" [(ngModel)]="airplane.fuelCapacity" name="fuelcapacity" #fuelcapacity="ngModel"
                    [ngClass]="{'is-invalid': fuelcapacity.invalid}" minlength="1"/>
               </div>
   
@@ -62,7 +62,7 @@
 
               <div class="col-md-12 form-group">
                 <label for="buildyear" class="col-form-label">Buildyear</label>
-                  <input required type="date" class="form-control my-2" [ngModel]="airplane.buildyear | date:'yyyy-MM-dd'" (ngModelChange)="airplane.buildyear = $event" 
+                  <input required type="date" class="form-control my-2" [ngModel]="airplane.buildYear | date:'yyyy-MM-dd'" (ngModelChange)="airplane.buildYear = $event" 
                     name="buildyear" #buildyear="ngModel" [ngClass]="{'is-invalid': buildyear.invalid}" [max]="dateToday">
               </div>
   

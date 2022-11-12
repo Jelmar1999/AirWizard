@@ -1,5 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { type } from 'os';
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Airplane } from '../pages/airplane/airplane';
@@ -47,16 +48,53 @@ export class AirplaneService {
   }
 
   addAirplane(airplane: Airplane, options?:any){
-    const endpoint = environment.apiUrl + "airplanes";
+    const endpoint = environment.apiUrl + "Airplanes";
+    const httpOptions = new HttpHeaders({
+      'Accept' : 'application/json',
+      'Content-Type': 'application/json',
+    })
+    // const Json = {
+    //   airplaneName: airplane.airplaneName,
+    //   model: airplane.model,
+    //   buildYear: airplane.buildYear,
+    //   fuelCapacity: airplane.fuelCapacity,
+    //   length: airplane.length,
+    //   wingspan: airplane.wingspan,
+    //   heigth: airplane.heigth,
+    //   engine: airplane.engine,
+    //   weight: airplane.weight
+    // }
     return this.http
-      .post<Airplane>(endpoint, { ...options, airplane, ...httpOptions})
+      .post<Airplane>(endpoint, { ...options, 
+        airplaneName: airplane.airplaneName,
+        model: airplane.model,
+        buildYear: airplane.buildYear,
+        fuelCapacity: airplane.fuelCapacity,
+        length: airplane.length,
+        wingspan: airplane.wingspan,
+        heigth: airplane.heigth,
+        engine: airplane.engine,
+        weight: airplane.weight, 
+        ...httpOptions})
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
   updateAirplane(updatedAirplane: Airplane, options?: any){
-    const endpoint = environment.apiUrl + "airplanes/" + updatedAirplane._id;
+    const endpoint = environment.apiUrl + "airplanes/" + updatedAirplane.id;
     return this.http
-      .put<Airplane>(endpoint, { ...options, updatedAirplane, ...httpOptions})
+      .put<Airplane>(endpoint, { ...options,
+        id : updatedAirplane.id,
+        airplaneName: updatedAirplane.airplaneName,
+        model: updatedAirplane.model,
+        buildYear: updatedAirplane.buildYear,
+        fuelCapacity: updatedAirplane.fuelCapacity,
+        length: updatedAirplane.length,
+        wingspan: updatedAirplane.wingspan,
+        heigth: updatedAirplane.heigth,
+        engine: updatedAirplane.engine,
+        weight: updatedAirplane.weight, 
+         updatedAirplane,
+          ...httpOptions})
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
