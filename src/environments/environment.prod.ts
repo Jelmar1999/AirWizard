@@ -4,7 +4,7 @@ export const environment = {
   production: true,
 
   // Fill in your own online server API url here
-  apiUrl: 'https://localhost:7277/api/',
+  apiUrl: 'https://airwizardapi.azurewebsites.net/api/',
 
   version: packagejson.version
 }

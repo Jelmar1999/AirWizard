@@ -93,7 +93,6 @@ export class AirplaneService {
         heigth: updatedAirplane.heigth,
         engine: updatedAirplane.engine,
         weight: updatedAirplane.weight, 
-         updatedAirplane,
           ...httpOptions})
       .pipe(tap(console.log), catchError(this.handleError))
   }
