@@ -31,25 +31,25 @@
             </div>
             <div class="row mt-3">
               <div class="col-md-12 form-group">
-                <label class="labels">Fuelcapacity</label>
+                <label class="labels">Fuelcapacity (L)</label>
                   <input required type="text" id="airplaneFuelcapacity" class="form-control my-2" [(ngModel)]="airplane.fuelCapacity" name="fuelcapacity" #fuelcapacity="ngModel"
                    [ngClass]="{'is-invalid': fuelcapacity.invalid}" minlength="1"/>
               </div>
   
               <div class="col-md-12 form-group">
-                <label class="labels">Length</label>
+                <label class="labels">Length (cm)</label>
                   <input required type="text" id="airplaneLength" class="form-control my-2" [(ngModel)]="airplane.length" 
                     name="length" #length="ngModel" [ngClass]="{'is-invalid': length.invalid}" minlength="1" />
               </div>
 
               <div class="col-md-12 form-group">
-                <label class="labels">Wingspan</label>
+                <label class="labels">Wingspan (cm)</label>
                   <input required type="text" id="airplaneWingspan" class="form-control my-2" [(ngModel)]="airplane.wingSpan" 
                     name="wingspan" #wingspan="ngModel" [ngClass]="{'is-invalid': wingspan.invalid}" minlength="1" />
               </div>
 
               <div class="col-md-12 form-group">
-                <label class="labels">Heigth</label>
+                <label class="labels">Heigth (cm)</label>
                   <input required type="text" id="airplaneHeigth" class="form-control my-2" [(ngModel)]="airplane.heigth" 
                     name="heigth" #heigth="ngModel" [ngClass]="{'is-invalid': heigth.invalid}" minlength="1" />
               </div>
@@ -67,7 +67,7 @@
               </div>
   
               <div class="col-md-12 form-group">
-                <label for="gender" class="col-form-label">Weight</label>
+                <label for="gender" class="col-form-label">Weight Class</label>
                 <select required (change)="weightToObject()" class="custom-select form-control my-2" id="weight" name="weight" [(ngModel)]="airplane.weightClass" #weight="ngModel">
                   <option *ngFor="let weight of weights">{{weight}}</option>
                 </select>
