@@ -28,6 +28,7 @@ import { AirportDetailsComponent } from './pages/airport/airport-details/airport
 import { GateListComponent } from './pages/gate/gate-list/gate-list.component';
 import { GateEditComponent } from './pages/gate/gate-edit/gate-edit.component';
 import { GateDetailsComponent } from './pages/gate/gate-details/gate-details.component'
+import { AlertModule } from './util/alert/alert.module';
 
 @NgModule({
   declarations: [
@@ -51,9 +52,9 @@ import { GateDetailsComponent } from './pages/gate/gate-details/gate-details.com
     AirportDetailsComponent,
     GateListComponent,
     GateEditComponent,
-    GateDetailsComponent
+    GateDetailsComponent,
   ],
-  imports: [BrowserModule, RouterModule, NgbModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
+  imports: [BrowserModule, RouterModule, NgbModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, AlertModule],
   providers: [],
   bootstrap: [AppComponent]
 })

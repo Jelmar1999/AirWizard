@@ -1,4 +1,5 @@
-<form>
+
+<form #airplaneEditForm="ngForm" (ngSubmit)="airplaneEditForm.form.valid && saveAirplane(this.airplane)">
     <div class="container rounded bg-white mt-5 mb-5 form-group">
       <div class="row">
         <div class="col-md-3 border-right">
@@ -18,52 +19,93 @@
             <div class="row mt-2">
               <div class="col-md-6 form-group">
                 <label class="labels">Airplane Name</label>
-                  <input required type="text" id="airplaneName" class="form-control my-2" [(ngModel)]="airplane.airplaneName" name="airplanename" #airplanename="ngModel"
-                  [ngClass]="{'is-invalid': airplanename.invalid}" minlength="3" />
+                  <input required type="text" id="airplaneName" class="form-control my-2" [(ngModel)]="airplane.airplaneName" name="airplaneName" #airplaneName="ngModel"
+                  [ngClass]="{'is-invalid': airplaneName.touched && airplaneName.invalid}" required minlength="3" />
+
+                  <div class="invalid-feedback" *ngIf="airplaneName.touched && airplaneName.invalid">
+                    <p *ngIf="airplaneName.errors!.required">Airplane name is required!</p>
+                    <p *ngIf="airplaneName.errors!.minlength">Airplane name must be at least 3 characters long!</p>
+                  </div>
               </div>
             </div>
+
             <div class="row mt-2">
               <div class="col-md-6 form-group">
                 <label class="labels">Model</label>
                   <input required type="text" id="airplaneModel" class="form-control my-2" [(ngModel)]="airplane.model" name="model" #model="ngModel"
-                  [ngClass]="{'is-invalid': model.invalid}" minlength="3" />
+                  [ngClass]="{'is-invalid': model.touched && model.invalid}" required minlength="2" />
+
+                  <div class="invalid-feedback" *ngIf="model.touched && model.invalid">
+                    <p *ngIf="model.errors!.required">Model is required!</p>
+                    <p *ngIf="model.errors!.minlength">Model must be at least 2 characters long!</p>
+                  </div>
               </div>
+
             </div>
             <div class="row mt-3">
               <div class="col-md-12 form-group">
                 <label class="labels">Fuelcapacity (L)</label>
-                  <input required type="text" id="airplaneFuelcapacity" class="form-control my-2" [(ngModel)]="airplane.fuelCapacity" name="fuelcapacity" #fuelcapacity="ngModel"
-                   [ngClass]="{'is-invalid': fuelcapacity.invalid}" minlength="1"/>
+                  <input type="number" id="airplaneFuelcapacity" class="form-control my-2" [(ngModel)]="airplane.fuelCapacity" name="fuelcapacity" #fuelcapacity="ngModel" 
+                   [ngClass]="{'is-invalid': fuelcapacity.touched && fuelcapacity.invalid}" required minlength="1"/>
+
+                   <div class="invalid-feedback" *ngIf="fuelcapacity.touched && fuelcapacity.invalid">
+                    <p *ngIf="fuelcapacity.errors!.required">Fuel capacity is required!</p>
+                    <p *ngIf="fuelcapacity.errors!.minlength">Fuel capacity can not be less than 1</p>
+                  </div>
               </div>
   
               <div class="col-md-12 form-group">
                 <label class="labels">Length (cm)</label>
-                  <input required type="text" id="airplaneLength" class="form-control my-2" [(ngModel)]="airplane.length" 
-                    name="length" #length="ngModel" [ngClass]="{'is-invalid': length.invalid}" minlength="1" />
+                  <input required type="number" id="airplaneLength" class="form-control my-2" [(ngModel)]="airplane.length" 
+                    name="length" #length="ngModel" [ngClass]="{'is-invalid': length.invalid}" required minlength="1" />
+
+                    <div class="invalid-feedback" *ngIf="length.touched && length.invalid">
+                        <p *ngIf="length.errors!.required">Length is required!</p>
+                        <p *ngIf="length.errors!.minlength">Length can not be less than 1</p>
+                    </div>
               </div>
 
               <div class="col-md-12 form-group">
                 <label class="labels">Wingspan (cm)</label>
-                  <input required type="text" id="airplaneWingspan" class="form-control my-2" [(ngModel)]="airplane.wingSpan" 
-                    name="wingspan" #wingspan="ngModel" [ngClass]="{'is-invalid': wingspan.invalid}" minlength="1" />
+                  <input required type="number" id="airplaneWingspan" class="form-control my-2" [(ngModel)]="airplane.wingSpan" 
+                    name="wingspan" #wingSpan="ngModel" [ngClass]="{'is-invalid': wingSpan.invalid}" required minlength="1" />
+
+                    <div class="invalid-feedback" *ngIf="wingSpan.touched && wingSpan.invalid">
+                        <p *ngIf="wingSpan.errors!.required">Wingspan is required!</p>
+                        <p *ngIf="wingSpan.errors!.minlength">Wingspan can not be less than 1</p>
+                    </div>
               </div>
 
               <div class="col-md-12 form-group">
                 <label class="labels">Heigth (cm)</label>
-                  <input required type="text" id="airplaneHeigth" class="form-control my-2" [(ngModel)]="airplane.heigth" 
-                    name="heigth" #heigth="ngModel" [ngClass]="{'is-invalid': heigth.invalid}" minlength="1" />
+                  <input required type="number" id="airplaneHeigth" class="form-control my-2" [(ngModel)]="airplane.heigth" 
+                    name="heigth" #heigth="ngModel" [ngClass]="{'is-invalid': heigth.invalid}" required minlength="1" />
+
+                    <div class="invalid-feedback" *ngIf="heigth.touched && heigth.invalid">
+                        <p *ngIf="heigth.errors!.required">Heigth is required!</p>
+                        <p *ngIf="heigth.errors!.minlength">Heigth can not be less than 1</p>
+                    </div>
               </div>
 
               <div class="col-md-12 form-group">
                 <label class="labels">Engine</label>
                   <input required type="text" id="airplaneEngine" class="form-control my-2" [(ngModel)]="airplane.engine" 
-                    name="engine" #engine="ngModel" [ngClass]="{'is-invalid': engine.invalid}" minlength="1" />
+                    name="engine" #engine="ngModel" [ngClass]="{'is-invalid': engine.invalid}" required minlength="3" />
+
+                    <div class="invalid-feedback" *ngIf="engine.touched && engine.invalid">
+                        <p *ngIf="engine.errors!.required">Engine is required!</p>
+                        <p *ngIf="engine.errors!.minlength">Engine  must be at least 3 characters long</p>
+                    </div>
               </div>
 
               <div class="col-md-12 form-group">
-                <label for="buildyear" class="col-form-label">Buildyear</label>
+                <label for="buildYear" class="col-form-label">Buildyear</label>
                   <input required type="date" class="form-control my-2" [ngModel]="airplane.buildYear | date:'yyyy-MM-dd'" (ngModelChange)="airplane.buildYear = $event" 
-                    name="buildyear" #buildyear="ngModel" [ngClass]="{'is-invalid': buildyear.invalid}" [max]="dateToday">
+                    name="buildYear" #buildYear="ngModel" [ngClass]="{'is-invalid': buildYear.touched && buildYear.invalid}" required max="{{dateToday | date:'yyyy-MM-dd'}}">
+
+                    <div class="invalid-feedback" *ngIf="buildYear.touched && buildYear.invalid">
+                        <p *ngIf="buildYear.errors!.required">Buildyear is required!</p>
+                      </div>
               </div>
   
               <div class="col-md-12 form-group">
@@ -78,8 +120,9 @@
           <div class="col-md-12 text-center">
             <div class="btn-group text-center" role="group">
               <div class="col-md-12">
-                <button type="submit" routerLink=".." (click)="saveAirplane(airplane)" class="btn btn-primary mx-2">Submit</button>
-                <button type="submit" routerLink=".." class="btn btn-primary btn-warning mx-2">Cancel</button>
+                <button type="submit" routerLink="../" (click)="saveAirplane(airplane)" class="btn btn-primary mx-2"
+                 [disabled]="!airplaneEditForm.valid">Submit</button>
+                <button type="submit" routerLink="../" class="btn btn-primary btn-warning mx-2">Cancel</button>
               </div>
             </div>
           </div>
