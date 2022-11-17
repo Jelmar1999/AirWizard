@@ -40,46 +40,48 @@
   <div class="col-sm-12 col-md-4">
     <p>Airport</p>
     <ul>
-      <li>airportname: string</li>
-      <li>airportId: number</li>
+      <li>airportName: string</li>
+      <li>airportId: Guid</li>
       <li>address: string</li>
-      <li>gates: gate[]</li>
+      <li>gates: Gate[]</li>
     </ul>
   </div>
   <div class="col-sm-12 col-md-4">
     <p>Gate</p>
     <ul>
-      <li>gatename: string</li>
-      <li>gateId: number</li>
-      <li>waitingroomcapacity: number</li>
-      <li>currentairplane: Airplane</li>
+      <li>gateName: string</li>
+      <li>gateId: Guid</li>
+      <li>waitingRoomCapacity: number</li>
+      <li>currentAirplane: Airplane</li>
+      <li>airport : Airport</li>
     </ul>
   </div>
   <div class="col-sm-12 col-md-4">
     <p>Airplane</p>
     <ul>
-      <li>planeId: number</li>
-      <li>airplanename: string</li>
+      <li>planeId: Guid</li>
+      <li>airplaneName: string</li>
       <li>model: string</li>
-      <li>buildyear: Date</li>
-      <li>fuelcapacity: number</li>
+      <li>buildYear: Date</li>
+      <li>fuelCapacity: number</li>
       <li>length: number</li>
       <li>wingspan: number</li>
       <li>heigth: number</li>
       <li>engine: string</li>
-      <li>weight: weight (ENUM)</li>
+      <li>weightClass: weightClass (ENUM)</li>
     </ul>
   </div>
   <div class="col-sm-12 col-md-4">
     <p>User</p>
     <ul>
-      <li>userId: number</li>
-      <li>firstname: string</li>
-      <li>lastname: string</li>
-      <li>email: string</li>
-      <li>phonenumber: string</li>
-      <li>birthdate: date</li>
+      <li>userId: Guid</li>
+      <li>firstName: string</li>
+      <li>lastName: string</li>
+      <li>emailAddress: string</li>
+      <li>phoneNumber: string</li>
+      <li>dateOfBirth: date</li>
       <li>gender: gender (ENUM)</li>
+      <li>ownedAirplanes : Airplane[]</li>
     </ul>
   </div>
 </div>
@@ -87,13 +89,13 @@
 <div class="row">
   <div class="col">
     <p>ERD</p>
-    <img src="assets/images/erdairportcasus.drawio.png " alt="..." />
-    <p>Documentmodel</p>
+    <img src="assets/images/erdAirportCasusdrawio.drawio.png" alt="..." />
+    <p>Documentmodel (Omdat ik de opdracht herkans wordt alles in een ERD gedaan, het documentmodel wordt niet meer gebruikt)</p>
     <img src="assets/images/documentmodel.drawio.png" alt="..." />
   </div>
 </div>
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-12">
     <h3>Use Cases</h3>
     <p>De applicatie biedt de volgende functionaliteit.</p>
@@ -102,4 +104,4 @@
     </div>
     <p>Vul hier zelf meer functionaliteit toe.</p>
   </div>
-</div>
+</div> -->

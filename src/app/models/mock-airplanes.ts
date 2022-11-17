@@ -1,4 +1,4 @@
-import { Airplane, Weight} from './airplane'
+import { Airplane, WeightClass} from './airplane.model'
 
 export const AIRPLANES: Airplane[] = [
   {
@@ -8,10 +8,10 @@ export const AIRPLANES: Airplane[] = [
     buildYear: new Date("2017-01-01"),
     fuelCapacity: 19156,
     length: 1989,
-    wingspan: 510,
+    wingSpan: 510,
     heigth: 490,
     engine: "CFM-56",
-    weight: Weight.Small
+    weightClass: WeightClass.Small
   },
   {
     id: '2',
@@ -20,10 +20,10 @@ export const AIRPLANES: Airplane[] = [
     buildYear: new Date('2017-01-01'),
     fuelCapacity: 15805,
     length: 43500,
-    wingspan: 610,
+    wingSpan: 610,
     heigth: 500,
     engine: "Pratt & Whitney PW1000G",
-    weight: Weight.LargeJet
+    weightClass: WeightClass.LargeJet
   },
   {
     id: '3',
@@ -32,10 +32,10 @@ export const AIRPLANES: Airplane[] = [
     buildYear: new Date('1981-01-01'),
     fuelCapacity: 54000,
     length: 1989,
-    wingspan: 510,
+    wingSpan: 510,
     heigth: 490,
     engine: "PW1000G",
-    weight: Weight.Small
+    weightClass: WeightClass.Small
   },
   {
     id: '4',
@@ -44,10 +44,10 @@ export const AIRPLANES: Airplane[] = [
     buildYear: new Date('1997-01-01'),
     fuelCapacity: 34000,
     length: 1989,
-    wingspan: 510,
+    wingSpan: 510,
     heigth: 490,
     engine: "CFM-56",
-    weight: Weight.Small
+    weightClass: WeightClass.Small
   },
   {
     id: '5',
@@ -56,10 +56,10 @@ export const AIRPLANES: Airplane[] = [
     buildYear: new Date('1990-01-01'),
     fuelCapacity: 43000,
     length: 34000,
-    wingspan: 467,
+    wingSpan: 467,
     heigth: 320,
     engine: "CFM-56",
-    weight: Weight.Medium
+    weightClass: WeightClass.Medium
   },
   {
     id: '6',
@@ -68,9 +68,9 @@ export const AIRPLANES: Airplane[] = [
     buildYear: new Date('1967-01-01'),
     fuelCapacity: 23000,
     length: 989,
-    wingspan: 410,
+    wingSpan: 410,
     heigth: 400,
     engine: "CFM-56",
-    weight: Weight.Heavy
+    weightClass: WeightClass.Heavy
   },
 ]

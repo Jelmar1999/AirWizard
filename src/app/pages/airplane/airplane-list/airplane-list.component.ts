@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { AirplaneService } from 'src/app/services/airplane.service';
-import { Airplane } from '../airplane';
+import { Airplane } from '../../../models/airplane.model';
 // import { AIRPLANES } from '../mock-airplanes';
 
 @Component({

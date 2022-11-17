@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { User } from '../pages/user/user';
+import { User } from '../models/user.model';
 // import { USERS } from '../pages/user/mock-users';
 import { environment } from 'src/environments/environment';
 
@@ -48,7 +48,7 @@ export class UserService{
   
   getUserByName(firstname: string) {
     return this.getUsers().pipe(
-      map((users: User[]) => users.find(user => user.firstname === firstname)!)
+      map((users: User[]) => users.find(user => user.firstName === firstname)!)
     );
   }
   deleteUserById(id: string, options?: any){

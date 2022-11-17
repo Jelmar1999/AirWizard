@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { USERS } from '../pages/user/mock-users';
-import { User } from '../pages/user/user';
+import { USERS } from '../models/mock-users';
+import { User } from '../models/user.model';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
@@ -42,7 +42,7 @@ describe('UserService', () => {
 
   it('should return a user by given name', (done : DoneFn)=>{
     service.getUserByName('RubberMan').subscribe((user : User) => {
-      expect(user.firstname).toEqual('RubberMan')
+      expect(user.firstName).toEqual('RubberMan')
       done()
     })
   })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { UserService } from 'src/app/services/user.service'
 import { ActivatedRoute, Router } from '@angular/router'
-import { User, Gender } from '../user'
+import { User, Gender } from '../../../models/user.model'
 
 @Component({
   selector: 'app-user-edit',
@@ -17,7 +17,7 @@ export class UserEditComponent implements OnInit {
   constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {}
   
   dateToObject(){
-    this.user.birthdate = new Date(this.user.birthdate)
+    this.user.dateOfBirth = new Date(this.user.dateOfBirth)
   }
 
   genderToObject(){
@@ -27,7 +27,7 @@ export class UserEditComponent implements OnInit {
   saveUser(user: User) {
     console.log('user add aangeroepen')
     this.user.gender = Gender[this.user.gender]
-    this.user.birthdate = new Date(this.user.birthdate)
+    this.user.dateOfBirth = new Date(this.user.dateOfBirth)
     if (this.userId) {
       //update
       this.userService.updateUser(this.user).subscribe(() => {

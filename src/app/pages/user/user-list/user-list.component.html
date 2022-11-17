@@ -18,11 +18,11 @@
   <tbody>
     <tr *ngFor="let user of users">
       <th scope="row">{{ user._id }}</th>
-      <a [routerLink]="['/users', user._id]">{{ user.firstname }} {{ user.lastname }} </a>
-      <td>{{ user.email }}</td>
+      <a [routerLink]="['/users', user._id]">{{ user.firstName }} {{ user.lastName }} </a>
+      <td>{{ user.emailAddress }}</td>
       <td>{{ user.gender }}</td>
-      <td>{{ user.phonenumber }}</td>
-      <td>{{ user.birthdate.toLocaleDateString() }}</td>
+      <td>{{ user.phoneNumber }}</td>
+      <td>{{ user.dateOfBirth.toLocaleDateString() }}</td>
     </tr>
   </tbody>
 </table>

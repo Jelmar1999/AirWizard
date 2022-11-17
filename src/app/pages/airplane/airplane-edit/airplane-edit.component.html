@@ -44,7 +44,7 @@
 
               <div class="col-md-12 form-group">
                 <label class="labels">Wingspan</label>
-                  <input required type="text" id="airplaneWingspan" class="form-control my-2" [(ngModel)]="airplane.wingspan" 
+                  <input required type="text" id="airplaneWingspan" class="form-control my-2" [(ngModel)]="airplane.wingSpan" 
                     name="wingspan" #wingspan="ngModel" [ngClass]="{'is-invalid': wingspan.invalid}" minlength="1" />
               </div>
 
@@ -68,7 +68,7 @@
   
               <div class="col-md-12 form-group">
                 <label for="gender" class="col-form-label">Weight</label>
-                <select required (change)="weightToObject()" class="custom-select form-control my-2" id="weight" name="weight" [(ngModel)]="airplane.weight" #weight="ngModel">
+                <select required (change)="weightToObject()" class="custom-select form-control my-2" id="weight" name="weight" [(ngModel)]="airplane.weightClass" #weight="ngModel">
                   <option *ngFor="let weight of weights">{{weight}}</option>
                 </select>
               </div>

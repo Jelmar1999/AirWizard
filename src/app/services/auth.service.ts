@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { BehaviorSubject, catchError, map, Observable, of, switchMap } from 'rxjs'
 import { environment } from 'src/environments/environment'
-import { User } from '../pages/user/user'
+import { User } from '../models/user.model'
 
 @Injectable({
   providedIn: 'root'

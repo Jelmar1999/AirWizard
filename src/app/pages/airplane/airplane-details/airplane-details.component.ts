@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AirplaneService } from 'src/app/services/airplane.service';
-import { Airplane, Weight } from '../airplane';
-import { AIRPLANES } from '../mock-airplanes';
+import { Airplane, WeightClass } from '../../../models/airplane.model';
 
 @Component({
   selector: 'app-airplane-details',
@@ -12,7 +11,7 @@ import { AIRPLANES } from '../mock-airplanes';
 export class AirplaneDetailsComponent implements OnInit {
   airplane: Airplane | null = null
   airplaneId: string | null = null
-  weight = Object.values(Weight)
+  weight = Object.values(WeightClass)
 
   dateToday = new Date().toISOString().substring(0,10)
   
@@ -26,10 +25,7 @@ export class AirplaneDetailsComponent implements OnInit {
       this.airplaneService.getAirplaneById(String(this.airplaneId)).subscribe((airplane) => {
         airplane.buildYear = new Date(airplane.buildYear);
         this.airplane = airplane;
-      // let foundPlane = AIRPLANES.filter( x => {
-      //   return x._id === this.airplaneId;
       })
-      // this.airplane = foundPlane[0];
     })
   }
   gotoAiplanes() {

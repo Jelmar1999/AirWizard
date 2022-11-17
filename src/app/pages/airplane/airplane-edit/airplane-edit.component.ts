@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AirplaneService } from 'src/app/services/airplane.service';
-import { Airplane, Weight } from '../airplane';
+import { Airplane, WeightClass } from '../../../models/airplane.model';
 
 @Component({
   selector: 'app-airplane-edit',
@@ -11,7 +11,7 @@ import { Airplane, Weight } from '../airplane';
 export class AirplaneEditComponent implements OnInit {
   airplane: Airplane = new Airplane()
   airplaneId: string | null = null
-  weights = Object.values(Weight)
+  weights = Object.values(WeightClass)
   dateToday = new Date().toISOString().substring(0, 10)
 
   constructor(private airplaneService: AirplaneService, private router: Router, private route: ActivatedRoute) { }
@@ -21,12 +21,12 @@ export class AirplaneEditComponent implements OnInit {
   }
 
   weightToObject(){
-    this.airplane.weight = Weight[this.airplane.weight]
+    this.airplane.weightClass = WeightClass[this.airplane.weightClass]
   }
 
   saveAirplane(airplane: Airplane) {
     console.log('airplane add aangeroepen')
-    this.airplane.weight = Weight[this.airplane.weight]
+    this.airplane.weightClass = WeightClass[this.airplane.weightClass]
     this.airplane.buildYear = new Date(this.airplane.buildYear)
     if (this.airplaneId) {
       //Update

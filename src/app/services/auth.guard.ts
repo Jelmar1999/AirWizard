@@ -9,7 +9,7 @@ import {
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { User } from '../pages/user/user';
+import { User } from '../models/user.model';
 import { AuthService } from './auth.service';
 
 /**

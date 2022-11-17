@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { Observable, switchMap } from 'rxjs';
 import { UserService } from 'src/app/services/user.service'
-import { Gender, User } from '../user'
+import { Gender, User } from '../../../models/user.model'
 
 declare function displaybuttons(): void;
 declare function removeButtons(): void;
@@ -30,7 +30,7 @@ export class UserDetailsComponent implements OnInit {
       this.userId = params.get('id');
       // Find user by id
       this.userService.getUserById(String(this.userId)).subscribe((user) => {
-        this.user = user, this.user.birthdate = new Date(user.birthdate);
+        this.user = user, this.user.dateOfBirth = new Date(user.dateOfBirth);
       })
     });
   }

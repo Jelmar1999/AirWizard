@@ -7,20 +7,20 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <!-- <th scope="col">#</th> -->
       <th scope="col">Name</th>
       <th scope="col">Model</th>
-      <th scope="col">Weight</th>
+      <th scope="col">weightClass</th>
       <th scope="col">Engine</th>
       <th scope="col">Buildyear</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let airplane of airplanes">
-      <th scope="row">{{ airplane.id }}</th>
+      <!-- <th scope="row">{{ airplane.id }}</th> -->
       <a [routerLink]="['/airplanes', airplane.id]">{{ airplane.airplaneName }} </a>
       <td>{{ airplane.model }}</td>
-      <td>{{ airplane.weight }}</td>
+      <td>{{ airplane.weightClass }}</td>
       <td>{{ airplane.engine }}</td>
       <td>{{ airplane.buildYear.toDateString() }}</td>
     </tr>

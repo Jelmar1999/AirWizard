@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { type } from 'os';
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Airplane } from '../pages/airplane/airplane';
+import { Airplane } from '../models/airplane.model';
 
 const httpOptions = {
   observe: "body",
@@ -71,10 +71,10 @@ export class AirplaneService {
         buildYear: airplane.buildYear,
         fuelCapacity: airplane.fuelCapacity,
         length: airplane.length,
-        wingspan: airplane.wingspan,
+        wingspan: airplane.wingSpan,
         heigth: airplane.heigth,
         engine: airplane.engine,
-        weight: airplane.weight, 
+        weightClass: airplane.weightClass, 
         ...httpOptions})
       .pipe(tap(console.log), catchError(this.handleError))
   }
@@ -89,10 +89,10 @@ export class AirplaneService {
         buildYear: updatedAirplane.buildYear,
         fuelCapacity: updatedAirplane.fuelCapacity,
         length: updatedAirplane.length,
-        wingspan: updatedAirplane.wingspan,
+        wingspan: updatedAirplane.wingSpan,
         heigth: updatedAirplane.heigth,
         engine: updatedAirplane.engine,
-        weight: updatedAirplane.weight, 
+        weightClass: updatedAirplane.weightClass, 
           ...httpOptions})
       .pipe(tap(console.log), catchError(this.handleError))
   }

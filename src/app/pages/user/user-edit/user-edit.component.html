@@ -18,14 +18,14 @@
           <div class="row mt-2">
             <div class="col-md-6 form-group">
               <label class="labels">First Name</label>
-                <input required type="text" id="userFirstname" class="form-control my-2" [(ngModel)]="user.firstname" name="firstname" #firstname="ngModel"
+                <input required type="text" id="userFirstname" class="form-control my-2" [(ngModel)]="user.firstName" name="firstname" #firstname="ngModel"
                 [ngClass]="{'is-invalid': firstname.invalid}" minlength="3" />
             </div>
           </div>
           <div class="row mt-2">
             <div class="col-md-6 form-group">
               <label class="labels">Last Name</label>
-                <input required type="text" id="userLastname" class="form-control my-2" [(ngModel)]="user.lastname" name="lastname" #lastname="ngModel"
+                <input required type="text" id="userLastname" class="form-control my-2" [(ngModel)]="user.lastName" name="lastname" #lastname="ngModel"
                 [ngClass]="{'is-invalid': lastname.invalid}" minlength="3" />
             </div>
           </div>
@@ -41,19 +41,19 @@
           <div class="row mt-3">
             <div class="col-md-12 form-group">
               <label class="labels">Email</label>
-                <input required type="email" id="userEmail" class="form-control my-2" [(ngModel)]="user.email" name="email" #email="ngModel"
+                <input required type="email" id="userEmail" class="form-control my-2" [(ngModel)]="user.emailAddress" name="email" #email="ngModel"
                  [ngClass]="{'is-invalid': email.invalid}" minlength="5"/>
             </div>
 
             <div class="col-md-12 form-group">
               <label class="labels">Phonenumber</label>
-                <input required type="text" id="userPhonenumber" class="form-control my-2" [(ngModel)]="user.phonenumber" 
+                <input required type="text" id="userPhonenumber" class="form-control my-2" [(ngModel)]="user.phoneNumber" 
                   name="phonenumber" #phonenumber="ngModel" [ngClass]="{'is-invalid': phonenumber.invalid}" minlength="8" />
             </div>
 
             <div class="col-md-12 form-group">
               <label for="dateOfBirth" class="col-form-label">BirthDate</label>
-                <input required type="date" class="form-control my-2" [ngModel]="user.birthdate | date:'yyyy-MM-dd'" (ngModelChange)="user.birthdate = $event"
+                <input required type="date" class="form-control my-2" [ngModel]="user.dateOfBirth | date:'yyyy-MM-dd'" (ngModelChange)="user.dateOfBirth = $event"
                   name="dateOfBirth" #dateOfBirth="ngModel" [ngClass]="{'is-invalid': dateOfBirth.invalid}" [max]="dateToday">
             </div>
 

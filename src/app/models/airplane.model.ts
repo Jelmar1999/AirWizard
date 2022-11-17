@@ -1,4 +1,4 @@
-export enum Weight {
+export enum WeightClass {
     Heavy = 'Heavy',
     B757 = 'B757',
     LargeJet = 'LargeJet',
@@ -14,20 +14,20 @@ export class Airplane {
     buildYear: Date= new Date('01-01-1999');
     fuelCapacity: number = 0;
     length: number = 0;
-    wingspan: number = 0;
+    wingSpan: number = 0;
     heigth: number = 0;
     engine: string = ""; 
-    weight: Weight = Weight.Small
+    weightClass: WeightClass = WeightClass.Small
     
-    constructor(airplanename= "", model ="", buildyear=new Date(), fuelcapacity=0, length=0, wingspan=0,height=0, engine ="", weigth= Weight.Small){  
-        this.airplaneName= airplanename
+    constructor(airplaneName= "", model ="", buildYear=new Date(), fuelCapacity=0, length=0, wingSpan=0,height=0, engine ="", weightClass= WeightClass.Small){  
+        this.airplaneName= airplaneName
         this.model = model
-        this.buildYear = buildyear
-        this.fuelCapacity = fuelcapacity
+        this.buildYear = buildYear
+        this.fuelCapacity = fuelCapacity
         this.length = length
-        this.wingspan = wingspan
+        this.wingSpan = wingSpan
         this.heigth = height
         this.engine = engine
-        this.weight = weigth
+        this.weightClass = weightClass
     }
 }

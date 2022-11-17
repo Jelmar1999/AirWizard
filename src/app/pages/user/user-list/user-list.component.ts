@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { UserService } from '../../../services/user.service'
 import { Observable } from 'rxjs'
 import { map,tap } from 'rxjs/operators'
-import { User } from '../user'
+import { User } from '../../../models/user.model'
 import { DecimalPipe } from '@angular/common'
 
 @Component({
@@ -38,7 +38,7 @@ export class UserListComponent implements OnInit {
         ),
         tap(users => console.log(users[0]))
       )
-      .subscribe((users) => users.map((user) => (user.birthdate = new Date(user.birthdate)), this.users = users))
+      .subscribe((users) => users.map((user) => (user.dateOfBirth = new Date(user.dateOfBirth)), this.users = users))
   }
   ngOnInit(): void {
     this.refreshUsers()

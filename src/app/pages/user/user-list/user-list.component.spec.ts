@@ -5,7 +5,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { UserListComponent } from './user-list.component';
 import { FormsModule } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { Gender, User } from '../user';
+import { Gender, User } from '../../../models/user.model';
 import { of } from 'rxjs';
 
 describe('UserListComponent', () => {
@@ -17,29 +17,29 @@ describe('UserListComponent', () => {
   const mockUsers: User[] = [
     {
       _id: 11,
-      firstname: 'Dr Mighty',
-      lastname: 'Fine',
-      email: 'Nice@gmail.com',
-      phonenumber: '06-44556666',
-      birthdate: new Date('12-04-1982'),
+      firstName: 'Dr Mighty',
+      lastName: 'Fine',
+      emailAddress: 'Nice@gmail.com',
+      phoneNumber: '06-44556666',
+      dateOfBirth: new Date('12-04-1982'),
       gender: Gender.Male,
     },
     {
       _id: 12,
-      firstname: 'Narco',
-      lastname: 'Cic',
-      email: 'Narco@gmail.com',
-      phonenumber: '06-44556666',
-      birthdate: new Date('12-04-1982'),
+      firstName: 'Narco',
+      lastName: 'Cic',
+      emailAddress: 'Narco@gmail.com',
+      phoneNumber: '06-44556666',
+      dateOfBirth: new Date('12-04-1982'),
       gender: Gender.Male,
     },
     {
       _id: 13,
-      firstname: 'Bombasto',
-      lastname: 'Manfred',
-      email: 'Bombasto@gmail.com',
-      phonenumber: '06-44556666',
-      birthdate: new Date('12-04-1982'),
+      firstName: 'Bombasto',
+      lastName: 'Manfred',
+      emailAddress: 'Bombasto@gmail.com',
+      phoneNumber: '06-44556666',
+      dateOfBirth: new Date('12-04-1982'),
       gender: Gender.Male,
     }
   ]
