@@ -15,10 +15,10 @@ export class AirplaneEditComponent implements OnInit {
   weights = Object.values(WeightClass)
   dateToday = new Date().toISOString().substring(0, 10)
 
-  constructor(private airplaneService: AirplaneService, private router: Router, private route: ActivatedRoute) { }
-  dateToObject(){
-    this.airplane.buildYear = new Date(this.airplane.buildYear)
-  }
+  constructor(
+    private airplaneService: AirplaneService, 
+    private router: Router, 
+    private route: ActivatedRoute) { }
 
   weightToObject(){
     this.airplane.weightClass = WeightClass[this.airplane.weightClass]
@@ -32,12 +32,18 @@ export class AirplaneEditComponent implements OnInit {
       //Update
       console.log(this.airplane)
       this.airplaneService.updateAirplane(this.airplane).subscribe(() => {
-        this.router.navigate(['..'], { relativeTo: this.route })
+        // this.router.navigate(['..'], { relativeTo: this.route })
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(()=>{
+          this.router.navigate(["../"])
+        })
       })
     } else{
       //Save
       this.airplaneService.addAirplane(this.airplane).subscribe(() => {
-        this.router.navigate(['..'], { relativeTo: this.route })
+        // this.router.navigate(['..'], { relativeTo: this.route })
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(()=>{
+          this.router.navigate(["/airplanes"])
+        })
       })
     }
   }

@@ -34,6 +34,9 @@ export class AirplaneDetailsComponent implements OnInit {
 
   deleteAirplane(){
     this.airplaneService.deleteAirplaneById(String(this.airplaneId)).subscribe();
-    this.router.navigate(['/airplanes'])
+    // this.router.navigate(['../'], { relativeTo: this.route })
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(["/airplanes"]);
+  }); 
   }
 }
