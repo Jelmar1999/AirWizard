@@ -34,7 +34,7 @@ export class AirplaneEditComponent implements OnInit {
       this.airplaneService.updateAirplane(this.airplane).subscribe(() => {
         // this.router.navigate(['..'], { relativeTo: this.route })
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(()=>{
-          this.router.navigate(["../"])
+          this.router.navigate(["/airplanes", this.airplaneId])
         })
       })
     } else{

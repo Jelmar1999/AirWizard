@@ -55,7 +55,7 @@
               </div>
   
               <div class="col-md-12 form-group">
-                <label class="labels">Length (cm)</label>
+                <label class="labels">Length (M)</label>
                   <input required type="number" id="airplaneLength" class="form-control my-2" [(ngModel)]="airplane.length" 
                     name="length" #length="ngModel" [ngClass]="{'is-invalid': length.invalid}" required minlength="1" />
 
@@ -66,7 +66,7 @@
               </div>
 
               <div class="col-md-12 form-group">
-                <label class="labels">Wingspan (cm)</label>
+                <label class="labels">Wingspan (M)</label>
                   <input required type="number" id="airplaneWingspan" class="form-control my-2" [(ngModel)]="airplane.wingSpan" 
                     name="wingspan" #wingSpan="ngModel" [ngClass]="{'is-invalid': wingSpan.invalid}" required minlength="1" />
 
@@ -77,7 +77,7 @@
               </div>
 
               <div class="col-md-12 form-group">
-                <label class="labels">Heigth (cm)</label>
+                <label class="labels">Heigth (M)</label>
                   <input required type="number" id="airplaneHeigth" class="form-control my-2" [(ngModel)]="airplane.heigth" 
                     name="heigth" #heigth="ngModel" [ngClass]="{'is-invalid': heigth.invalid}" required minlength="1" />
 
