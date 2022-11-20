@@ -12,9 +12,42 @@
     <div class="col-md-5 border-right">
       <div class="p-3 py-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <h4 class="text-right">Airplane Settings</h4>
+          <h4 class="text-right">Airplane Information</h4>
         </div>
-        <div class="row mt-2">
+        <div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Airplane Name: {{ airplane.airplaneName}}</li>
+            <li class="list-group-item">Model: {{ airplane.model }}</li>
+            <li class="list-group-item">Fuelcapacity (In Liters): {{ airplane.fuelCapacity }} L</li>
+            <li class="list-group-item">Length (In m): {{ airplane.length }} m</li>
+            <li class="list-group-item">Wingspan (In m): {{ airplane.wingSpan }} m</li>
+            <li class="list-group-item">Height (In m): {{ airplane.height }} m</li>
+            <li class="list-group-item">Engine: {{ airplane.engine  }}</li>
+            <li class="list-group-item">Buildyear: {{ airplane.buildYear.toLocaleDateString() }}</li>
+            <li class="list-group-item">Weight Class: {{ airplane.weightClass }}</li>
+          </ul>
+        </div>
+        <ng-template #content let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Warning!</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Are you sure you want to delete <span class="text-primary">"{{ airplane.airplaneName }}"</span></strong></p>
+            <p>All information associated to this airplane will be permanently deleted.
+              <span class="text-danger">This operation can NOT be undone.</span>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="c('Cancel click')">Cancel</button>
+            <button type="button" class="btn btn-danger"
+              (click)="deleteAirplane(); c('Delete click')">Ok</button>
+          </div>
+        </ng-template>
+
+        <!-- <div class="row mt-2">
           <div class="col-md-6 form-group">
             <label class="labels">Airplane Name</label>
             <p>{{ airplane.airplaneName }}</p>
@@ -40,7 +73,7 @@
             <p>{{ airplane.wingSpan }}</p>
           </div>
           <div class="col-md-12 form-group">
-            <label class="labels">heigth (In M)</label>
+            <label class="labels">Heigth (In M)</label>
             <p>{{ airplane.heigth }}</p>
           </div>
           <div class="col-md-12 form-group">
@@ -48,7 +81,7 @@
             <p>{{ airplane.engine }}</p>
           </div>
           <div class="col-md-12 form-group">
-            <label class="labels">Weigt Class</label>
+            <label class="labels">Weight Class</label>
             <p>{{ airplane.weightClass }}</p>
           </div>
           <div class="col-md-12 form-group">
@@ -56,13 +89,14 @@
             <p>{{ airplane.buildYear.toLocaleDateString() }}</p>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <div class="col-md-12 text-center">
           <div class="btn-group text-center" role="group">
             <div class="col-md-12">
               <button class="btn btn-primary profile-button mx-2" routerLink="edit">Edit Airplane</button>
-              <button class="btn btn-danger profile-button mx-2" (click)="deleteAirplane()" type="button">Delete Airplane</button>
+              <!-- <button class="btn btn-danger profile-button mx-2" (click)="deleteAirplane()" type="button">Delete Airplane</button> -->
+              <button class="btn btn-danger" (click)="open(content)">Delete</button>
               <button type="submit" routerLink=".." class="btn btn-primary btn-dark mx-2">Go Back</button>
             </div>
           </div>

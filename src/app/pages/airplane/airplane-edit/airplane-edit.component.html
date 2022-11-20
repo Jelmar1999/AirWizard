@@ -14,7 +14,7 @@
         <div class="col-md-5 border-right">
           <div class="p-3 py-5">
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h4 class="text-right">Airplane Settings</h4>
+              <h4 class="text-right">Airplane Information</h4>
             </div>
             <div class="row mt-2">
               <div class="col-md-6 form-group">
@@ -46,44 +46,44 @@
               <div class="col-md-12 form-group">
                 <label class="labels">Fuelcapacity (L)</label>
                   <input type="number" id="airplaneFuelcapacity" class="form-control my-2" [(ngModel)]="airplane.fuelCapacity" name="fuelcapacity" #fuelcapacity="ngModel" 
-                   [ngClass]="{'is-invalid': fuelcapacity.touched && fuelcapacity.invalid}" required minlength="1"/>
+                   [ngClass]="{'is-invalid': fuelcapacity.touched && fuelcapacity.invalid}" required min="1"/>
 
                    <div class="invalid-feedback" *ngIf="fuelcapacity.touched && fuelcapacity.invalid">
                     <p *ngIf="fuelcapacity.errors!.required">Fuel capacity is required and must be a number!</p>
-                    <p *ngIf="fuelcapacity.errors!.minlength">Fuel capacity can not be less than 1</p>
+                    <p *ngIf="fuelcapacity.errors!.min">Fuel capacity can not be less than 1</p>
                   </div>
               </div>
   
               <div class="col-md-12 form-group">
-                <label class="labels">Length (M)</label>
+                <label class="labels">Length (m)</label>
                   <input required type="number" id="airplaneLength" class="form-control my-2" [(ngModel)]="airplane.length" 
-                    name="length" #length="ngModel" [ngClass]="{'is-invalid': length.invalid}" required minlength="1" />
+                    name="length" #length="ngModel" [ngClass]="{'is-invalid': length.invalid}" required min="1" />
 
                     <div class="invalid-feedback" *ngIf="length.touched && length.invalid">
                         <p *ngIf="length.errors!.required">Length is required and must be a number!</p>
-                        <p *ngIf="length.errors!.minlength">Length can not be less than 1</p>
+                        <p *ngIf="length.errors!.min">Length can not be less than 1</p>
                     </div>
               </div>
 
               <div class="col-md-12 form-group">
-                <label class="labels">Wingspan (M)</label>
+                <label class="labels">Wingspan (m)</label>
                   <input required type="number" id="airplaneWingspan" class="form-control my-2" [(ngModel)]="airplane.wingSpan" 
-                    name="wingspan" #wingSpan="ngModel" [ngClass]="{'is-invalid': wingSpan.invalid}" required minlength="1" />
+                    name="wingspan" #wingSpan="ngModel" [ngClass]="{'is-invalid': wingSpan.invalid}" required min="1" />
 
                     <div class="invalid-feedback" *ngIf="wingSpan.touched && wingSpan.invalid">
                         <p *ngIf="wingSpan.errors!.required">Wingspan is required and must be a number!</p>
-                        <p *ngIf="wingSpan.errors!.minlength">Wingspan can not be less than 1</p>
+                        <p *ngIf="wingSpan.errors!.min">Wingspan can not be less than 1</p>
                     </div>
               </div>
 
               <div class="col-md-12 form-group">
-                <label class="labels">Heigth (M)</label>
-                  <input required type="number" id="airplaneHeigth" class="form-control my-2" [(ngModel)]="airplane.heigth" 
-                    name="heigth" #heigth="ngModel" [ngClass]="{'is-invalid': heigth.invalid}" required minlength="1" />
+                <label class="labels">Height (m)</label>
+                  <input required type="number" id="airplaneHeight" class="form-control my-2" [(ngModel)]="airplane.height" 
+                    name="height" #height="ngModel" [ngClass]="{'is-invalid': height.invalid}" required min="1" />
 
-                    <div class="invalid-feedback" *ngIf="heigth.touched && heigth.invalid">
-                        <p *ngIf="heigth.errors!.required">Heigth is required and must be a number!</p>
-                        <p *ngIf="heigth.errors!.minlength">Heigth can not be less than 1</p>
+                    <div class="invalid-feedback" *ngIf="height.touched && height.invalid">
+                        <p *ngIf="height.errors!.required">Height is required and must be a number!</p>
+                        <p *ngIf="height.errors!.min">Height can not be less than 1</p>
                     </div>
               </div>
 

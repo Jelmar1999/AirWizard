@@ -53,17 +53,6 @@ export class AirplaneService {
       'Accept' : 'application/json',
       'Content-Type': 'application/json',
     })
-    // const Json = {
-    //   airplaneName: airplane.airplaneName,
-    //   model: airplane.model,
-    //   buildYear: airplane.buildYear,
-    //   fuelCapacity: airplane.fuelCapacity,
-    //   length: airplane.length,
-    //   wingspan: airplane.wingspan,
-    //   heigth: airplane.heigth,
-    //   engine: airplane.engine,
-    //   weight: airplane.weight
-    // }
     return this.http
       .post<Airplane>(endpoint, { ...options, 
         airplaneName: airplane.airplaneName,
@@ -72,7 +61,7 @@ export class AirplaneService {
         fuelCapacity: airplane.fuelCapacity,
         length: airplane.length,
         wingSpan: airplane.wingSpan,
-        heigth: airplane.heigth,
+        heigth: airplane.height,
         engine: airplane.engine,
         weightClass: airplane.weightClass, 
         ...httpOptions})
@@ -90,7 +79,7 @@ export class AirplaneService {
         fuelCapacity: updatedAirplane.fuelCapacity,
         length: updatedAirplane.length,
         wingSpan: updatedAirplane.wingSpan,
-        heigth: updatedAirplane.heigth,
+        height: updatedAirplane.height,
         engine: updatedAirplane.engine,
         weightClass: updatedAirplane.weightClass, 
           ...httpOptions})

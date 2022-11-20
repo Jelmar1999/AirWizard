@@ -15,7 +15,7 @@ export class Airplane {
     fuelCapacity: number = 0;
     length: number = 0;
     wingSpan: number = 0;
-    heigth: number = 0;
+    height: number = 0;
     engine: string = ""; 
     weightClass: WeightClass = WeightClass.Small
     
@@ -26,7 +26,7 @@ export class Airplane {
         this.fuelCapacity = fuelCapacity
         this.length = length
         this.wingSpan = wingSpan
-        this.heigth = height
+        this.height = height
         this.engine = engine
         this.weightClass = weightClass
     }
