@@ -61,7 +61,7 @@ export class AirplaneService {
         fuelCapacity: airplane.fuelCapacity,
         length: airplane.length,
         wingSpan: airplane.wingSpan,
-        heigth: airplane.height,
+        height: airplane.height,
         engine: airplane.engine,
         weightClass: airplane.weightClass, 
         ...httpOptions})
