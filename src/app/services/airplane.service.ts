@@ -4,6 +4,7 @@ import { type } from 'os';
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Airplane } from '../models/airplane.model';
+import { User } from '../models/user.model';
 
 const httpOptions = {
   observe: "body",
@@ -25,34 +26,58 @@ export class AirplaneService {
     return throwError(() => error);
   }
 
-  getAirplanes(options?: any): Observable<Airplane[]> {
+  getAirplanes(userData : User, options?: any): Observable<Airplane[]> {
     const endpoint = environment.apiUrl + "airplanes";
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userData.token
+      })
+    }
     return this.http
-      .get<Airplane[]>(endpoint, { ...options, ...httpOptions})
+      .get<Airplane[]>(endpoint, {...options, ...httpOptions})
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
-  getAirplaneById(id: string, options?: any): Observable<Airplane> {
+  getAirplaneById(userData : User, id: string, options?: any): Observable<Airplane> {
     const endpoint = environment.apiUrl + "airplanes/" + id;
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userData.token
+      })
+    }
     return this.http
       .get<Airplane>(endpoint, { ...options, ...httpOptions})
       .pipe(tap(console.log), catchError(this.handleError))
   }
   
 
-  deleteAirplaneById(id: String, options?: any){
+  deleteAirplaneById(userData : User, id: String, options?: any){
     const endpoint = environment.apiUrl + "airplanes/" + id;
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userData.token
+      })
+    }
     return this.http
       .delete<Airplane>(endpoint, { ...options, ...httpOptions})
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
-  addAirplane(airplane: Airplane, options?:any){
+  addAirplane(userData : User, airplane: Airplane, options?:any){
     const endpoint = environment.apiUrl + "Airplanes";
-    const httpOptions = new HttpHeaders({
-      'Accept' : 'application/json',
-      'Content-Type': 'application/json',
-    })
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userData.token
+      })
+    }
     return this.http
       .post<Airplane>(endpoint, { ...options, 
         airplaneName: airplane.airplaneName,
@@ -63,15 +88,21 @@ export class AirplaneService {
         wingSpan: airplane.wingSpan,
         height: airplane.height,
         engine: airplane.engine,
-        weightClass: airplane.weightClass, 
-        ...httpOptions})
+        weightClass: airplane.weightClass}, 
+        httpOptions)
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
-  updateAirplane(updatedAirplane: Airplane, options?: any){
+  updateAirplane(userData : User, updatedAirplane: Airplane, options?: any){
     const endpoint = environment.apiUrl + "airplanes/" + updatedAirplane.id;
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: `Bearer ${userData.token}`
+      }).set("Authorization", `Bearer ${userData.token}`)
+    }
     return this.http
-      .put<Airplane>(endpoint, { ...options,
+      .put<Airplane>(endpoint, {...options,
         id : updatedAirplane.id,
         airplaneName: updatedAirplane.airplaneName,
         model: updatedAirplane.model,
@@ -81,8 +112,8 @@ export class AirplaneService {
         wingSpan: updatedAirplane.wingSpan,
         height: updatedAirplane.height,
         engine: updatedAirplane.engine,
-        weightClass: updatedAirplane.weightClass, 
-          ...httpOptions})
+        weightClass: updatedAirplane.weightClass}, 
+        httpOptions)
       .pipe(tap(console.log), catchError(this.handleError))
   }
 

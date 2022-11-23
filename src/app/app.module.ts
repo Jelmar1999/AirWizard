@@ -16,7 +16,6 @@ import { AboutComponent } from './pages/about/about.component'
 import { UsecaseComponent } from './pages/about/usecases/usecase.component'
 import { UserListComponent } from './pages/user/user-list/user-list.component'
 import { UserDetailsComponent } from './pages/user/user-details/user-details.component'
-import { UserEditComponent } from './pages/user/user-edit/user-edit.component';
 import { AirplaneDetailsComponent } from './pages/airplane/airplane-details/airplane-details.component';
 import { AirplaneEditComponent } from './pages/airplane/airplane-edit/airplane-edit.component'
 import { AirplaneListComponent } from './pages/airplane/airplane-list/airplane-list.component';
@@ -41,7 +40,6 @@ import { AlertModule } from './util/alert/alert.module';
     UsecaseComponent,
     UserListComponent,
     UserDetailsComponent,
-    UserEditComponent,
     AirplaneDetailsComponent,
     AirplaneEditComponent,
     AirplaneListComponent,

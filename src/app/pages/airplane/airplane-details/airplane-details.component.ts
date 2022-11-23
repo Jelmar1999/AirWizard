@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 import { AirplaneService } from 'src/app/services/airplane.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { AlertService } from 'src/app/util/alert/alert.service';
 import { Airplane, WeightClass } from '../../../models/airplane.model';
 
@@ -16,12 +19,16 @@ export class AirplaneDetailsComponent implements OnInit {
   weight = Object.values(WeightClass)
 
   dateToday = new Date().toISOString().substring(0,10)
+
+  currentUser : User | undefined
+  sub! : Subscription
   
   constructor(private route: ActivatedRoute,
      private router: Router, 
      private airplaneService: AirplaneService,
      private alertService: AlertService,
      private modalService: NgbModal,
+     private authService : AuthService,
      config: NgbModalConfig,) {
       config.backdrop = 'static'
       config.keyboard = false
@@ -32,13 +39,16 @@ export class AirplaneDetailsComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      // Get airplane id from the route
-      this.airplaneId = params.get('id');
-      // Find airplane by id
-      this.airplaneService.getAirplaneById(String(this.airplaneId)).subscribe((airplane) => {
-        airplane.buildYear = new Date(airplane.buildYear);
-        this.airplane = airplane;
+    this.sub = this.authService.currentUser$.subscribe((user)=>{
+      this.currentUser = user    
+      this.route.paramMap.subscribe((params) => {
+        // Get airplane id from the route
+        this.airplaneId = params.get('id');
+        // Find airplane by id
+        this.airplaneService.getAirplaneById(this.currentUser!, String(this.airplaneId)).subscribe((airplane) => {
+          airplane.buildYear = new Date(airplane.buildYear);
+          this.airplane = airplane;
+        })
       })
     })
   }
@@ -47,7 +57,7 @@ export class AirplaneDetailsComponent implements OnInit {
   }
 
   deleteAirplane(){
-    this.airplaneService.deleteAirplaneById(String(this.airplaneId)).subscribe({
+    this.airplaneService.deleteAirplaneById(this.currentUser!, String(this.airplaneId)).subscribe({
       complete: () =>{
         console.log('Changing route')
         this.alertService.success('Airplane has been deleted',{
@@ -55,7 +65,7 @@ export class AirplaneDetailsComponent implements OnInit {
           keepAfterRouteChange: true
         })
         this.router.navigateByUrl('/airplanes', { skipLocationChange: true }).then(() => {
-          this.airplaneService.getAirplanes().subscribe();
+          this.airplaneService.getAirplanes(this.currentUser!).subscribe();
       });
       }
     });

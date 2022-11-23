@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 import { AirplaneService } from 'src/app/services/airplane.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Airplane } from '../../../models/airplane.model';
 // import { AIRPLANES } from '../mock-airplanes';
 
@@ -14,22 +16,32 @@ export class AirplaneListComponent implements OnInit {
   airplanes!: Airplane[]
   selectedId = 0
 
+  currentUser : User | undefined
+  sub! : Subscription
+
   page = 1
   pageSize = 8
   collectionSize = 0;
 
-  constructor(public airplaneService: AirplaneService) {
-    this.refreshAirplanes()
+  constructor(
+    public authService: AuthService,
+    public airplaneService: AirplaneService
+
+    ) {
+      this.sub = this.authService.currentUser$.subscribe((user) => {
+        this.currentUser = user
+        this.refreshAirplanes() 
+      })
    }
 
   getCollectionSize(){
-    this.airplaneService.getAirplanes().pipe(
+    this.airplaneService.getAirplanes(this.currentUser!).pipe(
       map((airplanes: Airplane[]) => airplanes.length)).subscribe((size) => {this.collectionSize = size})
   }
 
   refreshAirplanes() {
     this.airplaneService
-      .getAirplanes()
+      .getAirplanes(this.currentUser!)
       .pipe(
         map((airplanes: Airplane[]) =>
           airplanes.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)
@@ -46,8 +58,11 @@ export class AirplaneListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.refreshAirplanes()
-    this.getCollectionSize()
-    console.log(this.collectionSize)
+    this.sub = this.authService.currentUser$.subscribe((user)=>{
+      this.currentUser = user    
+      this.refreshAirplanes()
+      this.getCollectionSize()
+      console.log(this.collectionSize)
+    })
   }
 }

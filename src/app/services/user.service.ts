@@ -1,80 +1,84 @@
-import { Injectable, PipeTransform } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-
-import { User } from '../models/user.model';
-// import { USERS } from '../pages/user/mock-users';
-import { environment } from 'src/environments/environment';
-
-import { v4 as uuidv4 } from 'uuid';
-import { ConstantPool } from '@angular/compiler';
+import { Injectable } from '@angular/core'
+import { User } from '../models/user.model'
+import { catchError, Observable, of, tap, throwError } from 'rxjs'
+import { environment } from '../../environments/environment'
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http'
 
 const httpOptions = {
-  observe: "body",
-  responseType: "json",
-};
+  observe: 'body',
+  responseType: 'json'
+}
 
 @Injectable({
   providedIn: 'root'
 })
-
-export class UserService{
-
+export class UserService {
   constructor(protected readonly http: HttpClient) {
-    console.log('UserService constructor aangeroepen');
+    console.log('Service constructor aangeroepen')
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {
-    console.log(error);
+    console.log(error)
 
-    return throwError(() => error);
+    return throwError(() => error)
   }
 
-  // CRUD FUNCTIONS
   getUsers(options?: any): Observable<User[]> {
-    const endpoint = environment.apiUrl + "users";
+    const endpoint = environment.apiUrl + 'user'
     return this.http
-      .get<User[]>(endpoint, { ...options, ...httpOptions})
+      .get<User[]>(endpoint, { ...options, ...httpOptions })
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
   getUserById(id: string, options?: any): Observable<User> {
-    const endpoint = environment.apiUrl + "users/" + id;
+    const endpoint = environment.apiUrl + 'user/' + id
     return this.http
-      .get<User>(endpoint, { ...options, ...httpOptions})
-      .pipe(tap(console.log), catchError(this.handleError))
-  }
-  
-  getUserByName(firstname: string) {
-    return this.getUsers().pipe(
-      map((users: User[]) => users.find(user => user.firstName === firstname)!)
-    );
-  }
-  deleteUserById(id: string, options?: any){
-    const endpoint = environment.apiUrl + "users/" + id;
-    return this.http
-      .delete<User>(endpoint, { ...options, ...httpOptions})
+      .get<User>(endpoint, { ...options, ...httpOptions })
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
-  addUser(user: User, options?:any){
-    const endpoint = environment.apiUrl + "users";
-    console.log(endpoint)
-    console.log(user)
+  deleteUser(id: String, userData: User, options?: any) {
+    const endpoint = environment.apiUrl + 'user/' + id
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userData.token
+      })
+    }
     return this.http
-      .post<User>(endpoint, { ...options, user, ...httpOptions})
+      .delete<any>(endpoint, { ...options, ...httpOptions })
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
-  getNewId(){
-    return uuidv4()
-  }
-  
-  updateUser(updatedUser: User, options?: any){
-    const endpoint = environment.apiUrl + "users/" + updatedUser._id;
+  addUser(user: User, options?: any) {
+    const endpoint = environment.apiUrl + 'User/register'
     return this.http
-      .put<User>(endpoint, { ...options, updatedUser, ...httpOptions})
+      .post<User>(endpoint, { ...options, 
+        UserName : user.userName,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        password: user.password,
+        emailAddress: user.email,
+        PhoneNumber: user.phoneNumber,
+        dateOfBirth: user.dateOfBirth,
+        gender: user.gender, 
+        ...httpOptions })
+      .pipe(tap(console.log), catchError(this.handleError))
+  }
+
+  updateUser(updatedUser: User, options?: any) {
+    const endpoint = environment.apiUrl + 'user/' + updatedUser.id
+    return this.http
+      .put<User>(endpoint, { ...options,
+        UserName : updatedUser.userName,
+        firstName: updatedUser.firstName,
+        lastName: updatedUser.lastName,
+        password: updatedUser.password,
+        emailAddress: updatedUser.email,
+        PhoneNumber: updatedUser.phoneNumber,
+        dateOfBirth: updatedUser.dateOfBirth,
+        gender: updatedUser.gender, 
+        ...httpOptions })
       .pipe(tap(console.log), catchError(this.handleError))
   }
 }

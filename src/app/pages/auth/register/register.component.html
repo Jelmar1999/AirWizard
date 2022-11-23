@@ -1,1 +1,110 @@
-<p>register works!</p>
+<div class="container login-container">
+    <div class="row justify-content-center">
+      <div class="col-sm-10 col-md-8 col-lg-6 my-5">
+        <div class="card card-auth shadow p-3 px-md-5 py-md-4">
+          <h2 class="text-center display-4 mb-3"><strong>
+              Register
+            </strong></h2>
+          <form #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onSubmit()">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" name="userName" class="form-control" [(ngModel)]="user.userName" #userName="ngModel"
+                [ngClass]="{ 'is-invalid': userName.touched && userName.invalid }" required minlength="3"
+                maxlength="15">
+              <div class="invalid-feedback" *ngIf="userName.touched && userName.invalid">
+                <p *ngIf="userName.errors!.required">Username is required</p>
+                <p *ngIf="userName.errors!.minlength">Username must be at least 3 characters long</p>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>First name</label>
+              <input type="text" name="firstName" class="form-control" [(ngModel)]="user.firstName" #firstName="ngModel"
+                [ngClass]="{ 'is-invalid': firstName.touched && firstName.invalid }" required minlength="3"
+                maxlength="15">
+              <div class="invalid-feedback" *ngIf="firstName.touched && firstName.invalid">
+                <p *ngIf="firstName.errors!.required">First name is required</p>
+                <p *ngIf="firstName.errors!.minlength">First name must be at least 3 characters long</p>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label>Last name</label>
+              <input type="text" name="lastName" class="form-control" [(ngModel)]="user.lastName" #lastName="ngModel"
+                [ngClass]="{ 'is-invalid': lastName.touched && lastName.invalid }" required minlength="2" maxlength="20">
+              <div class="invalid-feedback" *ngIf="lastName.touched && lastName.invalid">
+                <p *ngIf="lastName.errors!.required">Last name is required</p>
+                <p *ngIf="lastName.errors!.minlength">Last name must be at least 2 characters long</p>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label>Email address</label>
+              <input type="email" name="emailAddress" class="form-control" [(ngModel)]="user.email"
+                #emailAddress="ngModel" [ngClass]="{ 'is-invalid': emailAddress.touched && emailAddress.invalid }"
+                required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="40">
+              <div class="invalid-feedback" *ngIf="emailAddress.touched && emailAddress.invalid">
+                <p *ngIf="emailAddress.errors!.required">Email address is required</p>
+                <p *ngIf="emailAddress.errors!.pattern">Email address must be valid</p>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" name="password" class="form-control" [(ngModel)]="user.password" #password="ngModel"
+                [ngClass]="{ 'is-invalid': password.touched && password.invalid }" required minlength="6" maxlength="30">
+              <div class="invalid-feedback" *ngIf="password.touched && password.invalid">
+                <p *ngIf="password.errors!.required">Password is required</p>
+                <p *ngIf="password.errors!.minlength">Password must be at least 6 characters long</p>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label>Phone number</label>
+              <input type="text" name="phoneNumber" class="form-control" [(ngModel)]="user.phoneNumber"
+                #phoneNumber="ngModel" [ngClass]="{ 'is-invalid': phoneNumber.touched && phoneNumber.invalid }" required
+                minlength="6" maxlength="12" pattern="^[0-9]*$">
+              <div class="invalid-feedback" *ngIf="phoneNumber.touched && phoneNumber.invalid">
+                <p *ngIf="phoneNumber.errors!.required">Phone number is required</p>
+                <p *ngIf="phoneNumber.errors!.minlength else elsePhoneError">Phone number must be at least 6 characters
+                  long</p>
+                <ng-template #elsePhoneError>
+                  <p *ngIf="phoneNumber.errors!.pattern">Phone number can only contain numbers</p>
+                </ng-template>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label>Date of Birth</label>
+              <input type="date" name="dateOfBirth" class="form-control" [ngModel]="user.dateOfBirth | date:'yyyy-MM-dd'"
+              (ngModelChange)="user.dateOfBirth = $event" #dateOfBirth="ngModel"
+                [ngClass]="{ 'is-invalid': dateOfBirth.touched && dateOfBirth.invalid }" required max="{{dateToday | date:'yyyy-MM-dd'}}" >
+              <div class="invalid-feedback" *ngIf="dateOfBirth.touched && dateOfBirth.invalid">
+                <p *ngIf="dateOfBirth.errors!.required">Date of Birth is required</p>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label>Gender</label>
+              <select class="form-control" name="genders" [(ngModel)]="user.gender">
+                <option *ngFor="let gender of genders" [value]="gender">
+                  {{gender}}
+                </option>
+              </select>
+            </div>
+  
+            <div class="form-group">
+              <div class="row justify-content-around">
+                <button type="button" class="btn btn-secondary col-5" (click)="cancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary col-5" [disabled]="!registerForm.valid">Submit</button>
+              </div>
+            </div>
+          </form>
+          <!-- Debug for user model -->
+          <div *ngIf="!enviroment.production" class="my-4">
+            <pre>{{ user | json }}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

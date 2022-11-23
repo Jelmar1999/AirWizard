@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { AuthService } from 'src/app/services/auth.service'
+import { AlertService } from 'src/app/util/alert/alert.service'
 import { User } from '../../../models/user.model'
 
 @Component({
@@ -10,72 +10,34 @@ import { User } from '../../../models/user.model'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  loginForm!: FormGroup
+export class LoginComponent implements OnInit, OnDestroy {
+  user: User = new User()
   subs!: Subscription
-  submitted = false
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private alertService: AlertService) {}
 
   ngOnInit(): void {
-    this.loginForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, this.validEmail.bind(this)]),
-      password: new FormControl(null, [Validators.required, this.validPassword.bind(this)])
-    })
-
     this.subs = this.authService.getUserFromLocalStorage().subscribe((user: User) => {
       if (user) {
         console.log('User already logged in > to dashboard')
-        this.router.navigate(['/'])
+        this.router.navigate(['/dashboard'])
       }
     })
   }
 
   ngOnDestroy(): void {
-    if (this.subs) {
-      this.subs.unsubscribe()
-    }
+    this.subs.unsubscribe()
   }
 
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      this.submitted = true
-      const email = this.loginForm.value.email
-      const password = this.loginForm.value.password
-      this.authService
-        .login(email, password)
-        // .pipe(delay(1000))
-        .subscribe((user) => {
-          if (user) {
-            console.log('Logged in')
-            this.router.navigate(['/'])
-          }
-          this.submitted = false
-        })
-    } else {
-      this.submitted = false
-      console.error('loginForm invalid')
-    }
-  }
-
-  validEmail(control: FormControl): { [s: string]: boolean } {
-    const email = control.value
-    const regexp = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-    if (regexp.test(email) !== true) {
-      return { email: false }
-    } else {
-      return { email: true }
-    }
-  }
-
-  validPassword(control: FormControl): { [s: string]: boolean } {
-    const password = control.value
-    const regexp = new RegExp('^[a-zA-Z]([a-zA-Z0-9]){2,14}')
-    const test = regexp.test(password)
-    if (regexp.test(password) !== true) {
-      return { password: false }
-    } else {
-      return { password: true }
-    }
+  onSubmit() {
+    this.alertService.clear()
+    this.authService.login(this.user.userName, this.user.password).subscribe((user) => {
+      if (user) {
+        console.log('Logged in')
+        this.router.navigate(['dashboard'])
+      } else if(undefined) {
+        this.alertService.error('Email and password did not match')
+      }
+    })
   }
 }

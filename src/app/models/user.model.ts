@@ -7,22 +7,24 @@ export enum Gender {
 }
 
 export class User {
-    _id?: string = '';
+    id?: string = '';
     token?: string = '';
+    userName: string = '';
     firstName: string = '';
     lastName: string = '';
+    email: string = '';
     password: string= '';
-    emailAddress: string = '';
     phoneNumber: string = '';
-    dateOfBirth: Date= new Date('01-01-1999');
+    dateOfBirth: Date= new Date;
     gender: Gender = Gender.Male;
-    ownedAirplanes!: Airplane[] | undefined;
+    ownedAirplanes?: Airplane[] | undefined;
 
-    constructor(firstname= '', lastname= '',password= '',email='', phonenumber='', birthdate= new Date(), gender= Gender.Male ){
+    constructor(userName = '', firstname= '', lastname= '',password= '',email='', phonenumber='', birthdate= new Date(), gender= Gender.Male ){
+        this.userName = userName
         this.firstName = firstname,
         this.lastName = lastname,
+        this.email = email,
         this.password = password;
-        this.emailAddress = email,
         this.phoneNumber = phonenumber,
         this.dateOfBirth = birthdate,
         this.gender = gender

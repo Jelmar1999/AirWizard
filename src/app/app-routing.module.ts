@@ -5,7 +5,6 @@ import { LayoutComponent } from './core/layout/layout.component'
 import { AboutComponent } from './pages/about/about.component'
 import { UserListComponent } from './pages/user/user-list/user-list.component';
 import { UserDetailsComponent } from './pages/user/user-details/user-details.component';
-import { UserEditComponent } from './pages/user/user-edit/user-edit.component';
 import { AirplaneListComponent } from './pages/airplane/airplane-list/airplane-list.component'
 import { AirplaneDetailsComponent } from './pages/airplane/airplane-details/airplane-details.component'
 import { AirplaneEditComponent } from './pages/airplane/airplane-edit/airplane-edit.component'
@@ -17,6 +16,7 @@ import { AirportDetailsComponent } from './pages/airport/airport-details/airport
 import { GateListComponent } from './pages/gate/gate-list/gate-list.component'
 import { GateDetailsComponent } from './pages/gate/gate-details/gate-details.component'
 import { GateEditComponent } from './pages/gate/gate-edit/gate-edit.component'
+import { AccessGuard } from './util/guard/access.guard'
 
 const routes: Routes = [
   {
@@ -26,26 +26,86 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'login' },
       { path: 'login' , component: LoginComponent},
       { path: 'register' , component: RegisterComponent},
-      { path: 'dashboard', component: DashboardComponent },
+      { 
+        path: 'dashboard', 
+        component: DashboardComponent,
+        data: {requiresLogin: true},
+        canActivate: [AccessGuard] 
+      },
       { path: 'about', component: AboutComponent },
-      { path: 'users', component: UserListComponent },
-      { path: 'users/new', component: UserEditComponent },
-      { path: 'users/:id', component: UserDetailsComponent },
-      { path: 'users/:id/edit', component: UserEditComponent },
-      { path: 'airplanes', component: AirplaneListComponent },
-      { path: 'airplanes/new', component: AirplaneEditComponent },
-      { path: 'airplanes/:id', component: AirplaneDetailsComponent },
-      { path: 'airplanes/:id/edit', component: AirplaneEditComponent },
-      { path: 'airports', component: AirportListComponent },
-      { path: 'airports/new', component: AirportEditComponent },
-      { path: 'airports/:id', component: AirportDetailsComponent },
-      { path: 'airports/:id/edit', component: AirplaneEditComponent },
-      { path: 'gates', component: GateListComponent },
-      { path: 'gates/new', component: GateEditComponent },
-      { path: 'gates/:id', component: GateDetailsComponent },
-      { path: 'gates/:id/edit', component: GateEditComponent }
+      { path: 'users',
+        component: UserListComponent,
+        data : {requiresLogin: true},
+        canActivate: [AccessGuard] 
+      },
+      { path: 'users/:id', 
+        component: UserDetailsComponent,
+        data : {requiresLogin: true},
+        canActivate: [AccessGuard]   
+      },
+      { path: 'airplanes', 
+        component: AirplaneListComponent,
+        data : {requiresLogin: true},
+        canActivate: [AccessGuard]  
+      },
+      { path: 'airplanes/new', 
+        component: AirplaneEditComponent,
+        data : {requiresLogin: true},
+        canActivate: [AccessGuard]  
+      },
+      { path: 'airplanes/:id', 
+        component: AirplaneDetailsComponent,
+        data : {requiresLogin: true},
+        canActivate: [AccessGuard]  
+      },
+      { path: 'airplanes/:id/edit', 
+        component: AirplaneEditComponent,
+        data : {requiresLogin: true},
+        canActivate: [AccessGuard]  
+      },
+      { path: 'airports', 
+        component: AirportListComponent,
+        data : {requiresLogin: true},
+        canActivate: [AccessGuard]  
+      },
+      { path: 'airports/new', 
+        component: AirportEditComponent,
+        data : {requiresLogin: true},
+        canActivate: [AccessGuard]  
+      },
+      { path: 'airports/:id', 
+        component: AirportDetailsComponent,
+        data : {requiresLogin: true},
+        canActivate: [AccessGuard] 
+      },
+      { path: 'airports/:id/edit', 
+        component: AirplaneEditComponent,
+        data : {requiresLogin: true},
+        canActivate: [AccessGuard]  
+      },
+      { path: 'gates', 
+        component: GateListComponent,
+        data: { requiresLogin: true },
+        canActivate: [AccessGuard]
+      },
+      { path: 'gates/new', 
+        component: GateEditComponent,
+        data: { requiresLogin: true },
+        canActivate: [AccessGuard] 
+      },
+      { path: 'gates/:id', 
+        component: GateDetailsComponent,
+        data: { requiresLogin: true },
+        canActivate: [AccessGuard] 
+      },
+      { path: 'gates/:id/edit', 
+        component: GateEditComponent,
+        data: { requiresLogin: true },
+        canActivate: [AccessGuard] 
+      }
     ]
   },
+  // Everything else
   { path: '**', redirectTo: '/' }
 ]
 

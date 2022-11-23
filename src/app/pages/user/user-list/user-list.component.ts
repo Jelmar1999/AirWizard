@@ -1,48 +1,53 @@
 import { Component, OnInit } from '@angular/core'
-import { UserService } from '../../../services/user.service'
-import { Observable } from 'rxjs'
-import { map,tap } from 'rxjs/operators'
+import { map, Observable } from 'rxjs'
 import { User } from '../../../models/user.model'
-import { DecimalPipe } from '@angular/common'
+import { UserService } from '../../../services/user.service'
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css'],
-  providers: [],
+  styleUrls: []
 })
 export class UserListComponent implements OnInit {
   // users$!: Observable<User[]>
-  users! : User[]
+  users!: User[]
   selectedId = 0
 
   page = 1
-  pageSize = 8
-  collectionSize = 0;
-
+  pageSize = 5
+  collectionSize = 0
 
   constructor(public userService: UserService) {
-  }
-  
-  getCollectionSize(){
-    this.userService.getUsers().pipe(
-      map((users: User[]) => users.length)).subscribe((size) => {this.collectionSize = size})
+    this.refreshUsers()
   }
 
   refreshUsers() {
-    this.userService.getUsers().subscribe(result => console.log(result))
     this.userService
       .getUsers()
-      .pipe(map((users: User[]) =>
+      .pipe(
+        map((users: User[]) =>
           users.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)
-        ),
-        tap(users => console.log(users[0]))
+        )
       )
       .subscribe((users) => users.map((user) => (user.dateOfBirth = new Date(user.dateOfBirth)), this.users = users))
+    console.log(this.users)
   }
+
+  getCollectionSize() {
+    this.userService
+      .getUsers()
+      .pipe(map((users: User[]) => users.length))
+      .subscribe((size) => {
+        this.collectionSize = size
+      })
+  }
+
+  formatDate(date: string) {
+    return new Date(date).toLocaleDateString()
+  }
+
   ngOnInit(): void {
     this.refreshUsers()
     this.getCollectionSize()
-    console.log(this.collectionSize)
   }
 }
