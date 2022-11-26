@@ -39,16 +39,16 @@ export class AirplaneEditComponent implements OnInit {
       //Update
       console.log(this.airplane)
       this.airplaneService.updateAirplane(this.currentUser!, this.airplane).subscribe(() => {
-        // this.router.navigate(['..'], { relativeTo: this.route })
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(()=>{
-          this.router.navigate(["/airplanes", this.airplaneId])
+        // this.router.navigate(["/airplanes/", this.airplaneId])
+        this.router.navigateByUrl('..', { skipLocationChange: true }).then(()=>{
+          this.router.navigate(["/airplanes/", this.airplaneId])
         })
       })
     } else{
       //Save
       this.airplaneService.addAirplane(this.currentUser!, this.airplane).subscribe(() => {
-        // this.router.navigate(['..'], { relativeTo: this.route })
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(()=>{
+        // this.router.navigate(['/airplanes'], { relativeTo: this.route })
+        this.router.navigateByUrl('..', { skipLocationChange: true }).then(()=>{
           this.router.navigate(["/airplanes"])
         })
       })
