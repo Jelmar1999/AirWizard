@@ -21,8 +21,6 @@
     "sonar": "sonar-scanner",
     "lint": "ng lint",
     "e2e": "echo e2e testing wordt later toegevoegd"
-
-
   },
   "private": true,
   "engines": {
@@ -45,6 +43,7 @@
     "compress": "^0.99.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
+    "font-awesome": "^4.7.0",
     "path": "^0.12.7",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.1",
