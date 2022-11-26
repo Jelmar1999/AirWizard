@@ -9,7 +9,7 @@ export const AIRPLANES: Airplane[] = [
     fuelCapacity: 19156,
     length: 1989,
     wingSpan: 510,
-    heigth: 490,
+    height: 490,
     engine: "CFM-56",
     weightClass: WeightClass.Small
   },
@@ -21,7 +21,7 @@ export const AIRPLANES: Airplane[] = [
     fuelCapacity: 15805,
     length: 43500,
     wingSpan: 610,
-    heigth: 500,
+    height: 500,
     engine: "Pratt & Whitney PW1000G",
     weightClass: WeightClass.LargeJet
   },
@@ -33,7 +33,7 @@ export const AIRPLANES: Airplane[] = [
     fuelCapacity: 54000,
     length: 1989,
     wingSpan: 510,
-    heigth: 490,
+    height: 490,
     engine: "PW1000G",
     weightClass: WeightClass.Small
   },
@@ -45,7 +45,7 @@ export const AIRPLANES: Airplane[] = [
     fuelCapacity: 34000,
     length: 1989,
     wingSpan: 510,
-    heigth: 490,
+    height: 490,
     engine: "CFM-56",
     weightClass: WeightClass.Small
   },
@@ -57,7 +57,7 @@ export const AIRPLANES: Airplane[] = [
     fuelCapacity: 43000,
     length: 34000,
     wingSpan: 467,
-    heigth: 320,
+    height: 320,
     engine: "CFM-56",
     weightClass: WeightClass.Medium
   },
@@ -69,7 +69,7 @@ export const AIRPLANES: Airplane[] = [
     fuelCapacity: 23000,
     length: 989,
     wingSpan: 410,
-    heigth: 400,
+    height: 400,
     engine: "CFM-56",
     weightClass: WeightClass.Heavy
   },

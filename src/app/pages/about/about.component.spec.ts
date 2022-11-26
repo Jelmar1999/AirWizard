@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { AboutComponent } from './about.component'
-import { UsecaseComponent } from './usecases/usecase.component'
+// import { AboutComponent } from './about.component'
+// import { UsecaseComponent } from './usecases/usecase.component'
 
-describe('UsecaseComponent', () => {
-  let component: AboutComponent
-  let fixture: ComponentFixture<AboutComponent>
+// describe('UsecaseComponent', () => {
+//   let component: AboutComponent
+//   let fixture: ComponentFixture<AboutComponent>
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [AboutComponent, UsecaseComponent]
-    }).compileComponents()
-  }))
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [AboutComponent, UsecaseComponent]
+//     }).compileComponents()
+//   }))
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AboutComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-  })
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(AboutComponent)
+//     component = fixture.componentInstance
+//     fixture.detectChanges()
+//   })
 
-  it('should create', () => {
-    expect(component).toBeTruthy()
-  })
-})
+//   it('should create', () => {
+//     expect(component).toBeTruthy()
+//   })
+// })
