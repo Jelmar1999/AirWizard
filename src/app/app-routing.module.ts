@@ -79,7 +79,7 @@ const routes: Routes = [
         canActivate: [AccessGuard] 
       },
       { path: 'airports/:id/edit', 
-        component: AirplaneEditComponent,
+        component: AirportEditComponent,
         data : {requiresLogin: true},
         canActivate: [AccessGuard]  
       },

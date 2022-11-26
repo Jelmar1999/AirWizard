@@ -2,7 +2,7 @@ import { Airplane } from './airplane.model';
 import { Airport } from './airport.model';
 
 export class Gate {
-    _id: string = '';
+    id: string = '';
     gateName: string = "";
     waitingRoomCapacity: number = 0 
     currentAirplane!: Airplane

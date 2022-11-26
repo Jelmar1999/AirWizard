@@ -1,1 +1,60 @@
-<p>airport-details works!</p>
+<div class="container rounded bg-white mt-5 mb-5 form">
+    <div class="row" *ngIf="airport">
+      <div class="col-md-3 border-right">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+          <img
+            class="rounded-circle mt-5"
+            width="150px"
+            src="../../../../assets/images/airport.jpg"
+          /><span class="font-weight-bold">{{ airport.airportName }}</span>
+        </div>
+      </div>
+      <div class="col-md-5 border-right">
+        <div class="p-3 py-5">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="text-right">Airport Information</h4>
+          </div>
+          <div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Airport Name: {{ airport.airportName}}</li>
+              <li class="list-group-item">Address: {{ airport.address }}</li>
+              <li class="list-group-item">country: {{ airport.country }}</li>
+              <li class="list-group-item">Buildyear: {{ airport.buildYear.toLocaleDateString() }}</li>
+            </ul>
+          </div>
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Warning!</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p><strong>Are you sure you want to delete <span class="text-primary">"{{ airport.airportName }}"</span></strong></p>
+              <p>All information associated to this airport will be permanently deleted.
+                <span class="text-danger">This operation can NOT be undone.</span>
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" (click)="c('Cancel click')">Cancel</button>
+              <button type="button" class="btn btn-danger"
+                (click)="deleteAirport(); c('Delete click')">Ok</button>
+            </div>
+          </ng-template>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="btn-group text-center" role="group">
+              <div class="col-md-12">
+                <button class="btn btn-primary profile-button mx-2" routerLink="edit">Edit Airport</button>
+                <!-- <button class="btn btn-danger profile-button mx-2" (click)="deleteAirplane()" type="button">Delete Airplane</button> -->
+                <button class="btn btn-danger" (click)="open(content)">Delete</button>
+                <button type="submit" routerLink=".." class="btn btn-primary btn-dark mx-2">Go Back</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </div>
+  
