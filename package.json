@@ -19,8 +19,8 @@
     "build:prod": "ng build --prod --base-href https://jelmar1999.github.io/AirWizard/",
     "pretty": "prettier --write \"./src/**/*.{ts,js,css,scss,json}\"",
     "sonar": "sonar-scanner",
-    "lint": "ng lint",
-    "test": "ng test"
+    "test": "ng test --code-coverage --no-watch --no-progress --browsers=ChromeHeadlessCI",
+    "lint": "ng lint"
   },
   "private": true,
   "engines": {
