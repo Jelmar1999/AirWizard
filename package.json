@@ -20,7 +20,7 @@
     "pretty": "prettier --write \"./src/**/*.{ts,js,css,scss,json}\"",
     "sonar": "sonar-scanner",
     "lint": "ng lint",
-    "e2e": "echo e2e testing wordt later toegevoegd"
+    "test": "ng test"
   },
   "private": true,
   "engines": {

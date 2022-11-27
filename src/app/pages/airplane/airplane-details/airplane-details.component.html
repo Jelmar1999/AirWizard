@@ -16,7 +16,7 @@
         </div>
         <div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Airplane Name: {{ airplane.airplaneName}}</li>
+            <li id="airplaneName" class="list-group-item">Airplane Name: {{ airplane.airplaneName}}</li>
             <li class="list-group-item">Model: {{ airplane.model }}</li>
             <li class="list-group-item">Fuelcapacity (In Liters): {{ airplane.fuelCapacity }} L</li>
             <li class="list-group-item">Length (In m): {{ airplane.length }} m</li>
@@ -47,57 +47,14 @@
           </div>
         </ng-template>
 
-        <!-- <div class="row mt-2">
-          <div class="col-md-6 form-group">
-            <label class="labels">Airplane Name</label>
-            <p>{{ airplane.airplaneName }}</p>
-          </div>
-        </div>
-        <div class="row mt-2">
-          <div class="col-md-6 form-group">
-            <label class="labels">Model</label>
-            <p>{{ airplane.model }}</p>
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-md-12 form-group">
-            <label class="labels">Fuelcapacity (In Liters)</label>
-            <p>{{ airplane.fuelCapacity }}</p>
-          </div>
-          <div class="col-md-12 form-group">
-            <label class="labels">Length (In M)</label>
-            <p>{{ airplane.length }}</p>
-          </div>
-          <div class="col-md-12 form-group">
-            <label class="labels">Wingspan (In M)</label>
-            <p>{{ airplane.wingSpan }}</p>
-          </div>
-          <div class="col-md-12 form-group">
-            <label class="labels">Heigth (In M)</label>
-            <p>{{ airplane.heigth }}</p>
-          </div>
-          <div class="col-md-12 form-group">
-            <label class="labels">Engine</label>
-            <p>{{ airplane.engine }}</p>
-          </div>
-          <div class="col-md-12 form-group">
-            <label class="labels">Weight Class</label>
-            <p>{{ airplane.weightClass }}</p>
-          </div>
-          <div class="col-md-12 form-group">
-            <label class="labels">Buildyear</label>
-            <p>{{ airplane.buildYear.toLocaleDateString() }}</p>
-          </div>
-        </div>
-      </div> -->
       <div class="row">
         <div class="col-md-12 text-center">
           <div class="btn-group text-center" role="group">
             <div class="col-md-12">
-              <button class="btn btn-primary profile-button mx-2" routerLink="edit">Edit Airplane</button>
+              <button id="editButton" class="btn btn-primary profile-button mx-2" routerLink="edit">Edit Airplane</button>
               <!-- <button class="btn btn-danger profile-button mx-2" (click)="deleteAirplane()" type="button">Delete Airplane</button> -->
-              <button class="btn btn-danger" (click)="open(content)">Delete</button>
-              <button type="submit" routerLink=".." class="btn btn-primary btn-dark mx-2">Go Back</button>
+              <button id="deleteButton" class="btn btn-danger" (click)="open(content)">Delete</button>
+              <button id="backButton" type="submit" routerLink=".." class="btn btn-primary btn-dark mx-2">Go Back</button>
             </div>
           </div>
         </div>

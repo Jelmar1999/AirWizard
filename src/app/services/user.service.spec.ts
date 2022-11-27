@@ -1,42 +1,93 @@
-// import { TestBed } from '@angular/core/testing';
-// import { USERS } from '../models/mock-users';
-// import { User } from '../models/user.model';
-// import { UserService } from './user.service';
+import { TestBed } from '@angular/core/testing'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { UserService } from './user.service'
+import { User, Gender } from '../models/user.model'
+import { HttpClient } from '@angular/common/http'
+import { of } from 'rxjs'
 
-// describe('UserService', () => {
-//   let service: UserService;
+const mockUserData: User = {
+  token: 'secrettoken',
+  firstName: 'Piet',
+  lastName: 'Piraat',
+  userName: 'piraatje',
+  email: 'piet@mail.com',
+  password: 'secret',
+  phoneNumber: '0612345678',
+  dateOfBirth: new Date('01-01-2000'),
+  gender: Gender.Male
+}
 
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({});
-//     service = TestBed.inject(UserService);
-//   });
+const expectedUsers: User[] = [
+  {
+    id: '1',
+    firstName: 'Mees',
+    lastName: 'Kees',
+    userName: 'keesje',
+    email: 'mees@mail.com',
+    password: 'secret',
+    phoneNumber: '0612345678',
+    dateOfBirth: new Date('01-01-2000'),
+    gender: Gender.Male
+  },
+  {
+    id: '2',
+    firstName: 'Herman',
+    lastName: 'Brood',
+    userName: 'broodje',
+    email: 'herman@mail.com',
+    password: 'secret',
+    phoneNumber: '0612345678',
+    dateOfBirth: new Date('01-01-2000'),
+    gender: Gender.Male
+  }
+]
 
-//   it('should be created', () => {
-//     expect(service).toBeTruthy();
-//   });
+const expectedUser: User = {
+  id: '1',
+  firstName: 'Mees',
+  lastName: 'Kees',
+  userName: 'keesje',
+  email: 'mees@mail.com',
+  password: 'secret',
+  phoneNumber: '0612345678',
+  dateOfBirth: new Date('01-01-2000'),
+  gender: Gender.Male
+}
 
-//   it('should return a Observable with a list of users', (done : DoneFn)=>{
-//     service.getUsers().subscribe((users : User[]) => {
-//       console.log(users)
-//       expect(users.length).toBe(10)
-//       expect(users[0].id).toEqual(USERS[0].id)
-//       expect(users[1].id).toEqual(USERS[1].id)
-//       expect(users[2].id).toEqual(USERS[2].id)
-//       expect(users[3].id).toEqual(USERS[3].id)
-//       expect(users[4].id).toEqual(USERS[4].id)
-//       expect(users[5].id).toEqual(USERS[5].id)
-//       expect(users[6].id).toEqual(USERS[6].id)
-//       expect(users[7].id).toEqual(USERS[7].id)
-//       expect(users[8].id).toEqual(USERS[8].id)
-//       expect(users[9].id).toEqual(USERS[9].id)
-//       done()
-//     })
-//   })
+describe('UserService', () => {
+  let service: UserService
+  let httpSpy: jasmine.SpyObj<HttpClient>
 
-//   it('should return a user by given id', (done : DoneFn)=>{
-//     service.getUserById('16').subscribe((user : User) => {
-//       expect(user.id).toEqual('16')
-//       done()
-//     })
-//   })
-// });
+  beforeEach(() => {
+    httpSpy = jasmine.createSpyObj('HttpClient', ['get'])
+    TestBed.configureTestingModule({
+      providers: [{ provide: HttpClient, useValue: httpSpy }]
+    })
+    service = TestBed.inject(UserService)
+    httpSpy = TestBed.inject(HttpClient) as jasmine.SpyObj<HttpClient>
+  })
+
+  it('should be created', () => {
+    expect(service).toBeTruthy()
+  })
+
+  it('should return a list of all users', (done: DoneFn) => {
+    httpSpy.get.and.returnValue(of(expectedUsers))
+
+    service.getUsers().subscribe((users: User[]) => {
+      expect(users.length).toBe(2)
+      expect(users[0].id).toEqual(expectedUsers[0].id)
+      done()
+    })
+  })
+
+  it('should return user by id', (done: DoneFn) => {
+    httpSpy.get.and.returnValue(of(expectedUser))
+    httpSpy.get.and.returnValue(of(expectedUser))
+
+    service.getUserById('1').subscribe((user: User) => {
+      expect(user.id).toEqual(expectedUser.id)
+      done()
+    })
+  })
+})

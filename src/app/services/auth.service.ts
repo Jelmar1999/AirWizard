@@ -19,22 +19,6 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private alertService: AlertService) {
     console.log("Authservice Constructor")
     this.getUserFromLocalStorage()
-      // .pipe(
-      //   // switchMap is overbodig als we validateToken() niet gebruiken...
-      //   switchMap((user: User) => {
-      //     if (user) {
-      //       console.log('User found in local storage')
-      //       this.currentUser$.next(user)
-      //       console.log(user)
-      //       return this.validateToken(user)
-      //       // return of(user)
-      //     } else {
-      //       console.log(`No current user found`)
-      //       return of(undefined)
-      //     }
-      //   })
-      // )
-      // .subscribe(() => console.log('Startup auth done'))
       .pipe(
         map((user : User) => {
           if(user){
