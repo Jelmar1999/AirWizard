@@ -2,13 +2,7 @@
   <div class="container rounded bg-white mt-5 mb-5 form-group">
     <div class="row">
       <div class="col-md-3 border-right">
-        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-          <img
-            class="rounded-circle mt-5"
-            width="150px"
-            src="../../../../assets/images/airport.jpg"
-          /><span class="font-weight-bold"></span><span class="text-black-50"></span><span> </span>
-        </div>
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="../../../../assets/images/airport.jpg" /><span class="font-weight-bold"></span><span class="text-black-50"></span><span> </span></div>
       </div>
       <div class="col-md-5 border-right">
         <div class="p-3 py-5">
@@ -18,18 +12,7 @@
           <div class="row mt-2">
             <div class="col-md-6 form-group">
               <label class="labels">Airport Name</label>
-              <input
-                required
-                type="text"
-                id="airportName"
-                class="form-control my-2"
-                [(ngModel)]="airport.airportName"
-                name="airportName"
-                #airportName="ngModel"
-                [ngClass]="{ 'is-invalid': airportName.touched && airportName.invalid }"
-                required
-                minlength="3"
-              />
+              <input required type="text" id="airportName" class="form-control my-2" [(ngModel)]="airport.airportName" name="airportName" #airportName="ngModel" [ngClass]="{ 'is-invalid': airportName.touched && airportName.invalid }" required minlength="3" />
 
               <div class="invalid-feedback" *ngIf="airportName.touched && airportName.invalid">
                 <p *ngIf="airportName.errors!.required">Airport name is required!</p>
@@ -41,18 +24,7 @@
           <div class="row mt-2">
             <div class="col-md-6 form-group">
               <label class="labels">Country</label>
-              <input
-                required
-                type="text"
-                id="country"
-                class="form-control my-2"
-                [(ngModel)]="airport.country"
-                name="airportCountry"
-                #airportCountry="ngModel"
-                [ngClass]="{ 'is-invalid': airportCountry.touched && airportCountry.invalid }"
-                required
-                minlength="3"
-              />
+              <input required type="text" id="country" class="form-control my-2" [(ngModel)]="airport.country" name="airportCountry" #airportCountry="ngModel" [ngClass]="{ 'is-invalid': airportCountry.touched && airportCountry.invalid }" required minlength="3" />
 
               <div class="invalid-feedback" *ngIf="airportCountry.touched && airportCountry.invalid">
                 <p *ngIf="airportCountry.errors!.required">Country is required!</p>
@@ -63,18 +35,7 @@
           <div class="row mt-2">
             <div class="col-md-6 form-group">
               <label class="labels">Address</label>
-              <input
-                required
-                type="text"
-                id="airportAddress"
-                class="form-control my-2"
-                [(ngModel)]="airport.address"
-                name="address"
-                #airportAddress="ngModel"
-                [ngClass]="{ 'is-invalid': airportAddress.touched && airportAddress.invalid }"
-                required
-                minlength="6"
-              />
+              <input required type="text" id="airportAddress" class="form-control my-2" [(ngModel)]="airport.address" name="address" #airportAddress="ngModel" [ngClass]="{ 'is-invalid': airportAddress.touched && airportAddress.invalid }" required minlength="6" />
 
               <div class="invalid-feedback" *ngIf="airportAddress.touched && airportAddress.invalid">
                 <p *ngIf="airportAddress.errors!.required">Address is required!</p>
@@ -84,8 +45,18 @@
 
             <div class="col-md-12 form-group">
               <label for="buildYear" class="col-form-label">Buildyear</label>
-              <input required type="date" class="form-control my-2" [ngModel]="airport.buildYear | date:'yyyy-MM-dd'" (ngModelChange)="airport.buildYear = $event" 
-              name="buildYear" #buildYear="ngModel" [ngClass]="{'is-invalid': buildYear.touched && buildYear.invalid}" required max="{{dateToday | date:'yyyy-MM-dd'}}">
+              <input
+                required
+                type="date"
+                class="form-control my-2"
+                [ngModel]="airport.buildYear | date : 'yyyy-MM-dd'"
+                (ngModelChange)="airport.buildYear = $event"
+                name="buildYear"
+                #buildYear="ngModel"
+                [ngClass]="{ 'is-invalid': buildYear.touched && buildYear.invalid }"
+                required
+                max="{{ dateToday | date : 'yyyy-MM-dd' }}"
+              />
 
               <div class="invalid-feedback" *ngIf="buildYear.touched && buildYear.invalid">
                 <p *ngIf="buildYear.errors!.required">Buildyear is required!</p>
@@ -96,15 +67,7 @@
             <div class="col-md-12 text-center">
               <div class="btn-group text-center" role="group">
                 <div class="col-md-12">
-                  <button
-                    type="submit"
-                    routerLink="../"
-                    (click)="saveAirport(airport)"
-                    class="btn btn-primary mx-2"
-                    [disabled]="!airportEditForm.valid"
-                  >
-                    Submit
-                  </button>
+                  <button type="submit" routerLink="../" (click)="saveAirport(airport)" class="btn btn-primary mx-2" [disabled]="!airportEditForm.valid">Submit</button>
                   <button type="submit" routerLink="../" class="btn btn-primary btn-warning mx-2">Cancel</button>
                 </div>
               </div>

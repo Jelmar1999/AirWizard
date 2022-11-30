@@ -7,6 +7,9 @@ export class Gate {
     waitingRoomCapacity: number = 0 
     currentAirplane!: Airplane
     airport: Airport | undefined
+    airportName: string =""
+    airportId: string = ""
+    userId: string = ""
     
     constructor(gateName= "", waitingRoomCapacity = 0, ){  
         this.gateName= gateName
