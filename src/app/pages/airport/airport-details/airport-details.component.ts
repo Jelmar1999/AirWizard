@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
-import { Airport } from 'src/app/models/airport.model';
-import { User } from 'src/app/models/user.model';
-import { AirportService } from 'src/app/services/airport.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { AlertService } from 'src/app/util/alert/alert.service';
+import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap'
+import { map, Subscription } from 'rxjs'
+import { Airport } from 'src/app/models/airport.model'
+import { Gate } from 'src/app/models/gate.model'
+import { User } from 'src/app/models/user.model'
+import { AirportService } from 'src/app/services/airport.service'
+import { AuthService } from 'src/app/services/auth.service'
+import { GateService } from 'src/app/services/gate.service'
+import { AlertService } from 'src/app/util/alert/alert.service'
 
 @Component({
   selector: 'app-airport-details',
@@ -16,57 +18,84 @@ import { AlertService } from 'src/app/util/alert/alert.service';
 export class AirportDetailsComponent implements OnInit {
   airport: Airport | null = null
   airportId: string | null = null
+  gates!: Gate[]
 
-  dateToday = new Date().toISOString().substring(0,10)
+  page = 1
+  pageSize = 8
+  collectionSize = 0;
 
-  currentUser : User | undefined
-  sub! : Subscription
-  
-  constructor(private route: ActivatedRoute,
-     private router: Router, 
-     private airportService: AirportService,
-     private alertService: AlertService,
-     private modalService: NgbModal,
-     private authService : AuthService,
-     config: NgbModalConfig,) {
-      config.backdrop = 'static'
-      config.keyboard = false
-      }
-  
+  currentUser: User | undefined
+  sub!: Subscription
+
+  constructor(
+    private route: ActivatedRoute, 
+    private gateService: GateService,
+    private router: Router, 
+    private airportService: AirportService, 
+    private alertService: AlertService, 
+    private modalService: NgbModal, 
+    private authService: AuthService, 
+    config: NgbModalConfig) {
+      this.sub = this.authService.currentUser$.subscribe((user)=>{
+        this.currentUser = user
+        this.refreshGates()
+        config.backdrop = 'static'
+        config.keyboard = false
+      })
+  }
+
+  getCollectionSize() {
+    this.gateService
+      .getGates(this.currentUser!)
+      .pipe(map((gates: Gate[]) => gates.length))
+      .subscribe((size) => {
+        this.collectionSize = size
+      })
+  }
+
+  refreshGates() {
+    this.gateService
+      .getGates(this.currentUser!)
+      .pipe(map((gates: Gate[]) => gates.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)))
+      .subscribe((gates) => gates.map((gate) => (this.gates = gates)))
+  }
+
   open(content: any) {
     this.modalService.open(content)
   }
-  
+
   ngOnInit(): void {
-    this.sub = this.authService.currentUser$.subscribe((user)=>{
-      this.currentUser = user    
+    this.sub = this.authService.currentUser$.subscribe((user) => {
+      this.currentUser = user
       this.route.paramMap.subscribe((params) => {
         // Get airport id from the route
-        this.airportId = params.get('id');
+        this.airportId = params.get('id')
         // Find airport by id
         this.airportService.getAirportById(this.currentUser!, String(this.airportId)).subscribe((airplane) => {
-          airplane.buildYear = new Date(airplane.buildYear);
-          this.airport = airplane;
+          airplane.buildYear = new Date(airplane.buildYear)
+          this.airport = airplane
+          this.getCollectionSize() 
+          this.refreshGates()
         })
       })
     })
   }
   gotoAirport() {
-    this.router.navigate(['/airports']);
+    this.router.navigate(['/airports'])
   }
 
-  deleteAirport(){
+  deleteAirport() {
     this.airportService.deleteAirportById(this.currentUser!, String(this.airportId)).subscribe({
-      complete: () =>{
-        this.alertService.success('Airport has been deleted',{
+      complete: () => {
+        this.alertService.success('Airport has been deleted', {
           autoClose: true,
           keepAfterRouteChange: true
         })
         this.router.navigateByUrl('/airports', { skipLocationChange: true }).then(() => {
-          this.airportService.getAirports(this.currentUser!).subscribe();
-      });
+          this.airportService.getAirports(this.currentUser!).subscribe()
+        })
       }
-    });
+    })
     // this.router.navigate(['../'], { relativeTo: this.route })
   }
 }

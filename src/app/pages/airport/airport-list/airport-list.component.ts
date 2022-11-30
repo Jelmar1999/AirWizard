@@ -48,7 +48,6 @@ refreshAirports() {
       )
     )
     .subscribe((airports) => airports.map((airport) => (airport.gates = [], airport.buildYear = new Date(airport.buildYear)) ,this.airports = airports))
-  // this.airplanes = AIRPLANES;
 }
 
 formatDate(date: string) {

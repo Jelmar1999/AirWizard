@@ -46,7 +46,6 @@ export class AuthService {
       )
       .pipe(
         map((user) => {
-          console.log(user)
           let transformUser = new User;
           transformUser.token = user.token
           transformUser.id = user.id
@@ -127,7 +126,7 @@ export class AuthService {
 
   getUserFromLocalStorage(): Observable<User> {
     const localUser = JSON.parse(localStorage.getItem(this.CURRENT_USER)!)
-    console.log(localUser)
+    // console.log(localUser)
     return of(localUser)
   }
 
@@ -141,7 +140,7 @@ export class AuthService {
 
   private saveUserToLocalStorage(user: User): void {
     localStorage.setItem(this.CURRENT_USER, JSON.stringify(user))
-    console.log(JSON.stringify(user))
+    // console.log(JSON.stringify(user))
   }
 
   userMayEdit(itemUserId: string): Observable<boolean> {

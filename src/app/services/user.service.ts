@@ -23,24 +23,39 @@ export class UserService {
     return throwError(() => error)
   }
 
-  getUsers(options?: any): Observable<User[]> {
+  getUsers(userData : User, options?: any): Observable<User[]> {
     const endpoint = environment.apiUrl + 'user'
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userData.token
+      })
+    }
     return this.http
       .get<User[]>(endpoint, { ...options, ...httpOptions })
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
-  getUserById(id: string, options?: any): Observable<User> {
+  getUserById(userData : User, id: string, options?: any): Observable<User> {
     const endpoint = environment.apiUrl + 'user/' + id
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userData.token
+      })
+    }
     return this.http
       .get<User>(endpoint, { ...options, ...httpOptions })
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
-  deleteUser(id: String, userData: User, options?: any) {
+  deleteUser(userData : User, id: String, options?: any) {
     const endpoint = environment.apiUrl + 'user/' + id
     const httpOptions = {
-      headers: new HttpHeaders({
+      headers : new HttpHeaders({
+        'Accept' : 'application/json',
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + userData.token
       })
@@ -66,8 +81,15 @@ export class UserService {
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
-  updateUser(updatedUser: User, options?: any) {
+  updateUser(userData : User, updatedUser: User, options?: any) {
     const endpoint = environment.apiUrl + 'user/' + updatedUser.id
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userData.token
+      })
+    }
     return this.http
       .put<User>(endpoint, { ...options,
         UserName : updatedUser.userName,

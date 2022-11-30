@@ -48,9 +48,6 @@ export class AirplaneListComponent implements OnInit {
         )
       )
       .subscribe((airplanes) => airplanes.map((airplane) => (airplane.buildYear = new Date(airplane.buildYear)), this.airplanes = airplanes))
-    // this.airplanes = AIRPLANES;
-    
-    console.log(this.airplanes)
   }
 
   formatDate(date: string) {
@@ -62,7 +59,6 @@ export class AirplaneListComponent implements OnInit {
       this.currentUser = user    
       this.refreshAirplanes()
       this.getCollectionSize()
-      console.log(this.collectionSize)
     })
   }
 }

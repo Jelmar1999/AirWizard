@@ -1,6 +1,6 @@
 <div class="container rounded bg-white mt-7 mb-7 form">
   <div class="row" *ngIf="airport">
-    <div class="col-md-3 border-right">
+    <div class="col-md-2 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-5">
         <img class="rounded-circle mt-5" width="150px" src="../../../../assets/images/airport.jpg" /><span class="font-weight-bold">{{ airport.airportName }}</span>
       </div>
@@ -62,9 +62,14 @@
         <div class="col-md-4"></div>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="text-center">
-        <h4>Gates</h4>
+    <div class="col-md-5">
+      <div class="row">
+        <div class="col-md-1 text-center">
+          <h4>Gates</h4>
+        </div>
+        <div class="col-md-10 text-center">
+          <button [routerLink]="['new']" class="btn btn-primary profile-button">Add Gate</button>
+        </div>
       </div>
       <table class="table table-striped">
         <thead>
@@ -84,8 +89,16 @@
           </tr> -->
         </tbody>
       </table>
-      <div class="col-md-12 text-center">
-        <button [routerLink]="['new']" class="btn btn-primary profile-button">Add Gate</button>
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshGates()"> </ngb-pagination>
+
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshGates()">
+          <option [ngValue]="2">2 items per page</option>
+          <option [ngValue]="4">4 items per page</option>
+          <option [ngValue]="6">6 items per page</option>
+          <option [ngValue]="8">8 items per page</option>
+          <option [ngValue]="10">10 items per page</option>
+        </select>
       </div>
     </div>
   </div>

@@ -1,18 +1,70 @@
-<div *ngIf="user != null">
-  <div class="card mx-auto" style="width: 24rem;">
-    <div class="card-header">
-      <h5 class="my-1">User details</h5>
+<div class="container rounded bg-white mt-5 mb-5 form">
+  <div class="row" *ngIf="user">
+    <div class="col-md-3 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <img class="rounded-circle mt-5" width="150px" src="../../../../assets/images/person.png" /><span class="font-weight-bold">{{
+          user.firstName + " " + user.lastName
+        }}</span>
+      </div>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">First name: {{ user?.firstName }}</li>
-      <li class="list-group-item">Last name: {{ user?.lastName }}</li>
-      <li class="list-group-item">Email address: {{ user?.email }}</li>
-      <li class="list-group-item">Phone number: {{ user?.phoneNumber }}</li>
-      <li class="list-group-item">Date of birth: {{ user?.dateOfBirth!.toLocaleDateString() }}</li>
-      <li class="list-group-item">Gender: {{ user?.gender }}</li>
-    </ul>
-    <div class="card-body">
-      <a class="btn btn-secondary" role="button"(click)="cancel()">Go back</a>
+    <div class="col-md-5 border-right">
+      <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">User Information</h4>
+        </div>
+        <div>
+          <ul class="list-group list-group-flush">
+            <li id="userName" class="list-group-item">Username: {{ user.userName }}</li>
+            <li class="list-group-item">First Name: {{ user.firstName }}</li>
+            <li class="list-group-item">Last Name: {{ user.lastName }}</li>
+            <li class="list-group-item">Email Address: {{ user.email }}</li>
+            <li class="list-group-item">Phone Number: {{ user.phoneNumber }}</li>
+            <li class="list-group-item">Date of Birth: {{ user.dateOfBirth.toLocaleDateString() }}</li>
+            <li class="list-group-item">Gender: {{ user.gender }}</li>
+          </ul>
+        </div>
+        <ng-template #content let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Warning!</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <strong
+                >Are you sure you want to delete <span class="text-primary">"{{ user.userName }}"</span></strong
+              >
+            </p>
+            <p>
+              All information associated to this airplane will be permanently deleted.
+              <span class="text-danger">This operation can NOT be undone.</span>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="c('Cancel click')">Cancel</button>
+            <button type="button" class="btn btn-danger" (click)="deleteUser(); c('Delete click')">Ok</button>
+          </div>
+        </ng-template>
+
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="btn-group text-center" role="group">
+              <div class="col-md-12">
+                <div id="ownerButtons" [hidden]="currentUser?.id != userId">
+                  <button id="editButton" class="btn btn-primary profile-button mx-2" routerLink="edit">Edit Airplane</button>
+                  <!-- <button class="btn btn-danger profile-button mx-2" (click)="deleteAirplane()" type="button">Delete Airplane</button> -->
+                  <button id="deleteButton" class="btn btn-danger" (click)="open(content)">Delete</button>
+                </div>
+                <div>
+                  <button id="backButton" type="submit" routerLink=".." class="btn btn-primary btn-dark mx-2">Go Back</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
     </div>
   </div>
 </div>
