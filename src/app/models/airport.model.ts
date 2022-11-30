@@ -10,6 +10,7 @@ export class Airport {
     gates: Gate[] | undefined = [];
     owner: User | undefined
     ownerName : string = "";
+    ownerId : string ="";
     
     constructor(airporName= "", address = "", buildyear = new Date()){  
         this.airportName= airporName

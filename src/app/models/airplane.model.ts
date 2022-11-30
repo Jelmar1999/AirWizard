@@ -18,6 +18,7 @@ export class Airplane {
     height: number = 0;
     engine: string = ""; 
     weightClass: WeightClass = WeightClass.Small
+    userId: string = "" 
     
     constructor(airplaneName= "", model ="", buildYear=new Date(), fuelCapacity=0, length=0, wingSpan=0,height=0, engine ="", weightClass= WeightClass.Small){  
         this.airplaneName= airplaneName

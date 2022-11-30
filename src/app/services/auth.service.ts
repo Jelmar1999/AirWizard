@@ -57,6 +57,7 @@ export class AuthService {
           transformUser.phoneNumber = user.phoneNumber
           transformUser.dateOfBirth = user.dateOfBirth
           transformUser.gender = user.gender
+          transformUser.ownedAirplanes = user.ownedAirplanes
           this.saveUserToLocalStorage(transformUser)
           this.currentUser$.next(transformUser)
           this.alertService.success("Succesfully logged in!", {
