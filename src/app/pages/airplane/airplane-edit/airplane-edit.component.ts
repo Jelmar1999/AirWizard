@@ -69,4 +69,7 @@ export class AirplaneEditComponent implements OnInit {
       })
     })
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+  }
 }

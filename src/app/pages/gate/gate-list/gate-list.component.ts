@@ -61,4 +61,8 @@ export class GateListComponent implements OnInit {
     })
   }
 
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+  }
+
 }

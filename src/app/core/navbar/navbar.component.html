@@ -1,15 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" routerLink="/" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">{{ title }}</a>
-    <button
-      class="navbar-toggler hidden-sm-up"
-      type="button"
-      (click)="isNavbarCollapsed = !isNavbarCollapsed"
-      data-target="#navbarsDefault"
-      aria-controls="navbarsDefault"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div *ngIf="user" [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
@@ -18,16 +10,19 @@
           <a class="nav-link" routerLink="dashboard" [routerLinkActive]="['active']">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="airports" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Airports</a>
+          <a class="nav-link" routerLink="airports" [routerLinkActive]="['active']">Airports</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="gates" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Gates</a>
+          <a class="nav-link" routerLink="gates" [routerLinkActive]="['active']" >Gates</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="airplanes" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Airplanes</a>
+          <a class="nav-link" routerLink="airplanes" [routerLinkActive]="['active']" >Airplanes</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" routerLink="users" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Users</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="social" [routerLinkActive]="['active']">Social</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="about" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">About</a>

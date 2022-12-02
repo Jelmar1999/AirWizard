@@ -40,6 +40,18 @@ export class AirplaneService {
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
+  getAirplanesFromUser(userData : User, options?: any): Observable<Airplane[]> {
+    const endpoint = environment.apiUrl + "user/" + userData.id + "/fromuser";
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + userData.token
+      })
+    }
+    return this.http
+      .get<Airplane[]>(endpoint, {...options, ...httpOptions})
+      .pipe(tap(console.log), catchError(this.handleError))
+  }
   getAirplaneById(userData : User, id: string, options?: any): Observable<Airplane> {
     const endpoint = environment.apiUrl + "airplanes/" + id;
     const httpOptions = {

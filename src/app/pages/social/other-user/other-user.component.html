@@ -1,0 +1,31 @@
+<div *ngIf="user != null">
+    <div class="row">
+        <div class="col-3">
+            <div class="card mx-auto user-detail-card">
+                <div class="card-header">
+                    <h5 class="my-1">User details</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">First name: {{ user?.firstName }}</li>
+                    <li class="list-group-item">Last name: {{ user?.lastName }}</li>
+                    <li class="list-group-item">Date of Birth: {{ user?.dateOfBirth!.toLocaleDateString() }}</li>
+                    <li class="list-group-item">Gender: {{ user?.gender }}</li>
+                </ul>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a class="btn btn-secondary" role="button" routerLink="../..">Go back</a>
+                        <div *ngIf="followed; else notFollowed">
+                            <a class="btn btn-danger" role="button" (click)="unfollow()">Unfollow</a>
+                        </div>
+                        <ng-template #notFollowed>
+                            <a class="btn btn-success" role="button" (click)="follow()">Follow</a>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <app-airplane-list></app-airplane-list>
+        </div>
+    </div>
+</div>

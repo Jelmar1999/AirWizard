@@ -74,4 +74,7 @@ export class AirportEditComponent implements OnInit {
       })
     })
   }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+  }
 }

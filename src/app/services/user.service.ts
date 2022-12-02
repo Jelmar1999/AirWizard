@@ -37,15 +37,8 @@ export class UserService {
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
-  getUserById(userData : User, id: string, options?: any): Observable<User> {
+  getUserById(id: string, options?: any): Observable<User> {
     const endpoint = environment.apiUrl + 'user/' + id
-    const httpOptions = {
-      headers : new HttpHeaders({
-        'Accept' : 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + userData.token
-      })
-    }
     return this.http
       .get<User>(endpoint, { ...options, ...httpOptions })
       .pipe(tap(console.log), catchError(this.handleError))

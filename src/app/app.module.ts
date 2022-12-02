@@ -28,6 +28,10 @@ import { GateListComponent } from './pages/gate/gate-list/gate-list.component';
 import { GateEditComponent } from './pages/gate/gate-edit/gate-edit.component';
 import { GateDetailsComponent } from './pages/gate/gate-details/gate-details.component'
 import { AlertModule } from './util/alert/alert.module';
+import { FollowedUsersComponent } from './pages/social/followed-users/followed-users.component';
+import { NotFollowedUsersComponent } from './pages/social/not-followed-users/not-followed-users.component';
+import { OtherUserComponent } from './pages/social/other-user/other-user.component';
+import { SocialDashboardComponent } from './pages/social/social-dashboard/social-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,10 @@ import { AlertModule } from './util/alert/alert.module';
     GateListComponent,
     GateEditComponent,
     GateDetailsComponent,
+    FollowedUsersComponent,
+    NotFollowedUsersComponent,
+    OtherUserComponent,
+    SocialDashboardComponent,
   ],
   imports: [BrowserModule, RouterModule, NgbModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, AlertModule],
   providers: [],

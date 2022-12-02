@@ -17,6 +17,8 @@ import { GateListComponent } from './pages/gate/gate-list/gate-list.component'
 import { GateDetailsComponent } from './pages/gate/gate-details/gate-details.component'
 import { GateEditComponent } from './pages/gate/gate-edit/gate-edit.component'
 import { AccessGuard } from './util/guard/access.guard'
+import { SocialDashboardComponent } from './pages/social/social-dashboard/social-dashboard.component'
+import { OtherUserComponent } from './pages/social/other-user/other-user.component'
 
 const routes: Routes = [
   {
@@ -102,6 +104,41 @@ const routes: Routes = [
         component: GateEditComponent,
         data: { requiresLogin: true },
         canActivate: [AccessGuard] 
+      },
+      {
+        path: 'social',
+        pathMatch: 'full',
+        component: SocialDashboardComponent,
+        data: { requiresLogin: true },
+        canActivate: [AccessGuard]
+      },
+      {
+        path: 'social/user/:id',
+        pathMatch: 'full',
+        component: OtherUserComponent,
+        data: { requiresLogin: true },
+        canActivate: [AccessGuard]
+      },
+      {
+        path: 'social/user/:userId/airports/:id',
+        pathMatch: 'full',
+        component: AirportDetailsComponent,
+        data: { requiresLogin: true },
+        canActivate: [AccessGuard]
+      },
+      {
+        path: 'social/user/:userId/airplanes/:id',
+        pathMatch: 'full',
+        component: AirplaneDetailsComponent,
+        data: { requiresLogin: true },
+        canActivate: [AccessGuard]
+      },
+      {
+        path: 'social/user/:userId/airports/:airportId/gates/:gateId',
+        pathMatch: 'full',
+        component: GateDetailsComponent,
+        data: { requiresLogin: true },
+        canActivate: [AccessGuard]
       }
     ]
   },

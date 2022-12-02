@@ -50,7 +50,7 @@ export class UserDetailsComponent implements OnInit {
       // Get user id from the route
       this.userId = params.get('id');
       // Find user by id
-      this.userService.getUserById(this.currentUser!, String(this.userId)).subscribe((user) => {
+      this.userService.getUserById(String(this.userId)).subscribe((user) => {
         user.dateOfBirth = new Date(user.dateOfBirth);
         this.user = user;
       })

@@ -98,4 +98,8 @@ export class AirportDetailsComponent implements OnInit {
     })
     // this.router.navigate(['../'], { relativeTo: this.route })
   }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+  }
 }
