@@ -58,6 +58,14 @@ export class AirplaneDetailsComponent implements OnInit {
     this.router.navigate(['/airplanes']);
   }
 
+  goBack(){
+    if (this.airplane?.userId == this.currentUser?.id) {
+      this.router.navigateByUrl('/airplanes')
+    }else{
+      this.router.navigateByUrl(`/social/user/${this.airplane?.userId}`)
+    }
+  }
+
   deleteAirplane(){
     this.airplaneService.deleteAirplaneById(this.currentUser!, String(this.airplaneId)).subscribe({
       complete: () =>{
