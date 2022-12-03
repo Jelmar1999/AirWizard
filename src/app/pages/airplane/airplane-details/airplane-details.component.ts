@@ -48,8 +48,6 @@ export class AirplaneDetailsComponent implements OnInit {
         this.airplaneService.getAirplaneById(this.currentUser!, String(this.airplaneId)).subscribe((airplane) => {
           airplane.buildYear = new Date(airplane.buildYear);
           this.airplane = airplane;
-          console.log("CurrentUserId: "+ this.currentUser?.id)
-          console.log("AirplaneUserId: "+ this.airplane.userId)
         })
       })
     })

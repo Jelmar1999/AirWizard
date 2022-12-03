@@ -28,8 +28,8 @@ export class GateService {
     return throwError(() => error);
   }
 
-  getGates(userData : User, options?: any): Observable<Gate[]> {
-    const endpoint = environment.apiUrl + "gates";
+  getGatesForAirport(userData : User, airportId: string,  options?: any): Observable<Gate[]> {
+    const endpoint = environment.apiUrl + "airports/" + airportId + "/gates";
     const httpOptions = {
       headers : new HttpHeaders({
         'Accept' : 'application/json',
@@ -42,8 +42,8 @@ export class GateService {
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
-  getGateById(userData : User, id: string, options?: any): Observable<Gate> {
-    const endpoint = environment.apiUrl + "gates/" + id;
+  getGateById(userData : User, airportId: string, gateId: string, options?: any): Observable<Gate> {
+    const endpoint = environment.apiUrl + "airports/" + airportId + "/gates/" + gateId;
     const httpOptions = {
       headers : new HttpHeaders({
         'Accept' : 'application/json',
@@ -56,8 +56,8 @@ export class GateService {
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
-  deleteGateById(userData : User, id: String, options?: any){
-    const endpoint = environment.apiUrl + "gates/" + id;
+  deleteGateById(userData : User,airportId: string, gateId: String, options?: any){
+    const endpoint = environment.apiUrl + "airports/" + airportId + "/gates/"+ gateId +"/delete";
     const httpOptions = {
       headers : new HttpHeaders({
         'Accept' : 'application/json',
@@ -71,7 +71,7 @@ export class GateService {
   }
 
   addGateToAirport(userData : User, airportId: string, gate : Gate, options?:any){
-    const endpoint = environment.apiUrl + "Airports/" + airportId;
+    const endpoint = environment.apiUrl + "airports/" + airportId + "/gates/new";
     const httpOptions = {
       headers : new HttpHeaders({
         'Accept' : 'application/json',
@@ -83,26 +83,29 @@ export class GateService {
       .post<Gate>(endpoint, { ...options, 
         gateName: gate.gateName,
         waitingRoomCapacity: gate.waitingRoomCapacity,
-        airport : gate.airport,
-        airportId: gate.airportId,
-        airportName: gate.airportName}, 
+        isAvailable: gate.available,
+        direction: gate.direction}, 
         httpOptions)
       .pipe(tap(console.log), catchError(this.handleError))
   }
 
   updateGate(userData : User, airportId: string, updatedGate: Gate, options?: any){
-    const endpoint = environment.apiUrl + "airports/" + airportId + "/" + updatedGate.id;
+    const endpoint = environment.apiUrl + "airports/" + airportId + "/gates/" + updatedGate.id + '/edit';
     const httpOptions = {
       headers : new HttpHeaders({
+        'Accept' : 'application/json',
         'Content-Type': 'application/json',
-        // Authorization: `Bearer ${userData.token}`
-      }).set("Authorization", `Bearer ${userData.token}`)
+        Authorization: 'Bearer ' + userData.token
+      })
     }
     return this.http
-      .put<Airplane>(endpoint, {...options,
+      .put<Gate>(endpoint, {...options,
         id : updatedGate.id,
         gateName: updatedGate.gateName,
-        waitingRoomCapacity: updatedGate.waitingRoomCapacity,}, 
+        waitingRoomCapacity: updatedGate.waitingRoomCapacity,
+        isAvailable: updatedGate.available,
+        direction: updatedGate.direction
+        }, 
         httpOptions)
       .pipe(tap(console.log), catchError(this.handleError))
   }

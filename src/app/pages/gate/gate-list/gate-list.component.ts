@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { map, Subscription } from 'rxjs';
-import { Gate } from 'src/app/models/gate.model';
-import { User } from 'src/app/models/user.model';
-import { AuthService } from 'src/app/services/auth.service';
-import { GateService } from 'src/app/services/gate.service';
+import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { map, Subscription } from 'rxjs'
+import { Airport } from 'src/app/models/airport.model'
+import { Gate } from 'src/app/models/gate.model'
+import { User } from 'src/app/models/user.model'
+import { AirportService } from 'src/app/services/airport.service'
+import { AuthService } from 'src/app/services/auth.service'
+import { GateService } from 'src/app/services/gate.service'
 
 @Component({
   selector: 'app-gate-list',
@@ -13,56 +16,52 @@ import { GateService } from 'src/app/services/gate.service';
 export class GateListComponent implements OnInit {
   gates!: Gate[]
   selectedId = 0
-  
-  currentUser : User | undefined
-  sub! : Subscription
-  
+
+  airportId: string | null = null
+  airport: Airport | null = null
+  airportOwnerId: string | null = null
+
+  currentUser: User | undefined
+  sub!: Subscription
+
   page = 1
   pageSize = 8
-  collectionSize = 0;
-  
-  constructor(
-    public authService: AuthService,
-    public gateService: GateService
-  
-    ) {
-      this.sub = this.authService.currentUser$.subscribe((user) => {
-        this.currentUser = user
-        this.refreshGates() 
+  collectionSize = 0
+
+  constructor(private authService: AuthService, 
+    private gateService: GateService, 
+    private airportService: AirportService,
+    private route: ActivatedRoute) {
+    this.sub = this.authService.currentUser$.subscribe((user) => {
+      this.currentUser = user
+      this.route.paramMap.subscribe((params) => {
+        this.airportId = params.get('id')
+        this.airportService.getAirportById(this.currentUser!, String(this.airportId)).subscribe((airport)=>{
+          this.airport = airport
+          this.airportOwnerId = airport.ownerId
+        })
       })
-   }
-  
-  getCollectionSize(){
-    this.gateService.getGates(this.currentUser!).pipe(
-      map((gates: Gate[]) => gates.length)).subscribe((size) => {this.collectionSize = size})
+    })
   }
-  
-  
+
   refreshGates() {
     this.gateService
-      .getGates(this.currentUser!)
-      .pipe(
-        map((gates: Gate[]) =>
-          gates.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize),
-        )
-      )
-      .subscribe((gates) => gates.map((gate) => this.gates = gates))
-  }
-  
-  formatDate(date: string) {
-    return new Date(date).toLocaleDateString()
+      .getGatesForAirport(this.currentUser!, String(this.airportId))
+      .pipe(map((gates: Gate[]) => gates.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)))
+      .subscribe((gates) => gates.map((gate) => (this.gates = gates)))
   }
   
   ngOnInit(): void {
-    this.sub = this.authService.currentUser$.subscribe((user)=>{
-      this.currentUser = user   
-      this.getCollectionSize() 
-      this.refreshGates()
+    this.sub = this.authService.currentUser$.subscribe((user) => {
+      this.currentUser = user
+      this.route.paramMap.subscribe((params) => {
+        this.airportId = params.get('id')
+        this.refreshGates()
+      })
     })
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe()
   }
-
 }

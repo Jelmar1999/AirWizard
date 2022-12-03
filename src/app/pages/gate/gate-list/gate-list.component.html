@@ -1,25 +1,25 @@
-<h2>Gates</h2>
-<div class="row">
-  <div class="col-md-12 text-left">
-    <button [routerLink]="['new']" class="btn btn-primary profile-button">Add Gate</button>
+<h4 class="text-center">Gates</h4>
+<div class="row" style="padding: 10px">
+  <div id="ownerButtons" class="col-md-12 text-left text-center" [hidden]="currentUser?.id != airportOwnerId">
+    <div class="col-md-12 text-left text-center">
+      <button [routerLink]="['gates/new']" class="btn btn-primary profile-button">Add Gate</button>
+    </div>
   </div>
 </div>
+
 <table class="table table-striped">
   <thead>
     <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Waiting Room Capacity</th>
-        <th scope="col">Airport Name</th>
-        <th scope="col">Docked Airplane</th>
-      </tr>
+      <th scope="col">Name</th>
+      <th scope="col">WR Capacity</th>
+      <th scope="col">Is Occupied</th>
+    </tr>
   </thead>
   <tbody>
     <tr *ngFor="let gate of gates">
-      <a [routerLink]="['/airports', gate.id]">{{ gate.gateName}} </a>
-      <td>{{ gate.gateName }}</td>
-      <td>{{ gate.waitingRoomCapacity}}</td>
-      <td>{{ gate.airportName }}</td>
-      <td>{{ gate.currentAirplane }}</td>
+      <a [routerLink]="['/airports', airportId, 'gates', gate.id]">{{ gate.gateName }} </a>
+      <td>{{ gate.waitingRoomCapacity }}</td>
+      <td>{{ gate.available ? 'Occupied' : 'Available' }}</td>
     </tr>
   </tbody>
 </table>

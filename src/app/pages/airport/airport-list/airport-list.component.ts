@@ -25,24 +25,7 @@ export class AirportListComponent implements OnInit {
   constructor(public authService: AuthService, public airportService: AirportService) {
     this.sub = this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user
-      this.refreshAirports()
     })
-  }
-
-  getCollectionSize() {
-    this.airportService
-      .getAirports(this.currentUser!)
-      .pipe(map((airports: Airport[]) => airports.length))
-      .subscribe((size) => {
-        this.collectionSize = size
-      })
-  }
-
-  refreshAirports() {
-    this.airportService
-      .getAirports(this.currentUser!)
-      .pipe(map((airports: Airport[]) => airports.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)))
-      .subscribe((airports) => airports.map((airport) => ((airport.gates = []), (airport.buildYear = new Date(airport.buildYear))), (this.airports = airports)))
   }
 
   formatDate(date: string) {
@@ -52,9 +35,15 @@ export class AirportListComponent implements OnInit {
   ngOnInit(): void {
     this.sub = this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user
-      this.getCollectionSize()
       this.refreshAirports()
     })
+  }
+
+  refreshAirports() {
+    this.airportService
+      .getAirports(this.currentUser!)
+      .pipe(map((airports: Airport[]) => airports.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)))
+      .subscribe((airports) => airports.map((airport) => ((airport.gates = []), (airport.buildYear = new Date(airport.buildYear))), (this.airports = airports)))
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe()

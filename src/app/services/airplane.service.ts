@@ -124,7 +124,8 @@ export class AirplaneService {
         wingSpan: updatedAirplane.wingSpan,
         height: updatedAirplane.height,
         engine: updatedAirplane.engine,
-        weightClass: updatedAirplane.weightClass}, 
+        weightClass: updatedAirplane.weightClass,
+        userId: userData.id}, 
         httpOptions)
       .pipe(tap(console.log), catchError(this.handleError))
   }

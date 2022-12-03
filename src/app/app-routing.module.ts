@@ -85,22 +85,22 @@ const routes: Routes = [
         data : {requiresLogin: true},
         canActivate: [AccessGuard]  
       },
-      { path: 'gates', 
+      { path: 'airports/:id/gates', 
         component: GateListComponent,
         data: { requiresLogin: true },
         canActivate: [AccessGuard]
       },
-      { path: 'gates/new', 
+      { path: 'airports/:id/gates/new', 
         component: GateEditComponent,
         data: { requiresLogin: true },
         canActivate: [AccessGuard] 
       },
-      { path: 'gates/:id', 
+      { path: 'airports/:airportId/gates/:gateId', 
         component: GateDetailsComponent,
         data: { requiresLogin: true },
         canActivate: [AccessGuard] 
       },
-      { path: 'gates/:id/edit', 
+      { path: 'airports/:id/gates/:gateId/edit', 
         component: GateEditComponent,
         data: { requiresLogin: true },
         canActivate: [AccessGuard] 

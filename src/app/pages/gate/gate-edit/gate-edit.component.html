@@ -1,1 +1,57 @@
-<p>gate-edit works!</p>
+<form #gateEditForm="ngForm" (ngSubmit)="gateEditForm.form.valid && saveGate(this.gate) ">
+    <div class="container rounded bg-white mt-5 mb-5 form-group">
+      <div class="row">
+        <div class="col-md-3 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="../../../../assets/images/gate.jpg" /><span class="font-weight-bold"></span><span class="text-black-50"></span><span> </span></div>
+        </div>
+        <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Gate Information</h4>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-6 form-group">
+                <label class="labels">Gate</label>
+                <input required type="text" id="gateName" class="form-control my-2" [(ngModel)]="gate.gateName" name="gateName" #gateName="ngModel" [ngClass]="{ 'is-invalid': gateName.touched && gateName.invalid }" required minlength="3" />
+  
+                <div class="invalid-feedback" *ngIf="gateName.touched && gateName.invalid">
+                  <p *ngIf="gateName.errors!.required">Gate name is required!</p>
+                  <p *ngIf="gateName.errors!.minlength">Gate name must be at least 2 characters long!</p>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row mt-2">
+              <div class="col-md-6 form-group">
+                <label class="labels">Waiting Room Capacity</label>
+                <input required type="number" id="capacity" class="form-control my-2" [(ngModel)]="gate.waitingRoomCapacity" name="capacity" #capacity="ngModel" [ngClass]="{ 'is-invalid': capacity.touched && capacity.invalid }" required min="1" />
+  
+                <div class="invalid-feedback" *ngIf="capacity.touched && capacity.invalid">
+                  <p *ngIf="capacity.errors!.required">Capacity is required!</p>
+                  <p *ngIf="capacity.errors!.min">Capacity can not be less than 1</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-mt-2">
+                <label for="gender" class="col-form-label">Direction of gate</label>
+                <select required (change)="directionToObject()" class="custom-select form-control my-2" id="weight" name="weight" [(ngModel)]="gate.direction" #weight="ngModel">
+                  <option *ngFor="let direction of directions">{{direction}}</option>
+                </select>
+              </div>
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <div class="btn-group text-center" role="group">
+                  <div class="col-md-12">
+                    <button type="submit" routerLink=".." (click)="saveGate(gate)" class="btn btn-primary mx-2" [disabled]="!gateEditForm.valid">Submit</button>
+                    <button type="submit" routerLink=".." class="btn btn-primary btn-warning mx-2">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </form>
+  

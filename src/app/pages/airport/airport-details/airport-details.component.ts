@@ -38,27 +38,14 @@ export class AirportDetailsComponent implements OnInit {
     config: NgbModalConfig) {
       this.sub = this.authService.currentUser$.subscribe((user)=>{
         this.currentUser = user
-        this.refreshGates()
-        config.backdrop = 'static'
-        config.keyboard = false
+        this.route.paramMap.subscribe((params) => {
+          this.airportId = params.get('id')
+          config.backdrop = 'static'
+          config.keyboard = false
+        })
       })
   }
 
-  getCollectionSize() {
-    this.gateService
-      .getGates(this.currentUser!)
-      .pipe(map((gates: Gate[]) => gates.length))
-      .subscribe((size) => {
-        this.collectionSize = size
-      })
-  }
-
-  refreshGates() {
-    this.gateService
-      .getGates(this.currentUser!)
-      .pipe(map((gates: Gate[]) => gates.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)))
-      .subscribe((gates) => gates.map((gate) => (this.gates = gates)))
-  }
 
   open(content: any) {
     this.modalService.open(content)
@@ -74,8 +61,6 @@ export class AirportDetailsComponent implements OnInit {
         this.airportService.getAirportById(this.currentUser!, String(this.airportId)).subscribe((airplane) => {
           airplane.buildYear = new Date(airplane.buildYear)
           this.airport = airplane
-          this.getCollectionSize() 
-          this.refreshGates()
         })
       })
     })
@@ -96,7 +81,6 @@ export class AirportDetailsComponent implements OnInit {
         })
       }
     })
-    // this.router.navigate(['../'], { relativeTo: this.route })
   }
 
   ngOnDestroy(): void {
