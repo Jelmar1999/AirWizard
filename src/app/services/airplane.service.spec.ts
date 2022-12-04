@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { Airplane, WeightClass } from '../models/airplane.model';
+import { Gate } from '../models/gate.model';
 
 import { User, Gender } from '../models/user.model';
 import { AirplaneService } from './airplane.service';
@@ -32,7 +33,9 @@ const expectedAirplanes: Airplane[] = [
         height: 490,
         engine: 'CFM-56',
         weightClass: WeightClass.Small,
-        userId: 'b5973afe-d368-453a-bbd0-fba55f815960'
+        userId: 'b5973afe-d368-453a-bbd0-fba55f815960',
+        gateId: '1',
+        currentGate: new Gate
       },
       {
         id: '2',
@@ -45,7 +48,9 @@ const expectedAirplanes: Airplane[] = [
         height: 500,
         engine: 'Pratt & Whitney PW1000G',
         weightClass: WeightClass.LargeJet,
-        userId: 'b5973afe-d368-453a-bbd0-fba55f815960'
+        userId: 'b5973afe-d368-453a-bbd0-fba55f815960',
+        gateId: '1',
+        currentGate: new Gate
       },
       {
         id: '3',
@@ -58,7 +63,9 @@ const expectedAirplanes: Airplane[] = [
         height: 490,
         engine: 'PW1000G',
         weightClass: WeightClass.Small,
-        userId: 'b5973afe-d368-453a-bbd0-fba55f815960'
+        userId: 'b5973afe-d368-453a-bbd0-fba55f815960',
+        gateId: '1',
+        currentGate: new Gate
       },
       {
         id: '4',
@@ -71,7 +78,9 @@ const expectedAirplanes: Airplane[] = [
         height: 490,
         engine: 'CFM-56',
         weightClass: WeightClass.Small,
-        userId: 'b5973afe-d368-453a-bbd0-fba55f815960'
+        userId: 'b5973afe-d368-453a-bbd0-fba55f815960',
+        gateId: '1',
+        currentGate: new Gate
       },
       {
         id: '5',
@@ -84,7 +93,9 @@ const expectedAirplanes: Airplane[] = [
         height: 320,
         engine: 'CFM-56',
         weightClass: WeightClass.Medium,
-        userId: 'b5973afe-d368-453a-bbd0-fba55f815960'
+        userId: 'b5973afe-d368-453a-bbd0-fba55f815960',
+        gateId: '1',
+        currentGate: new Gate
       },
       {
         id: '6',
@@ -97,7 +108,9 @@ const expectedAirplanes: Airplane[] = [
         height: 400,
         engine: 'CFM-56',
         weightClass: WeightClass.Heavy,
-        userId: 'b5973afe-d368-453a-bbd0-fba55f815960'
+        userId: 'b5973afe-d368-453a-bbd0-fba55f815960',
+        gateId: '1',
+        currentGate: new Gate
       }
 ]
 

@@ -59,7 +59,7 @@ describe('UserListComponent', () => {
     spyUserService.getUsers.and.returnValue(of(fakeUsers))
     
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, FormsModule],
+      imports: [RouterTestingModule, FormsModule,  HttpClientTestingModule],
       declarations: [UserListComponent],
       providers: [
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },

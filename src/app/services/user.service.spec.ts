@@ -74,7 +74,7 @@ describe('UserService', () => {
   it('should return a list of all users', (done: DoneFn) => {
     httpSpy.get.and.returnValue(of(expectedUsers))
 
-    service.getUsers().subscribe((users: User[]) => {
+    service.getUsers(mockUserData).subscribe((users: User[]) => {
       expect(users.length).toBe(2)
       expect(users[0].id).toEqual(expectedUsers[0].id)
       done()

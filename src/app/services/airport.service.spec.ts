@@ -10,6 +10,7 @@ import { AirportService } from './airport.service';
 
 
 const mockUserData: User = {
+  id: '1',
   token: "secrettoken",
   firstName:'Piet',
   lastName:'Piraat',
@@ -28,9 +29,21 @@ const expectedAirports: Airport[] = [
         address: 'De laan 43',
         country: 'The Netherlands',
         gates: undefined,
-        owner: mockUserData,
+        owner: {
+          id: '1',
+          token: "secrettoken",
+          firstName:'Piet',
+          lastName:'Piraat',
+          userName: 'piraatje',
+          email:'piet@mail.com',
+          password:'secret',
+          phoneNumber:'0612345678',
+          dateOfBirth: new Date('01-01-2000'),
+          gender: Gender.Male
+        },
         ownerName: 'Piet Piraatje',
-        buildYear: new Date('2017-01-01')
+        buildYear: new Date('2017-01-01'),
+        ownerId: '1'
       },
       {
         id: '2',
@@ -38,9 +51,21 @@ const expectedAirports: Airport[] = [
         address: 'Den haagseweg 21',
         country: 'The Netherlands',
         gates: undefined,
-        owner: mockUserData,
+        owner: {
+          id: '1',
+          token: "secrettoken",
+          firstName:'Piet',
+          lastName:'Piraat',
+          userName: 'piraatje',
+          email:'piet@mail.com',
+          password:'secret',
+          phoneNumber:'0612345678',
+          dateOfBirth: new Date('01-01-2000'),
+          gender: Gender.Male
+        },
         ownerName: 'Piet Piraatje',
-        buildYear: new Date('2017-01-01')
+        buildYear: new Date('2017-01-01'),
+        ownerId: '1'
       },
       {
         id: '3',
@@ -48,9 +73,21 @@ const expectedAirports: Airport[] = [
         address: 'Laan 67',
         country: 'The Netherlands',
         gates: undefined,
-        owner: mockUserData,
+        owner: {
+          id: '1',
+          token: "secrettoken",
+          firstName:'Piet',
+          lastName:'Piraat',
+          userName: 'piraatje',
+          email:'piet@mail.com',
+          password:'secret',
+          phoneNumber:'0612345678',
+          dateOfBirth: new Date('01-01-2000'),
+          gender: Gender.Male
+        },
         ownerName: 'Piet Piraatje',
-        buildYear: new Date('2017-01-01')
+        buildYear: new Date('2017-01-01'),
+        ownerId: '1'
       }
 ]
 
@@ -63,7 +100,8 @@ const expectedAirport = {
     gates: undefined,
     owner: mockUserData,
     ownerName: 'Piet Piraatje',
-    buildYear: new Date('2017-01-01')
+    buildYear: new Date('2017-01-01'),
+    ownerId: '1'
 }
 
 describe('AirportService', () => {

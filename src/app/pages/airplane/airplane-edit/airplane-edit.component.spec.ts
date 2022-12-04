@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { type } from 'os'
 import { BehaviorSubject, of } from 'rxjs'
 import { Airplane, WeightClass } from 'src/app/models/airplane.model'
+import { Gate } from 'src/app/models/gate.model'
 import { Gender, User } from 'src/app/models/user.model'
 import { AirplaneService } from 'src/app/services/airplane.service'
 import { AuthService } from 'src/app/services/auth.service'
@@ -37,7 +38,10 @@ const expectedAirplanes: Airplane[] = [
     wingSpan: 510,
     height: 490,
     engine: 'CFM-56',
-    weightClass: WeightClass.Small
+    weightClass: WeightClass.Small,
+    userId: '1',
+    gateId: '1',
+    currentGate: new Gate
   },
   {
     id: '2',
@@ -49,7 +53,10 @@ const expectedAirplanes: Airplane[] = [
     wingSpan: 610,
     height: 500,
     engine: 'Pratt & Whitney PW1000G',
-    weightClass: WeightClass.LargeJet
+    weightClass: WeightClass.LargeJet,
+    userId: '1',
+    gateId: '1',
+    currentGate: new Gate
   },
   {
     id: '3',
@@ -61,7 +68,10 @@ const expectedAirplanes: Airplane[] = [
     wingSpan: 510,
     height: 490,
     engine: 'PW1000G',
-    weightClass: WeightClass.Small
+    weightClass: WeightClass.Small,
+    userId: '1',
+    gateId: '1',
+    currentGate: new Gate
   }
 ]
 

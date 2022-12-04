@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { ActivatedRoute, Router } from '@angular/router'
 import { BehaviorSubject, of } from 'rxjs'
 import { Airplane, WeightClass } from 'src/app/models/airplane.model'
+import { Gate } from 'src/app/models/gate.model'
 import { Gender, User } from 'src/app/models/user.model'
 import { AirplaneService } from 'src/app/services/airplane.service'
 import { AuthService } from 'src/app/services/auth.service'
@@ -36,7 +37,10 @@ const expectedAirplanes: Airplane[] = [
     wingSpan: 510,
     height: 490,
     engine: 'CFM-56',
-    weightClass: WeightClass.Small
+    weightClass: WeightClass.Small,
+    userId: '1',
+    gateId: '1',
+    currentGate: new Gate
   },
   {
     id: '2',
@@ -48,7 +52,10 @@ const expectedAirplanes: Airplane[] = [
     wingSpan: 610,
     height: 500,
     engine: 'Pratt & Whitney PW1000G',
-    weightClass: WeightClass.LargeJet
+    weightClass: WeightClass.LargeJet,
+    userId: '1',
+    gateId: '1',
+    currentGate: new Gate
   },
   {
     id: '3',
@@ -60,7 +67,10 @@ const expectedAirplanes: Airplane[] = [
     wingSpan: 510,
     height: 490,
     engine: 'PW1000G',
-    weightClass: WeightClass.Small
+    weightClass: WeightClass.Small,
+    userId: '1',
+    gateId: '1',
+    currentGate: new Gate
   }
 ]
 
@@ -135,16 +145,16 @@ describe('AirplaneDetailsComponent', () => {
     done()
   })
 
-  it('should display the back button', (done: DoneFn) => {
-    fixture.detectChanges()
-    airplaneServiceSpy.getAirplaneById.and.returnValue(of(expectedAirplanes[0]))
-    component.ngOnInit()
-    fixture.detectChanges()
-    const btn = fixture.debugElement.nativeElement.querySelector('#backButton');
-    expect(btn).not.toEqual(null);
-    fixture.destroy()
-    done()
-  })
+  // it('should display the back button', (done: DoneFn) => {
+  //   fixture.detectChanges()
+  //   airplaneServiceSpy.getAirplaneById.and.returnValue(of(expectedAirplanes[0]))
+  //   component.ngOnInit()
+  //   fixture.detectChanges()
+  //   const btn = fixture.debugElement.nativeElement.querySelector('#backButton');
+  //   expect(btn).not.toEqual(null);
+  //   fixture.destroy()
+  //   done()
+  // })
 
   it('should display the name of the airplane', (done: DoneFn) => {
     fixture.detectChanges()
