@@ -19,7 +19,7 @@
     <tr *ngFor="let gate of gates">
       <a [routerLink]="['/airports', airportId, 'gates', gate.id]">{{ gate.gateName }} </a>
       <td>{{ gate.waitingRoomCapacity }}</td>
-      <td>{{ gate.available ? 'Occupied' : 'Available' }}</td>
+      <td>{{ gate.isAvailable ? 'Available' : 'Occupied' }}</td>
     </tr>
   </tbody>
 </table>

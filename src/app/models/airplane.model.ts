@@ -1,3 +1,5 @@
+import { Gate } from "./gate.model";
+
 export enum WeightClass {
     Heavy = 'Heavy',
     B757 = 'B757',
@@ -18,7 +20,9 @@ export class Airplane {
     height: number = 0;
     engine: string = ""; 
     weightClass: WeightClass = WeightClass.Small
-    userId: string = "" 
+    userId: string = "" ;
+    gateId: string = "";
+    currentGate: Gate | undefined;
     
     constructor(airplaneName= "", model ="", buildYear=new Date(), fuelCapacity=0, length=0, wingSpan=0,height=0, engine ="", weightClass= WeightClass.Small){  
         this.airplaneName= airplaneName

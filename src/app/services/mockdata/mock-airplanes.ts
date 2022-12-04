@@ -1,4 +1,4 @@
-import { Airplane, WeightClass} from './airplane.model'
+import { Airplane, WeightClass} from '../../models/airplane.model'
 
 export const AIRPLANES: Airplane[] = [
   {
@@ -11,7 +11,8 @@ export const AIRPLANES: Airplane[] = [
     wingSpan: 510,
     height: 490,
     engine: "CFM-56",
-    weightClass: WeightClass.Small
+    weightClass: WeightClass.Small,
+    userId: 'b5973afe-d368-453a-bbd0-fba55f815960'
   },
   {
     id: '2',
@@ -23,7 +24,8 @@ export const AIRPLANES: Airplane[] = [
     wingSpan: 610,
     height: 500,
     engine: "Pratt & Whitney PW1000G",
-    weightClass: WeightClass.LargeJet
+    weightClass: WeightClass.LargeJet,
+    userId: 'b5973afe-d368-453a-bbd0-fba55f815960'
   },
   {
     id: '3',
@@ -35,7 +37,8 @@ export const AIRPLANES: Airplane[] = [
     wingSpan: 510,
     height: 490,
     engine: "PW1000G",
-    weightClass: WeightClass.Small
+    weightClass: WeightClass.Small,
+    userId: 'b5973afe-d368-453a-bbd0-fba55f815960'
   },
   {
     id: '4',
@@ -47,7 +50,8 @@ export const AIRPLANES: Airplane[] = [
     wingSpan: 510,
     height: 490,
     engine: "CFM-56",
-    weightClass: WeightClass.Small
+    weightClass: WeightClass.Small,
+    userId: 'b5973afe-d368-453a-bbd0-fba55f815960'
   },
   {
     id: '5',
@@ -59,7 +63,8 @@ export const AIRPLANES: Airplane[] = [
     wingSpan: 467,
     height: 320,
     engine: "CFM-56",
-    weightClass: WeightClass.Medium
+    weightClass: WeightClass.Medium,
+    userId: 'b5973afe-d368-453a-bbd0-fba55f815960'
   },
   {
     id: '6',
@@ -71,6 +76,7 @@ export const AIRPLANES: Airplane[] = [
     wingSpan: 410,
     height: 400,
     engine: "CFM-56",
-    weightClass: WeightClass.Heavy
+    weightClass: WeightClass.Heavy,
+    userId: 'b5973afe-d368-453a-bbd0-fba55f815960'
   },
 ]

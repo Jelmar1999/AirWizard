@@ -13,6 +13,7 @@
       <th scope="col">Weight Class</th>
       <th scope="col">Engine</th>
       <th scope="col">Buildyear</th>
+      <th scope="col">At Gate</th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,12 @@
       <td>{{ airplane.weightClass }}</td>
       <td>{{ airplane.engine }}</td>
       <td>{{ airplane.buildYear.toDateString() }}</td>
+      <div *ngIf="airplane.gateId != null; else notOccupied">
+        <td>{{ 'Docked' }}</td>
+      </div>
+      <ng-template #notOccupied>
+        <td>{{ 'Currently not Docked' }}</td>
+      </ng-template>
     </tr>
   </tbody>
 </table>

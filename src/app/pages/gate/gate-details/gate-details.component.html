@@ -1,70 +1,93 @@
 <div class="container rounded bg-white mt-5 mb-5 form">
-    <div class="row" *ngIf="gate">
-      <div class="col-md-3 border-right">
-        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-          <img class="rounded-circle mt-5" width="150px" src="../../../../assets//images/gate.jpg" /><span class="font-weight-bold">{{
-            gate.gateName
-          }}</span>
-        </div>
+  <div class="row" *ngIf="gate">
+    <div class="col-md-3 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <img class="rounded-circle mt-5" width="150px" src="../../../../assets//images/gate.jpg" /><span class="font-weight-bold">{{ gate.gateName }}</span>
       </div>
-      <div class="col-md-5 border-right">
-        <div class="p-3 py-5">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-right">Gate Information</h4>
+    </div>
+    <div class="col-md-5 border-right">
+      <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">Gate Information</h4>
+        </div>
+        <div>
+          <ul class="list-group list-group-flush">
+            <li id="airplaneName" class="list-group-item">Gate Name: {{ gate.gateName }}</li>
+            <li class="list-group-item">Waiting room capacity: {{ gate.waitingRoomCapacity }}</li>
+            <li class="list-group-item">Is available: {{ gate.isAvailable ? 'Available' : 'Occupied' }}</li>
+            <li class="list-group-item">Direction: {{ gate.direction }}</li>
+
+            <div *ngIf="this.currentAirplane != null">
+              <li class="list-group-item">Docked Airplane: {{ currentAirplane!.airplaneName }}</li>
+
+              <div [hidden]="this.currentUser!.id!.localeCompare(this.gate.currentAirplane!['userId'])">
+                <button class="btn btn-info col-md-12" routerLink="../../" (click)="removeAirplaneFromGate(this.currentAirplane!)">Remove Airplane</button>
+              </div>
+
+            </div>
+          </ul>
+        </div>
+        <ng-template #content let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Warning!</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <div>
-            <ul class="list-group list-group-flush">
-              <li id="airplaneName" class="list-group-item">Gate Name: {{ gate.gateName }}</li>
-              <li class="list-group-item">Waiting room capacity: {{ gate.waitingRoomCapacity }}</li>
-              <li class="list-group-item">Is available: {{ gate.available ? 'Occupied' : 'Available'}}</li>
-              <li class="list-group-item">Direction: {{ gate.direction }}</li>
-              <li class="list-group-item">Docked Airplane: {{ gate.currentAirplane }}</li>
-            </ul>
+          <div class="modal-body">
+            <p>
+              <strong
+                >Are you sure you want to delete <span class="text-primary">"{{ gate.gateName }}"</span></strong
+              >
+            </p>
+            <p>
+              All information associated to this gate will be permanently deleted.
+              <span class="text-danger">This operation can NOT be undone.</span>
+            </p>
           </div>
-          <ng-template #content let-c="close" let-d="dismiss">
-            <div class="modal-header">
-              <h4 class="modal-title" id="modal-basic-title">Warning!</h4>
-              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>
-                <strong
-                  >Are you sure you want to delete <span class="text-primary">"{{ gate.gateName }}"</span></strong
-                >
-              </p>
-              <p>
-                All information associated to this gate will be permanently deleted.
-                <span class="text-danger">This operation can NOT be undone.</span>
-              </p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" (click)="c('Cancel click')">Cancel</button>
-              <button type="button" class="btn btn-danger" (click)="deleteGate(); c('Delete click')">Ok</button>
-            </div>
-          </ng-template>
-  
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <div class="btn-group text-center" role="group">
-                <div class="col-md-12">
-                  <div id="ownerButtons" [hidden]="currentUser?.id != ownerId">
-                    <button id="editButton" class="btn btn-primary profile-button mx-2" routerLink="edit">Edit Gate</button>
-                    <!-- <button class="btn btn-danger profile-button mx-2" (click)="deleteAirplane()" type="button">Delete Airplane</button> -->
-                    <button id="deleteButton" class="btn btn-danger" (click)="open(content)">Delete</button>
-                  </div>
-                  <div>
-                    <!-- <button id="goBackButton" class="btn btn-primary btn-dark" (click)="goBack()">Go Back</button> -->
-                    <button id="backButton" type="submit" routerLink="../../" class="btn btn-primary btn-dark mx-2">Go Back</button>
-                  </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="c('Cancel click')">Cancel</button>
+            <button type="button" class="btn btn-danger" (click)="deleteGate(); c('Delete click')">Ok</button>
+          </div>
+        </ng-template>
+
+        <div class="row" style="padding: 20px;">
+          <div class="col-md-12 text-center">
+            <div class="btn-group text-center" role="group">
+              <div class="col-md-12">
+                <div id="ownerButtons" [hidden]="currentUser?.id != ownerId">
+                  <button id="editButton" class="btn btn-primary profile-button mx-2" routerLink="edit">Edit Gate</button>
+                  <!-- <button class="btn btn-danger profile-button mx-2" (click)="deleteAirplane()" type="button">Delete Airplane</button> -->
+                  <button id="deleteButton" class="btn btn-danger" (click)="open(content)">Delete</button>
+                </div>
+                <div>
+                  <!-- <button id="goBackButton" class="btn btn-primary btn-dark" (click)="goBack()">Go Back</button> -->
+                  <button id="backButton" type="submit" routerLink="../../" class="btn btn-primary btn-dark mx-2">Go Back</button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-4"></div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div *ngIf="gate.isAvailable">
+        <form #addAirplaneForm="ngForm" (ngSubmit)="addAirplaneForm.form.valid && saveAirplaneToGate(this.selectedAirplane!)">
+          <div class="row mt-12">
+            <div class="col-mt-2">
+              <label for="airplane" class="col-form-label">Select Airplane to dock at this gate</label>
+              <select (change)="(this.selectedAirplane)" class="custom-select form-control my-2"id="airplane" [(ngModel)]="this.selectedAirplane" name="airplane">
+                <option disabled selected value="undefined">Choose Airplane</option>
+                <option *ngFor="let airplane of airplanesUser" [value]="airplane.id">{{ airplane.airplaneName }}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+        <div id="saveAirplaneToGateButton" [hidden]="selectedAirplane === undefined">
+          <button type="submit" routerLink="../../" (click)="saveAirplaneToGate(this.selectedAirplane!)" class="btn btn-primary mx-2" [disabled]="!addAirplaneForm.valid">Submit</button>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

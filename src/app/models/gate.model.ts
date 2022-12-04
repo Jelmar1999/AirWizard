@@ -12,15 +12,16 @@ export class Gate {
     id: string = '';
     gateName: string = "";
     waitingRoomCapacity: number = 0 
-    available: boolean = true
+    isAvailable: boolean = true
     direction: Direction = Direction.North
-    currentAirplane!: Airplane
+    airplaneId: string = ""
+    currentAirplane!: Airplane | undefined
     airport: Airport | undefined
     airportName: string =""
     airportId: string = ""
     userId: string = ""
     
-    constructor(gateName= "", waitingRoomCapacity = 0, ){  
+    constructor(gateName= "", waitingRoomCapacity = 0 ){  
         this.gateName= gateName
         this.waitingRoomCapacity = waitingRoomCapacity
     }

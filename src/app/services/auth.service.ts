@@ -67,9 +67,8 @@ export class AuthService {
         }),
         catchError((error: any) => {
           console.log('error:', error)
-          console.log('error.message:', error.message)
-          console.log('error.error.message:', error.error.message)
-          this.alertService.error(error.error.message || error.message),{
+          console.log('error.message:', error.error)
+          this.alertService.error(error.error || error.message),{
             autoClose: true,
             keepAfterRouteChange: true
           };

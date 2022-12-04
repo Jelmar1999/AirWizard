@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="col-mt-2">
-                <label for="gender" class="col-form-label">Direction of gate</label>
+                <label for="weight" class="col-form-label">Direction of gate</label>
                 <select required (change)="directionToObject()" class="custom-select form-control my-2" id="weight" name="weight" [(ngModel)]="gate.direction" #weight="ngModel">
                   <option *ngFor="let direction of directions">{{direction}}</option>
                 </select>
