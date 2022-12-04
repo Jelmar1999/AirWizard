@@ -25,7 +25,7 @@
       <td>{{ airplane.engine }}</td>
       <td>{{ airplane.buildYear.toDateString() }}</td>
       <div *ngIf="airplane.gateId != null; else notOccupied">
-        <td>{{ 'Docked' }}</td>
+        <td>{{ airplane.currentGate!.gateName}}</td>
       </div>
       <ng-template #notOccupied>
         <td>{{ 'Currently not Docked' }}</td>

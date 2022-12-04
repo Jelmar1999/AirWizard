@@ -7,7 +7,7 @@ export class Airport {
     address: string = "";
     buildYear: Date= new Date('1999-01-01');
     country: string = "";
-    gates: Gate[] | undefined = [];
+    gates: Gate[] | undefined;
     owner: User | undefined
     ownerName : string = "";
     ownerId : string ="";
