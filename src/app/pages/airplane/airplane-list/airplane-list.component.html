@@ -1,7 +1,9 @@
 <h2>Airplanes</h2>
 <div class="row">
-  <div class="col-md-12 text-left">
-    <button id="newAirplaneButton" [routerLink]="['new']" class="btn btn-primary profile-button">Add Airplane</button>
+  <div *ngIf="lookingAtOwnPlanes">
+    <div class="col-md-12 text-left">
+      <button id="newAirplaneButton" [routerLink]="['new']" class="btn btn-primary profile-button">Add Airplane</button>
+    </div>
   </div>
 </div>
 <table class="table table-striped">

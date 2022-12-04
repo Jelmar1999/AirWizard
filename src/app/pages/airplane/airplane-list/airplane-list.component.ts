@@ -22,6 +22,8 @@ export class AirplaneListComponent implements OnInit {
   userId: string | null = null
   user: User | null = null
 
+  lookingAtOwnPlanes: boolean | undefined
+
   page = 1
   pageSize = 8
   collectionSize = 0
@@ -33,8 +35,13 @@ export class AirplaneListComponent implements OnInit {
       this.currentUser = loginUser
       this.route.paramMap.subscribe((params) => {
         this.userId = params.get('id')
+        let url = this.route.snapshot.url[0].path
+        if( url.match('airplanes')){
+          this.lookingAtOwnPlanes = true;
+        }else{
+          this.lookingAtOwnPlanes = false;
+        }
         if (this.userId) {
-          console.log('User id' + this.userId)
           this.userService.getUserById(String(this.userId)).subscribe((user) => {
             this.user = user
             this.refreshAirplanes()
