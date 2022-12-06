@@ -2,9 +2,7 @@
   <div class="row" *ngIf="airplane">
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-        <img class="rounded-circle mt-5" width="150px" src="https://honeywell.scene7.com/is/image/honeywell/AeroBT-s_414384259_Business-Jet_2880x1440" /><span class="font-weight-bold">{{
-          airplane.airplaneName
-        }}</span>
+        <img class="rounded-circle mt-5" width="150px" src="https://honeywell.scene7.com/is/image/honeywell/AeroBT-s_414384259_Business-Jet_2880x1440" /><span class="font-weight-bold">{{ airplane.airplaneName }}</span>
       </div>
     </div>
     <div class="col-md-5 border-right">
@@ -15,14 +13,14 @@
         <div>
           <ul class="list-group list-group-flush">
             <li id="airplaneName" class="list-group-item">Airplane Name: {{ airplane.airplaneName }}</li>
-            <li class="list-group-item">Model: {{ airplane.model }}</li>
-            <li class="list-group-item">Fuelcapacity (In Liters): {{ airplane.fuelCapacity }} L</li>
-            <li class="list-group-item">Length (In m): {{ airplane.length }} m</li>
-            <li class="list-group-item">Wingspan (In m): {{ airplane.wingSpan }} m</li>
-            <li class="list-group-item">Height (In m): {{ airplane.height }} m</li>
-            <li class="list-group-item">Engine: {{ airplane.engine }}</li>
-            <li class="list-group-item">Buildyear: {{ airplane.buildYear.toLocaleDateString() }}</li>
-            <li class="list-group-item">Weight Class: {{ airplane.weightClass }}</li>
+            <li id="model" class="list-group-item">Model: {{ airplane.model }}</li>
+            <li id="fuelcapacity" class="list-group-item">Fuelcapacity (In Liters): {{ airplane.fuelCapacity }} L</li>
+            <li id="length" class="list-group-item">Length (In m): {{ airplane.length }} m</li>
+            <li id="wingspan" class="list-group-item">Wingspan (In m): {{ airplane.wingSpan }} m</li>
+            <li id="height" class="list-group-item">Height (In m): {{ airplane.height }} m</li>
+            <li id="engine" class="list-group-item">Engine: {{ airplane.engine }}</li>
+            <li id="buildYear" class="list-group-item">Buildyear: {{ airplane.buildYear.toLocaleDateString() }}</li>
+            <li id="weigthClass" class="list-group-item">Weight Class: {{ airplane.weightClass }}</li>
           </ul>
         </div>
         <ng-template #content let-c="close" let-d="dismiss">
@@ -53,15 +51,9 @@
           <div class="col-md-12 text-center">
             <div class="btn-group text-center" role="group">
               <div class="col-md-12">
-                <div id="ownerButtons" [hidden]="currentUser?.id != airplane.userId">
-                  <button id="editButton" class="btn btn-primary profile-button mx-2" routerLink="edit">Edit Airplane</button>
-                  <!-- <button class="btn btn-danger profile-button mx-2" (click)="deleteAirplane()" type="button">Delete Airplane</button> -->
-                  <button id="deleteButton" class="btn btn-danger" (click)="open(content)">Delete</button>
-                </div>
-                <div>
-                  <button id="goBackButton" class="btn btn-primary btn-dark" (click)="goBack()">Go Back</button>
-                  <!-- <button id="backButton" type="submit" routerLink="../" class="btn btn-primary btn-dark mx-2">Go Back</button> -->
-                </div>
+                <button id="editButton" *ngIf="this.isOwner" class="btn btn-primary profile-button mx-2" routerLink="edit">Edit Airplane</button>
+                <button id="deleteButton" *ngIf="this.isOwner" class="btn btn-danger profile-button mx-2" (click)="open(content)">Delete</button>
+                <button id="goBackButton" class="btn btn-primary btn-dark profile-button mx-2" (click)="goBack()">Go Back</button>
               </div>
             </div>
           </div>

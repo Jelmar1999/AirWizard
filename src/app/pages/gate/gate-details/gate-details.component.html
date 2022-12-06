@@ -21,7 +21,7 @@
               <li class="list-group-item">Docked Airplane: {{ currentAirplane!.airplaneName }}</li>
 
               <div [hidden]="this.currentUser!.id!.localeCompare(this.gate.currentAirplane!['userId'])">
-                <button class="btn btn-info col-md-12" routerLink="../../" (click)="removeAirplaneFromGate(this.currentAirplane!)">Remove Airplane</button>
+                <button class="btn btn-info col-md-12" routerLink=".." (click)="removeAirplaneFromGate(this.currentAirplane!)">Remove Airplane</button>
               </div>
 
             </div>
@@ -55,15 +55,9 @@
           <div class="col-md-12 text-center">
             <div class="btn-group text-center" role="group">
               <div class="col-md-12">
-                <div id="ownerButtons" [hidden]="currentUser?.id != ownerId">
-                  <button id="editButton" class="btn btn-primary profile-button mx-2" routerLink="edit">Edit Gate</button>
-                  <!-- <button class="btn btn-danger profile-button mx-2" (click)="deleteAirplane()" type="button">Delete Airplane</button> -->
-                  <button id="deleteButton" class="btn btn-danger" (click)="open(content)">Delete</button>
-                </div>
-                <div>
-                  <!-- <button id="goBackButton" class="btn btn-primary btn-dark" (click)="goBack()">Go Back</button> -->
+                  <button id="editButton" *ngIf="this.isOwner" class="btn btn-primary profile-button mx-2" routerLink="edit">Edit Gate</button>
+                  <button id="deleteButton" *ngIf="this.isOwner"  class="btn btn-danger" (click)="open(content)">Delete</button>
                   <button id="backButton" type="submit" routerLink="../../" class="btn btn-primary btn-dark mx-2">Go Back</button>
-                </div>
               </div>
             </div>
           </div>

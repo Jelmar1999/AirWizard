@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { Airplane, WeightClass } from '../models/airplane.model';
 import { Gate } from '../models/gate.model';
 
@@ -48,7 +48,7 @@ const expectedAirplanes: Airplane[] = [
         height: 500,
         engine: 'Pratt & Whitney PW1000G',
         weightClass: WeightClass.LargeJet,
-        userId: 'b5973afe-d368-453a-bbd0-fba55f815960',
+        userId: '2',
         gateId: '1',
         currentGate: new Gate
       },
@@ -63,7 +63,7 @@ const expectedAirplanes: Airplane[] = [
         height: 490,
         engine: 'PW1000G',
         weightClass: WeightClass.Small,
-        userId: 'b5973afe-d368-453a-bbd0-fba55f815960',
+        userId: '2',
         gateId: '1',
         currentGate: new Gate
       },
@@ -78,7 +78,7 @@ const expectedAirplanes: Airplane[] = [
         height: 490,
         engine: 'CFM-56',
         weightClass: WeightClass.Small,
-        userId: 'b5973afe-d368-453a-bbd0-fba55f815960',
+        userId: '3',
         gateId: '1',
         currentGate: new Gate
       },
@@ -93,7 +93,7 @@ const expectedAirplanes: Airplane[] = [
         height: 320,
         engine: 'CFM-56',
         weightClass: WeightClass.Medium,
-        userId: 'b5973afe-d368-453a-bbd0-fba55f815960',
+        userId: '4',
         gateId: '1',
         currentGate: new Gate
       },
@@ -125,7 +125,10 @@ const expectedAirplane = {
     wingSpan: 510,
     height: 490,
     engine: 'CFM-56',
-    weightClass: WeightClass.Small
+    weightClass: WeightClass.Small,
+    userId: 'b5973afe-d368-453a-bbd0-fba55f815960',
+    gateId: '1',
+    currentGate: new Gate
 }
 
 describe('AirplaneService', () => {
@@ -133,7 +136,7 @@ describe('AirplaneService', () => {
   let httpSpy: jasmine.SpyObj<HttpClient>
 
   beforeEach(() => {
-    httpSpy = jasmine.createSpyObj('HttpClient', ['get'])
+    httpSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete'])
 
     TestBed.configureTestingModule({
       providers: [{ provide: HttpClient, useValue: httpSpy }]
@@ -161,7 +164,80 @@ describe('AirplaneService', () => {
 
     service.getAirplaneById(mockUserData, '1').subscribe((airplane: Airplane) => {
       expect(airplane.id).toEqual(expectedAirplane.id)
+      expect(airplane.userId).toEqual("b5973afe-d368-453a-bbd0-fba55f815960")
       done()
+    })
+  })
+
+  it('should return all airplanes from user', (done: DoneFn) => {
+    httpSpy.get.and.returnValue(of(expectedAirplane))
+
+    service.getAirplanesFromUser(mockUserData, mockUserData).subscribe({
+      complete: () => {
+        expect(httpSpy.get.calls.count()).toBe(1)
+        done()
+      },
+      error: (e) => {
+        done.fail('an error occured')
+      }
+    })
+  })
+
+  it('should return a error when the server returns a 404', (done: DoneFn) => {
+    const errorResponse = new HttpErrorResponse({
+      error: 'test 404 error',
+      status: 404,
+      statusText: 'Not Found'
+    })
+
+    httpSpy.delete.and.returnValue(throwError(() => errorResponse))
+
+    service.deleteAirplaneById(mockUserData, '1').subscribe({
+      complete: () => {
+        done.fail('expected an error')
+      },
+      error: (e) => {
+        expect(e.error).toContain(errorResponse.error)
+        done()
+      }
+    })
+  })
+  
+  it('should send a post request to the api', (done: DoneFn) => {
+    httpSpy.post.and.returnValue(of('Match created'))
+    service.addAirplane(mockUserData, expectedAirplane).subscribe({
+      complete: () => {
+        expect(httpSpy.post.calls.count()).toBe(1)
+        done()
+      },
+      error: (e) => {
+        done.fail('an error occured')
+      }
+    })
+  })
+  it('should send a update request to the api', (done: DoneFn) => {
+    httpSpy.put.and.returnValue(of('Match created')) 
+    service.updateAirplane(mockUserData, expectedAirplane).subscribe({
+      complete: () => {
+        expect(httpSpy.put.calls.count()).toBe(1)
+        done()
+      },
+      error: (e) => {
+        done.fail('an error occured')
+      }
+    })
+  })
+
+  it('should send a delete request to the api', (done: DoneFn) => {
+    httpSpy.delete.and.returnValue(of('Match created')) 
+    service.deleteAirplaneById(mockUserData, '1').subscribe({
+      complete: () => {
+        expect(httpSpy.delete.calls.count()).toBe(1)
+        done()
+      },
+      error: (e) => {
+        done.fail('an error occured')
+      }
     })
   })
 });

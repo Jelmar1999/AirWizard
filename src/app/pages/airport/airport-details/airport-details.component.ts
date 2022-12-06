@@ -20,6 +20,8 @@ export class AirportDetailsComponent implements OnInit {
   airportId: string | null = null
   gates!: Gate[]
 
+  isOwner: boolean = false
+
   page = 1
   pageSize = 8
   collectionSize = 0;
@@ -58,9 +60,12 @@ export class AirportDetailsComponent implements OnInit {
         // Get airport id from the route
         this.airportId = params.get('id')
         // Find airport by id
-        this.airportService.getAirportById(this.currentUser!, String(this.airportId)).subscribe((airplane) => {
-          airplane.buildYear = new Date(airplane.buildYear)
-          this.airport = airplane
+        this.airportService.getAirportById(this.currentUser!, String(this.airportId)).subscribe((airport) => {
+          airport.buildYear = new Date(airport.buildYear)
+          this.airport = airport
+          if (this.currentUser?.id == airport.ownerId) {
+            this.isOwner = true
+          }
         })
       })
     })

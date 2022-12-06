@@ -9,7 +9,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <!-- <th scope="col">#</th> -->
       <th scope="col">Name</th>
       <th scope="col">Model</th>
       <th scope="col">Weight Class</th>
@@ -20,17 +19,16 @@
   </thead>
   <tbody>
     <tr *ngFor="let airplane of airplanes">
-      <!-- <th scope="row">{{ airplane.id }}</th> -->
-      <a [routerLink]="['/airplanes', airplane.id]">{{ airplane.airplaneName }} </a>
-      <td>{{ airplane.model }}</td>
-      <td>{{ airplane.weightClass }}</td>
-      <td>{{ airplane.engine }}</td>
-      <td>{{ airplane.buildYear.toDateString() }}</td>
+      <a id="airplaneName" [routerLink]="['/airplanes', airplane.id]">{{ airplane.airplaneName }} </a>
+      <td id="airplaneModel">{{ airplane.model }}</td>
+      <td id="airplaneWeigthClass">{{ airplane.weightClass }}</td>
+      <td id="airplaneEngine">{{ airplane.engine }}</td>
+      <td id="airplaneBuildYear">{{ airplane.buildYear.toDateString() }}</td>
       <div *ngIf="airplane.gateId != null; else notOccupied">
         <td>{{ airplane.currentGate!.gateName}}</td>
       </div>
       <ng-template #notOccupied>
-        <td>{{ 'Currently not Docked' }}</td>
+        <td id="airplaneAtGate">{{ 'Currently not Docked' }}</td>
       </ng-template>
     </tr>
   </tbody>

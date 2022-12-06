@@ -46,14 +46,9 @@
             <div class="btn-group text-center" role="group">
               <div class="col-md-12">
                 <div class="col-md-12">
-                  <div id="ownerButtons" [hidden]="currentUser?.id != airport.ownerId">
-                    <button class="btn btn-primary profile-button mx-2" routerLink="edit">Edit Airport</button>
-                    <!-- <button class="btn btn-danger profile-button mx-2" (click)="deleteAirplane()" type="button">Delete Airplane</button> -->
-                    <button class="btn btn-danger" (click)="open(content)">Delete</button>
-                  </div>
-                  <div>
-                    <button type="submit" routerLink=".." class="btn btn-primary btn-dark mx-2">Go Back</button>
-                  </div>
+                    <button class="btn btn-primary profile-button mx-2" *ngIf="this.isOwner" routerLink="edit">Edit Airport</button>
+                    <button class="btn btn-danger profile-button mx-2"  *ngIf="this.isOwner" (click)="open(content)">Delete</button>
+                    <button type="submit" routerLink=".." class="btn btn-primary btn-dark mx-2 profile-button mx-2">Go Back</button>
                 </div>
               </div>
             </div>

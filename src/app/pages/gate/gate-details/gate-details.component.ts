@@ -25,26 +25,12 @@ export class GateDetailsComponent implements OnInit {
   airport: Airport | null = null
   ownerId: string | null = null
 
+  isOwner: boolean = false
+
   airplanesUser!: Airplane[]
   selectedAirplane!: Airplane | undefined
 
   currentAirplane!: Airplane | undefined
-
-  // currentAirplane: Airplane = {
-  //   airplaneName: 'placeholder',
-  //   model: 'placeholder',
-  //   buildYear: new Date(),
-  //   fuelCapacity: 1,
-  //   length: 1,
-  //   wingSpan: 1,
-  //   height: 1,
-  //   engine: 'placeholder',
-  //   weightClass: WeightClass.Small,
-  //   id: '',
-  //   userId: '',
-  //   gateId: '',
-  //   currentGate: undefined
-  // }
 
   currentUser: User | undefined
   sub!: Subscription
@@ -86,14 +72,14 @@ export class GateDetailsComponent implements OnInit {
             this.gate = gate
             if (gate.airplaneId != null) {
               this.currentAirplane = gate.currentAirplane
-              console.log("airplane user id "+gate.currentAirplane!['userId'])
-              console.log("user id "+this.currentUser?.id)
-              console.log("bool " + this.currentUser!.id!.localeCompare(this.gate.currentAirplane!['userId']))
             }
           })
           this.airportService.getAirportById(this.currentUser!, String(this.airportId)).subscribe((airport) => {
             this.airport = airport
             this.ownerId = airport.ownerId
+            if (this.currentUser?.id == airport.ownerId) {
+              this.isOwner = true
+            }
           })
           this.airplaneService.getAirplanesFromUser(this.currentUser!, this.currentUser!).subscribe((airplanes) => {
             this.airplanesUser = airplanes
@@ -122,7 +108,8 @@ export class GateDetailsComponent implements OnInit {
   removeAirplaneFromGate(selectedAirplane: Airplane){
     console.log('remove airplane to gate called')
     this.gateService.RemoveAirplaneFromGate(this.currentUser!, String(this.airportId), String(this.gateId), String(this.currentAirplane?.id)).subscribe(()=>{
-      this.router.navigateByUrl(`/airports/${this.airportId}/gates/${this.gateId}`, { skipLocationChange: true }).then(() => {})
+      this.router.navigateByUrl(`/airports/${this.airportId}/gates/${this.gateId}`, { skipLocationChange: false }).then(() => {
+      })
     })
   }
 

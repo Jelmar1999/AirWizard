@@ -6,7 +6,6 @@ import { AirplaneService } from 'src/app/services/airplane.service'
 import { AuthService } from 'src/app/services/auth.service'
 import { UserService } from 'src/app/services/user.service'
 import { Airplane } from '../../../models/airplane.model'
-// import { AIRPLANES } from '../mock-airplanes';
 
 @Component({
   selector: 'app-airplane-list',
@@ -23,6 +22,7 @@ export class AirplaneListComponent implements OnInit {
   user: User | null = null
 
   lookingAtOwnPlanes: boolean | undefined
+  urlAirplanes: string | null = null
 
   page = 1
   pageSize = 8
@@ -34,9 +34,11 @@ export class AirplaneListComponent implements OnInit {
     this.sub = this.authService.currentUser$.subscribe((loginUser) => {
       this.currentUser = loginUser
       this.route.paramMap.subscribe((params) => {
-        this.userId = params.get('id')
-        let url = this.route.snapshot.url[0].path
-        if( url.match('airplanes')){
+        if (params.get('id') != null) {
+          this.userId = params.get('id')
+        }
+        this.urlAirplanes = this.route.snapshot.url[0].path
+        if( this.urlAirplanes.match('airplanes')){
           this.lookingAtOwnPlanes = true;
         }else{
           this.lookingAtOwnPlanes = false;

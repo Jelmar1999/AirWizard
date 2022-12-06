@@ -100,7 +100,7 @@
 
               <div class="col-md-12 form-group">
                 <label for="buildYear" class="col-form-label">Buildyear</label>
-                  <input required type="date" class="form-control my-2" [ngModel]="airplane.buildYear | date:'yyyy-MM-dd'" (ngModelChange)="airplane.buildYear = $event" 
+                  <input required type="date" id="airplaneBuilYear" class="form-control my-2" [ngModel]="airplane.buildYear | date:'yyyy-MM-dd'" (ngModelChange)="airplane.buildYear = $event" 
                     name="buildYear" #buildYear="ngModel" [ngClass]="{'is-invalid': buildYear.touched && buildYear.invalid}" required max="{{dateToday | date:'yyyy-MM-dd'}}">
 
                     <div class="invalid-feedback" *ngIf="buildYear.touched && buildYear.invalid">
@@ -109,8 +109,8 @@
               </div>
   
               <div class="col-md-12 form-group">
-                <label for="gender" class="col-form-label">Weight Class</label>
-                <select required (change)="weightToObject()" class="custom-select form-control my-2" id="weight" name="weight" [(ngModel)]="airplane.weightClass" #weight="ngModel">
+                <label for="weightClass" class="col-form-label">Weight Class</label>
+                <select required (change)="weightToObject()" class="custom-select form-control my-2" id="weightClass" name="weight" [(ngModel)]="airplane.weightClass" #weight="ngModel">
                   <option *ngFor="let weight of weights">{{weight}}</option>
                 </select>
               </div>
@@ -122,7 +122,7 @@
               <div class="col-md-12">
                 <button id="saveAirplane" type="submit" routerLink="../" (click)="saveAirplane(airplane)" class="btn btn-primary mx-2"
                  [disabled]="!airplaneEditForm.valid">Submit</button>
-                <button type="submit" routerLink="../"  class="btn btn-primary btn-warning mx-2">Cancel</button>
+                <button id="cancelSave" type="submit" routerLink="../"  class="btn btn-primary btn-warning mx-2">Cancel</button>
               </div>
             </div>
           </div>
