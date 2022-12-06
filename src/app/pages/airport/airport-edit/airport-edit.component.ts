@@ -35,7 +35,6 @@ export class AirportEditComponent implements OnInit {
       //Update
       console.log(this.airport)
       this.airportService.updateAirport(this.currentUser!, this.airport).subscribe(() => {
-        // this.router.navigate(["/airports/", this.airportsId])
         this.router.navigateByUrl('..', { skipLocationChange: true }).then(()=>{
           this.router.navigate(["/airports/", this.airportId])
         })
@@ -43,7 +42,6 @@ export class AirportEditComponent implements OnInit {
     } else{
       //Save
       this.airportService.addAirport(this.currentUser!, this.airport).subscribe(() => {
-        // this.router.navigate(['/airports'], { relativeTo: this.route })
         this.router.navigateByUrl('..', { skipLocationChange: true }).then(()=>{
           this.router.navigate(["/airports"])
         })

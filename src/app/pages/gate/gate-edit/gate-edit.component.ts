@@ -40,7 +40,9 @@ export class GateEditComponent implements OnInit {
         //Update
         console.log(this.gate)
         this.gateService.updateGate(this.currentUser!, String(this.airportId), this.gate).subscribe(() => {
-          this.router.navigate([`/airports/${this.airportId}/gates/${this.gateId}`])
+          this.router.navigateByUrl('..', { skipLocationChange: true }).then(() => {
+            this.router.navigate([`/airports/${this.airportId}/gates/${this.gateId}`])
+          })
         })
       } else {
         //Save
@@ -55,6 +57,15 @@ export class GateEditComponent implements OnInit {
 
   directionToObject() {
     this.gate.direction = Direction[this.gate.direction]
+  }
+
+  goBack() {
+    console.log("go back")
+    if (this.gateId == null) {
+      this.router.navigateByUrl('..', { skipLocationChange: true }).then(() => {
+        this.router.navigate([`/airports/${this.airportId}`])
+      })
+    }
   }
 
   ngOnInit(): void {

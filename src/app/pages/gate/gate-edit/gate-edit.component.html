@@ -43,7 +43,7 @@
                 <div class="btn-group text-center" role="group">
                   <div class="col-md-12">
                     <button type="submit" routerLink=".." (click)="saveGate(gate)" class="btn btn-primary mx-2" [disabled]="!gateEditForm.valid">Submit</button>
-                    <button type="submit" routerLink=".." class="btn btn-primary btn-warning mx-2">Cancel</button>
+                    <button type="submit" routerLink=".." (click)="goBack()" class="btn btn-primary btn-warning mx-2">Cancel</button>
                   </div>
                 </div>
               </div>
