@@ -45,6 +45,11 @@ const routes: Routes = [
         data : {requiresLogin: true},
         canActivate: [AccessGuard]   
       },
+      { path: 'users/:id/edit', 
+      component: RegisterComponent,
+      data : {requiresLogin: true},
+      canActivate: [AccessGuard]   
+      },
       { path: 'airplanes', 
         component: AirplaneListComponent,
         data : {requiresLogin: true},

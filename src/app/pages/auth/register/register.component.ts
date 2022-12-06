@@ -28,8 +28,8 @@ export class RegisterComponent implements OnInit {
       complete: () => {
         window.scrollTo({
           top: 0,
-          left: 0,
-        });
+          left: 0
+        })
         this.router.navigate(['login'])
         this.alertService.success('Account has been created!', {
           autoClose: true,
@@ -41,9 +41,16 @@ export class RegisterComponent implements OnInit {
           top: 0,
           left: 0,
           behavior: 'smooth'
-        });
-        if (e.error.message == 'User with this email already exists') {
+        })
+        console.log('e.error ' + e.error)
+        if (e.error === 'User with this email already exists') {
           this.alertService.warn('This emailaddress is already registered', {
+            autoClose: true,
+            keepAfterRouteChange: true
+          })
+        }
+        if (e.error === 'User with this username already exists') {
+          this.alertService.warn('This username is already in use', {
             autoClose: true,
             keepAfterRouteChange: true
           })

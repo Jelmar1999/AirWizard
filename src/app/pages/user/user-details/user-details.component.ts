@@ -61,15 +61,14 @@ export class UserDetailsComponent implements OnInit {
     this.userService.deleteUser(this.currentUser!, String(this.userId)).subscribe({
       complete: () =>{
         console.log('Changing route')
-        this.alertService.success('Airplane has been deleted',{
+        this.alertService.success('User has been deleted',{
           autoClose: true,
           keepAfterRouteChange: true
         })
-        this.router.navigateByUrl('/user', { skipLocationChange: true }).then(() => {
-          this.userService.getUsers(this.currentUser!).subscribe();
-      });
+        this.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
+        });
       }
     });
-    // this.router.navigate(['../'], { relativeTo: this.route })
+    this.authService.logout()
   }
 }
