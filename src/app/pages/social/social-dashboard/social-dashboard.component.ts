@@ -11,5 +11,4 @@ export class SocialDashboardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

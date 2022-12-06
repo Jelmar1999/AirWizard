@@ -56,9 +56,6 @@ export class SocialService {
     return this.http.post<any>(endpoint, {}, { ...options, ...httpOptions }).pipe(
       tap(console.log),
       catchError((error: any) => {
-        console.log('error:', error)
-        console.log('error.message:', error.message)
-        console.log('error.error.message:', error.error.message)
         return of(undefined)
       })
     )
@@ -75,9 +72,6 @@ export class SocialService {
     return this.http.delete<any>(endpoint, { ...options, ...httpOptions }).pipe(
       tap(console.log),
       catchError((error: any) => {
-        console.log('error:', error)
-        console.log('error.message:', error.message)
-        console.log('error.error.message:', error.error.message)
         return of(undefined)
       })
     )

@@ -77,35 +77,9 @@ export class AuthService {
       )
   }
 
-  // validateToken(userData: User): Observable<User | null | undefined> {
-  //   const url = `${environment.apiUrl}validateToken`
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/json',
-  //       Authorization: 'Bearer ' + userData.token
-  //     })
-  //   }
-
-  //   console.log(`validateToken at ${url}`)
-  //   console.log(userData)
-  //   console.log(userData.token)
-  //   return this.http.get<any>(url, httpOptions).pipe(
-  //     map((response) => {
-  //       console.log('token is valid')
-  //       return response
-  //     }),
-  //     catchError((error: any) => {
-  //       console.log('Validate token Failed')
-  //       this.logout()
-  //       this.currentUser$.next(undefined!)
-  //       return of(undefined!)
-  //     })
-  //   )
-  // }
-
   logout(): void {
     this.router
-      .navigate(['/'])
+      .navigate(['/login'])
       .then((success) => {
         // true when canDeactivate allows us to leave the page.
         if (success) {

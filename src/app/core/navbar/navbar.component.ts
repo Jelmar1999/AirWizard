@@ -22,9 +22,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   sub!: Subscription
 
   constructor(private authService: AuthService, private alertService: AlertService){
-
   }
- 
+
   ngOnInit(): void {
     this.sub = this.authService.currentUser$.subscribe((user) => (this.user = user))
   }

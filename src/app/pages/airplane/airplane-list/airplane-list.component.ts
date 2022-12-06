@@ -38,10 +38,10 @@ export class AirplaneListComponent implements OnInit {
           this.userId = params.get('id')
         }
         this.urlAirplanes = this.route.snapshot.url[0].path
-        if( this.urlAirplanes.match('airplanes')){
-          this.lookingAtOwnPlanes = true;
-        }else{
-          this.lookingAtOwnPlanes = false;
+        if (this.urlAirplanes.match('airplanes')) {
+          this.lookingAtOwnPlanes = true
+        } else {
+          this.lookingAtOwnPlanes = false
         }
         if (this.userId) {
           this.userService.getUserById(String(this.userId)).subscribe((user) => {
@@ -58,20 +58,22 @@ export class AirplaneListComponent implements OnInit {
     })
   }
 
-  refreshAirplanes() {
-    this.airplaneService
-      .getAirplanesFromUser(this.currentUser!, this.user!)
-      .pipe(
-        map((airplanes: Airplane[]) => {
-          return airplanes.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)
-        })
-      )
-      .subscribe((airplanes) => airplanes.map((airplane) => (airplane.buildYear = new Date(airplane.buildYear)), (this.airplanes = airplanes)))
-  }
-
   ngOnDestroy(): void {
     if (!this.userId) {
       this.sub.unsubscribe()
+    }
+  }
+
+  refreshAirplanes() {
+    if (this.user != undefined && this.currentUser != undefined) {
+      this.airplaneService
+        .getAirplanesFromUser(this.currentUser!, this.user!)
+        .pipe(
+          map((airplanes: Airplane[]) => {
+            return airplanes.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)
+          })
+        )
+        .subscribe((airplanes) => airplanes.map((airplane) => (airplane.buildYear = new Date(airplane.buildYear)), (this.airplanes = airplanes)))
     }
   }
 }

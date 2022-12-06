@@ -51,15 +51,6 @@ export class AirportEditComponent implements OnInit {
     }
   }
 
-  // onChangeGateSelect(selectedGate: Gate) {
-  //   if (selectedGate.id === this.airport!.gates.) {
-  //     console.log('Old home team: ' + this.oldHomeTeamValue.fullName)
-  //     this.match!.awayTeam = this.oldHomeTeamValue
-  //     this.oldAwayTeamValue = this.match!.awayTeam
-  //   }
-  //   this.airport.gates?.push(selectedGate)
-  // }
-
   ngOnInit(): void {
     this.sub = this.authService.currentUser$.subscribe((user)=>{
       this.currentUser = user    

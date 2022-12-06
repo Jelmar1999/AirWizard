@@ -28,10 +28,6 @@ export class AirportListComponent implements OnInit {
     })
   }
 
-  formatDate(date: string) {
-    return new Date(date).toLocaleDateString()
-  }
-
   ngOnInit(): void {
     this.sub = this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user
@@ -40,10 +36,12 @@ export class AirportListComponent implements OnInit {
   }
 
   refreshAirports() {
-    this.airportService
-      .getAirports(this.currentUser!)
-      .pipe(map((airports: Airport[]) => airports.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)))
-      .subscribe((airports) => airports.map((airport) => ((airport.buildYear = new Date(airport.buildYear))), (this.airports = airports)))
+    if (this.currentUser != undefined) {
+      this.airportService
+        .getAirports(this.currentUser!)
+        .pipe(map((airports: Airport[]) => airports.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize)))
+        .subscribe((airports) => airports.map((airport) => (airport.buildYear = new Date(airport.buildYear)), (this.airports = airports)))
+    }
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe()
