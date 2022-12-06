@@ -83,10 +83,15 @@ export class GateDetailsComponent implements OnInit {
           })
           this.airplaneService.getAirplanesFromUser(this.currentUser!, this.currentUser!).subscribe((airplanes) => {
             this.airplanesUser = airplanes
+            this.removeDockedAirplanes()
           })
         } catch (error) {}
       })
     })
+  }
+
+  removeDockedAirplanes(){
+    this.airplanesUser = this.airplanesUser.filter(airplane => airplane.gateId === null)
   }
 
   saveAirplaneToGate(selectedAirplane: Airplane) {
