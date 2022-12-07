@@ -42,7 +42,10 @@
       <li>airportName: string</li>
       <li>airportId: Guid</li>
       <li>address: string</li>
+      <li>buildYear: Date</li>
+      <li>country: string</li>
       <li>gates: Gate[]</li>
+      <li>owner: User</li>
     </ul>
   </div>
   <div class="col-sm-12 col-md-4">
@@ -51,6 +54,8 @@
       <li>gateName: string</li>
       <li>gateId: Guid</li>
       <li>waitingRoomCapacity: number</li>
+      <li>direction: Direction(ENUM)</li>
+      <li>isAvailable: Boolean</li>
       <li>currentAirplane: Airplane</li>
       <li>airport : Airport</li>
     </ul>
@@ -58,27 +63,30 @@
   <div class="col-sm-12 col-md-4">
     <p>Airplane</p>
     <ul>
-      <li>planeId: Guid</li>
+      <li>airplaneId: Guid</li>
       <li>airplaneName: string</li>
       <li>model: string</li>
       <li>buildYear: Date</li>
       <li>fuelCapacity: number</li>
       <li>length: number</li>
       <li>wingspan: number</li>
-      <li>heigth: number</li>
+      <li>height: number</li>
       <li>engine: string</li>
       <li>weightClass: weightClass (ENUM)</li>
+      <li>owner: User</li>
     </ul>
   </div>
   <div class="col-sm-12 col-md-4">
     <p>User</p>
     <ul>
       <li>userId: Guid</li>
+      <li>token: string</li>
+      <li>userName: string</li>
       <li>firstName: string</li>
       <li>lastName: string</li>
-      <li>emailAddress: string</li>
+      <li>email: string</li>
       <li>phoneNumber: string</li>
-      <li>dateOfBirth: date</li>
+      <li>dateOfBirth: Date</li>
       <li>gender: gender (ENUM)</li>
       <li>ownedAirplanes : Airplane[]</li>
     </ul>
@@ -88,7 +96,7 @@
 <div class="row">
   <div class="col">
     <p>ERD</p>
-    <img src="assets/images/erdAirportCasusdrawio.drawio.png" alt="..." />
+    <img src="assets/images/ERD_AirWizard.drawio.png" alt="..." />
     <p>Documentmodel (Omdat ik de opdracht herkans wordt alles in een ERD gedaan, het documentmodel wordt niet meer gebruikt)</p>
     <img src="assets/images/documentmodel.drawio.png" alt="..." />
   </div>
